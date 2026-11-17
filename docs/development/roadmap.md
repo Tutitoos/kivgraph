@@ -1,9 +1,10 @@
 # Kivgraph: improvement plan (rev. 2, 2026-11-15)
 
 This is the working note the plan was run from, kept here as a record. It was
-written in Spanish outside the repository while the work was done in
-`Tutitoos/kivgraph` (PR #32 to #100 there), and translated when that work
-moved to `Tutitoos/kivgraph_official`. It is a log, not a specification: it
+written in Spanish outside the repository while the work was done in a
+separate development repository (PR #32 to #100 there), and translated when
+that work moved to a fork of the official project. It is a log, not a
+specification: it
 was appended to as each lot closed, so an early section can describe a state
 a later one changed, and where two disagree the later one holds. The status
 paragraph below and "Migration to the fork" at the end of phase 6 are the
@@ -11,7 +12,8 @@ current state. The private repositories used as a measurement corpus are not
 named. The ADRs and the code are the reference for behavior.
 
 Base when the plan was written: `main` at `200c6db`, ADRs up to 0124.
-Upstream at that time: `Tutitoos/kivgraph`. `Luqueee/kivgraph` was then no
+Upstream at that time: the development repository. `Luqueee/kivgraph` was
+then no
 longer a reference: nothing was proposed there and its releases were not
 pulled in. That rule ended on 2026-11-17, see "Pull request to the original
 project" at the end of phase 6.
@@ -69,14 +71,15 @@ maintainer: 1d (the module path stays) and the report to `typescript-go`
 Done when: `scripts/check-docs.sh` passes and each figure matches its
 `report.md`.
 
-## Phase 1. The upstream becomes `Tutitoos/kivgraph`
+## Phase 1. The upstream becomes the development repository
 
 Status: 470 files name `Luqueee`. The binary updates itself from there
-(`internal/update/update.go:34`), and `Tutitoos/kivgraph` is private and has
+(`internal/update/update.go:34`), and the development repository is private
+and has
 no release at all (it has the tags; Actions is enabled).
 
 Done on 2026-11-15 (PRs #32 and #34): distribution repointed to
-`Tutitoos/kivgraph`, telemetry removed (ADR 0118), MCP registry not
+the development repository, telemetry removed (ADR 0118), MCP registry not
 published, release `v0.10.0-dev.1` (prerelease, `requires_reindex`). Checked
 on macOS arm64 with a temporary `HOME`: `version` and `update` correct;
 `index --full` and `doctor` not. Linux and Windows only through the
@@ -107,7 +110,7 @@ and the README's versionless one-liner works). 1d closed without being done
 - Compatibility: an already installed binary will keep looking for updates
   in `Luqueee/kivgraph`; there is no way to redirect it from here.
 
-Done when: a clean installation from `Tutitoos/kivgraph` passes `init`,
+Done when: a clean installation from the development repository passes `init`,
 `doctor`, `index --full` and `update` reports "up to date".
 
 ## Phase 2. Bugs found (4 PRs, one per lot)
@@ -1850,7 +1853,7 @@ overrides this note):
 
 1. Decide the number. There is a new command (`impact`), which the table in
    the skill counts as MINOR; check it against `git fetch origin --tags`,
-   `gh api repos/Tutitoos/kivgraph/releases/latest` and the list of tags, not
+   `gh api repos/<owner>/<repo>/releases/latest` and the list of tags, not
    against what is remembered here. The sentence on what whoever updates gains:
    `impact`, the space reservation on filesystems without `fallocate`, the fix
    of the snapshot mapping, TypeScript indexing outside the `include` of a
@@ -1963,16 +1966,16 @@ With this, phase 1 only has 1d open. Still not ordered: 1d, the report to
 Done when: a pass after an edit below `8 s` (proposed threshold) with content
 equal to that of a clean rebuild.
 
-### Migration to the fork `Tutitoos/kivgraph_official` (2026-11-17)
+### Migration to the fork (2026-11-17)
 
 Done:
 
-- PR #1 of the fork: all of `main` of `Tutitoos/kivgraph` (170 commits,
+- PR #1 of the fork: all of `main` of the development repository (170 commits,
   history preserved), merge commit `56dc1a3`.
 - PR #2 of the fork: `update`, installers, build scripts, `server.json`,
-  README, docs, landing and skill read from `Tutitoos/kivgraph_official`; ADR
-  0126; merge commit `db209bc`. The MCP Registry name
-  (`io.github.Tutitoos/kivgraph`), the module path and ADR 0118 do not change.
+  README, docs, landing and skill read from the fork; ADR 0126; merge commit
+  `db209bc`. The MCP Registry name, the module path and ADR 0118 do not
+  change.
 - Annotated tag `v0.10.0` on `db209bc` (not on `f6986b3`, which is where it is
   in the other repository). Release published in the fork with 11 assets,
   `releases/latest` = `v0.10.0`. The macOS jobs were cancelled twice for lack
@@ -1981,7 +1984,8 @@ Done:
   `db209bc`), `update` up to date, `init`, `doctor` PASS, `index --full`
   published.
 
-- `Tutitoos/kivgraph`: PR #100 (`1b2cabb`) puts the notice of the move in the
+- The development repository: PR #100 (`1b2cabb`) puts the notice of the move
+  in the
   README with the install commands of the fork; repository archived. Its
   binaries keep looking for updates there: reinstall once.
 - Working clone: `main` tracks `official/main` (`db209bc`),
@@ -2003,7 +2007,8 @@ Done:
 
 Remaining (maintainer's decision):
 
-- Dependabot alerts is disabled in the fork (in `Tutitoos/kivgraph` it was
+- Dependabot alerts is disabled in the fork (in the development repository it
+  was
   what warned about dependencies); issues too. It is enabled in the repository
   settings.
 
@@ -2046,6 +2051,27 @@ waiting for its owner.
   the Go suite); a comment on the pull request gives the three names and
   suggests requiring them, or `CI result` alone, after merging. The pull
   request still shows as blocked by a rule that cannot be read from outside.
+
+#### The site catches up, and the tree names the official project (2026-11-17)
+
+- PR #7 and #8 of the fork (`c4c7a99`, `983da65`): the site and the reference
+  say fifteen tools, seven languages, `find_implementations`, `impact`,
+  `configure`, `hook`, and the configuration tables of every language. Both
+  were carried to the branch of `Luqueee/kivgraph#221`.
+- The site says what its token figures do not show: they are costs per
+  question, and the two end-to-end benchmarks did not show a reliable saving
+  over a whole task. Four loosely quoted figures were corrected and the cold
+  indexing cost carries its version. Not carried to the pull request.
+- ADR 0127: `update`, installers, build scripts, `server.json`, `glama.json`,
+  README, docs, landing and skill name `Luqueee/kivgraph` again. Telemetry
+  stays off and the MCP Registry job stays gated. The documented install
+  commands therefore install the official project's latest release, not this
+  tree, and no release is cut from the fork while this holds. This document
+  and ADR 0118 and 0126 no longer name the repositories the work passed
+  through.
+- Not done: the benchmarks were not rerun on `0.10.0` (the corpus is not
+  available), and the captured answers in the tool reference that predate
+  `completeness` were not recaptured.
 
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 

@@ -518,7 +518,7 @@ jobs:
   # github` opens a device flow, which no unattended run can complete, and the
   # alternative is a long-lived token in the repository secrets. The identity
   # proven here is the repository itself, which is also the namespace being
-  # published to -- `io.github.Tutitoos/kivgraph`.
+  # published to -- `io.github.Luqueee/kivgraph`.
   registry:
     name: Publish to the MCP Registry
     needs:

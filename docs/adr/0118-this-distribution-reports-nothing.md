@@ -1,9 +1,10 @@
 # ADR 0118: This distribution reports nothing and publishes from its own repository
 
-Status: accepted, 2026-11-15.
+Status: accepted, 2026-11-15. The repository decision is superseded by ADR
+0127; the telemetry decision holds.
 
 Changes the distribution: releases, `kivgraph update` and the installers use
-`Tutitoos/kivgraph`. Changes telemetry: nothing is sent.
+the development repository. Changes telemetry: nothing is sent.
 
 Changes the schema: no.
 
@@ -29,13 +30,14 @@ Everything a release touches still pointed at the original project:
 
 1. **Repository.** `update.Repository`, the installers, the bundle and
    registry metadata and the documented install commands name
-   `Tutitoos/kivgraph`. Install commands use the GitHub release URLs directly.
+   the development repository. Install commands use the GitHub release URLs
+   directly.
 2. **Telemetry.** Nothing is sent. `telemetry.Endpoint` is empty, and a build
    with no endpoint returns before it claims a marker or prints a notice. The
    installers lose the request and its notice.
 3. **MCP Registry.** Not published. The job stays in the workflow, gated on
    the repository variable `PUBLISH_MCP_REGISTRY`, and `server.json` names
-   `io.github.Tutitoos/kivgraph` so that enabling it is one variable.
+   that repository's namespace so that enabling it is one variable.
 4. **Website.** None. `landing/` stays as the source of the user
    documentation and is not deployed.
 
