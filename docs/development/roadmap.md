@@ -2086,6 +2086,33 @@ waiting for its owner.
   the cold index, `0.8.0` for the MCP token cost, `0.3.0` for the first
   end-to-end run.
 
+#### CI: scans, CodeQL and Windows tests (2026-11-17)
+
+- PR #14 (`9e12fda6`): `.github/dependabot.yml` (weekly, grouped: `gomod`, the
+  three pnpm projects, the actions); `security.yml` (weekly `govulncheck`,
+  reachable only, and `pnpm audit` per project, also by hand); `codeql.yml`
+  (Go with an untagged `go build ./...`, because the pinned CodeQL has no
+  `none` mode for Go, and JavaScript/TypeScript; not part of `CI result`); a
+  `windows` job in `ci.yml` that runs the 11 packages carrying a `_windows.go`
+  file on `windows-latest`, which `CI result` requires.
+- Running those tests on Windows for the first time found two production
+  defects. `internal/daemon`: a busy `127.0.0.1:7788` stopped the daemon
+  instead of falling back, because `syscall.EADDRINUSE` is not what a Windows
+  bind returns (`addrinuse_windows.go` checks `WSAEADDRINUSE`).
+  `internal/workspace`: a manifest deleted after the directory listing reached
+  the parse and aborted the pass, because `DirEntry.Info` answers from the
+  listing on Windows (`visitUnlessVanished`). Three tests also assumed Unix
+  (`/tmp`, an unescaped path in JSON, a float sum with no slack).
+- Both fixes and the test changes were carried to the branch of
+  `Luqueee/kivgraph#221` (head `86947516`); the workflows were not.
+- PR #15: the audit passes `--ignore-unfixable`. `pnpm audit` reports one high
+  advisory today in all three projects, `picomatch` (GHSA-fc5q-39xc-vjpf,
+  patched in `>=4.0.8`), and 4.0.8 is not on npm (latest `4.0.7`; an override
+  to `^4.0.8` fails to install). It needs an override once the version exists.
+- Not exercised: Dependabot has not opened a pull request yet, so its
+  handling of the `pnpm-workspace.yaml` overrides and of the `patchedDependencies`
+  in `web` is unknown. CodeQL findings have not been read.
+
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
 `kivgraph impact --base <ref>`: symbols touched by `git diff`, aggregated
