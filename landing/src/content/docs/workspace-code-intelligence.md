@@ -32,7 +32,7 @@ Without a repository-aware index, an agent may need repeated search and file rea
 
 Kivgraph exposes those questions through MCP tools and preserves the evidence attached to each result. This can reduce exploratory tool calls while keeping the answer addressable by repository, path, symbol and line range.
 
-It does not win every question. On the 29-question benchmark plain `grep` costs fewer tokens on five of them, all single-repository lookups of a rare name where both approaches answer correctly. The workspace graph earns its cost on common names, on transitive impact and on consumers in another repository; the split is in the [comparison](/comparison/).
+It does not win every question. On the 29-question benchmark plain `grep` costs fewer tokens on five of them — three that ask whether a symbol has any caller, one two-hop impact question and one lookup of a name that occurs twice — and both approaches answer all five correctly. The workspace graph earns its cost on common names, on transitive impact and on consumers in another repository; the split is in the [comparison](/comparison/).
 
 ## Supported workspace model
 

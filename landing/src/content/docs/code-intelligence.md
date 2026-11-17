@@ -28,7 +28,7 @@ The MCP tools expose these questions directly through [`find_symbol`](/docs/tool
 
 An empty result is therefore meaningful only when the response reports sufficient confidence and completeness. Unresolved facts remain visible instead of being silently discarded.
 
-Text search is still the cheaper tool for some questions. On the 29-question benchmark `grep` costs fewer tokens on five of them — a rare name in a single repository, where reading the two files that hold it beats a graph query. Kivgraph is worth the call on common names, on transitive impact, on cross-repository consumers and where an absence has to be proven. The measured split is in the [comparison](/comparison/).
+Text search is still the cheaper tool for some questions. On the 29-question benchmark `grep` costs fewer tokens on five of them: three that ask whether a symbol has any caller, one two-hop impact question and one lookup of a name that occurs twice. Kivgraph is worth the call on common names, on transitive impact, on cross-repository consumers and where an absence has to be proven rather than suggested. The measured split is in the [comparison](/comparison/).
 
 ## Local and repository-aware
 

@@ -39,13 +39,31 @@ more than the total: a Rust trait-method question cost 264 tokens against
 `grep`'s 22,016, both answers exact, while the widest margin in the run is
 86.8x.
 
+## What this does not show
+
+The run above measures the cost of answering one question. It does not measure
+a task. Kivgraph began as research into whether a code graph reduces the
+context an agent needs, and that research did not demonstrate a reliable net
+token saving over long, end-to-end agent conversations.
+
+| Benchmark | Tasks | Result with the graph |
+| --- | --- | --- |
+| End-to-end, three arms (kivgraph `0.3.0`) | 6 tasks, 12 runs per arm | 15% more cost, 20% more time, within noise |
+| End-to-end, this project's own Go repository | 12 fixes, 24 runs per arm | 18% less cost, 5.3 fewer tool calls, same recall; sign test `p = 0.146` |
+
+The two disagree in sign, so neither supports a claim in either direction. What
+is measured is narrower: a structural question costs fewer tokens through the
+graph than through `grep` and file reads, on most questions and not on all. The
+reports are `benchmarks/agent-e2e/report.md` and
+`benchmarks/agent-e2e/self-repo/report.md` in the repository.
+
 ## Where the graph is the more expensive route
 
 `grep` is cheaper on five of the 29 questions, and both arms are correct on all
-five. They are the questions text search is built for: a rare name, one
-repository, two files to open. Looking up a Go constructor that occurs twice in
-the whole corpus cost Kivgraph 123 tokens and `grep` 65 — the graph query is
-1.9x the price of the obvious `grep`.
+five: three that ask whether a symbol has any caller, one two-hop impact
+question and one lookup of a name that occurs twice. Looking up that Go
+constructor cost Kivgraph 123 tokens and `grep` 65 — the graph query is 1.9x the
+price of the obvious `grep`.
 
 A graph query also has a floor an agent should know about. Asked for
 `withBackoff` by bare name, where the corpus declares seven distinct symbols with
