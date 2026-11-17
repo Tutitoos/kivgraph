@@ -2036,6 +2036,16 @@ waiting for its owner.
   dependencies.
 - The fork does not change: its `main` keeps publishing from itself and
   reporting nothing. The branch stays until the pull request closes.
+- A second commit on that branch only, `60edc5e`: `main` of the original
+  project requires a check named `Verify Go, web and landing packages`, and
+  `7c3984d` had split that job in three (`Lint Go and run the race tests`,
+  `Verify Go`, `Verify the worker, web and landing packages`), so the pull
+  request waited for a status that never arrived with every real check green.
+  The `verify` job carries the old name again there, and the six required
+  checks report success. The name is no longer accurate (that job runs only
+  the Go suite); a comment on the pull request gives the three names and
+  suggests requiring them, or `CI result` alone, after merging. The pull
+  request still shows as blocked by a rule that cannot be read from outside.
 
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
