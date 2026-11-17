@@ -20,6 +20,9 @@ on:
 permissions:
   contents: read
 
+env:
+  GOTOOLCHAIN: local
+
 concurrency:
   group: codeql-${{ github.ref }}
   cancel-in-progress: true
@@ -36,11 +39,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # No build: the tree needs a pinned native library and a C
-          # toolchain to compile, and the extraction without a build reads the
-          # source the same way.
+          # Go has no extraction without a build in the CodeQL version this
+          # action pins, so it builds untagged: that is the build every
+          # contributor has, and it needs no native library.
           - language: go
-            build-mode: none
+            build-mode: manual
           - language: javascript-typescript
             build-mode: none
 
@@ -50,11 +53,21 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Set up Go
+        if: matrix.language == 'go'
+        uses: ./.github/actions/setup-go
+        with:
+          job: ${{ github.job }}
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
+
+      - name: Build Go
+        if: matrix.language == 'go'
+        run: go build ./...
 
       - name: Analyze
         uses: github/codeql-action/analyze@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
