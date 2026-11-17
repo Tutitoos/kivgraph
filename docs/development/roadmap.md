@@ -11,8 +11,10 @@ current state. The private repositories used as a measurement corpus are not
 named. The ADRs and the code are the reference for behavior.
 
 Base when the plan was written: `main` at `200c6db`, ADRs up to 0124.
-Upstream at that time: `Tutitoos/kivgraph`. `Luqueee/kivgraph` is no longer a
-reference: nothing is proposed there and its releases are not pulled in.
+Upstream at that time: `Tutitoos/kivgraph`. `Luqueee/kivgraph` was then no
+longer a reference: nothing was proposed there and its releases were not
+pulled in. That rule ended on 2026-11-17, see "Pull request to the original
+project" at the end of phase 6.
 
 ## Goal
 
@@ -2010,6 +2012,30 @@ Closed without doing, by the maintainer's decision (2026-11-17):
 - `v0.10.0-dev.1` is not tagged in the fork: its commit predates the repoint.
 - 1d: the Go module path is still `github.com/Luqueee/kivgraph`. This replaces
   the earlier mentions of 1d as pending.
+
+#### Pull request to the original project (2026-11-17)
+
+The rule that nothing is proposed to `Luqueee/kivgraph` was lifted by the
+maintainer: the work goes back as `Luqueee/kivgraph#221`, from the branch
+`feat/upstream-the-fork-work` of the fork. Its `main` had not moved from
+`259fb00`, so there was nothing to resolve. Open, CI green there (12 checks),
+waiting for its owner.
+
+- It carries the whole history (178 commits, 283 files) plus one commit,
+  `907e245`, that reverts `b64fb8b` and `7bf39cd`: update source, installers,
+  bundle and registry metadata, install commands and the publishing skill
+  name the original project again, the MCP Registry job is ungated, and the
+  first-run telemetry is back. Those files are byte-identical to `259fb00`.
+- Left out of it: ADR 0118 and ADR 0126, this document, and the
+  `v0.10.0-dev.1` note, whose content is folded into the `v0.10.0` one.
+- Not exercised: the telemetry request against the real collector, on
+  purpose. `make test-ladybug` and `make coverage` were not rerun on the last
+  commit.
+- Not checked, outside both repositories: whether the collector accepts
+  events from `0.10.0`, and the redeploy of the site with its new
+  dependencies.
+- The fork does not change: its `main` keeps publishing from itself and
+  reporting nothing. The branch stays until the pull request closes.
 
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
