@@ -2058,20 +2058,33 @@ waiting for its owner.
   say fifteen tools, seven languages, `find_implementations`, `impact`,
   `configure`, `hook`, and the configuration tables of every language. Both
   were carried to the branch of `Luqueee/kivgraph#221`.
-- The site says what its token figures do not show: they are costs per
-  question, and the two end-to-end benchmarks did not show a reliable saving
-  over a whole task. Four loosely quoted figures were corrected and the cold
-  indexing cost carries its version. Not carried to the pull request.
-- ADR 0127: `update`, installers, build scripts, `server.json`, `glama.json`,
-  README, docs, landing and skill name `Luqueee/kivgraph` again. Telemetry
+- PR #10 (`bf5a9617`): the guides and the tool reference follow the daemon,
+  the Windows integrations, the linked skill, `include_derived` in the cursor
+  identity, the views and the completeness block, and gain answer shapes for
+  `find_implementations`, `index_project` and `get_index_status` and an
+  "Uninstalling" section. Statements were read from the code; no server was
+  run. Carried to the branch of `Luqueee/kivgraph#221` (head `764dc79`), CI
+  green there.
+- PR #9 (`bf09e4d8`): the site says what its token figures do not show: they
+  are costs per question, and the two end-to-end benchmarks did not show a
+  reliable saving over a whole task. Four loosely quoted figures were
+  corrected and the cold indexing cost carries its version. Not carried to
+  the pull request, by decision.
+- PR #11 (`ed9e4160`), ADR 0127: `update`, installers, build scripts,
+  `server.json`, `glama.json`, README, docs, landing and skill name
+  `Luqueee/kivgraph` again. Telemetry
   stays off and the MCP Registry job stays gated. The documented install
   commands therefore install the official project's latest release, not this
   tree, and no release is cut from the fork while this holds. This document
   and ADR 0118 and 0126 no longer name the repositories the work passed
-  through.
+  through. The attribution in the `v0.8.0` note stays: a changelog records
+  who did what.
 - Not done: the benchmarks were not rerun on `0.10.0` (the corpus is not
-  available), and the captured answers in the tool reference that predate
-  `completeness` were not recaptured.
+  available) and the captured answers in the tool reference that predate
+  `completeness` were not recaptured. The figures the site quotes keep the
+  version they were measured with: `0.5.0` for the 29 questions, `0.3.2` for
+  the cold index, `0.8.0` for the MCP token cost, `0.3.0` for the first
+  end-to-end run.
 
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
