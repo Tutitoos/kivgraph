@@ -1,0 +1,62 @@
+name: CodeQL
+
+# Static analysis for the classes `staticcheck` does not look for: injection,
+# path traversal, SSRF, unsafe deserialization. The binary serves an HTTP
+# listener and a daemon, and reads paths and arguments from clients.
+#
+# Runs on pull requests to `main`, on `main`, and weekly, because new queries
+# are published without any change to this repository. It is not part of
+# `CI result`: a finding is read in the Security tab, and a pull request is not
+# blocked by a query added since it opened.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "23 5 * * 2"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codeql-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Analyze ${{ matrix.language }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # No build: the tree needs a pinned native library and a C
+          # toolchain to compile, and the extraction without a build reads the
+          # source the same way.
+          - language: go
+            build-mode: none
+          - language: javascript-typescript
+            build-mode: none
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+        with:
+          category: /language:${{ matrix.language }}
