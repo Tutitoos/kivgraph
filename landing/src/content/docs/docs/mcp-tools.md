@@ -48,8 +48,9 @@ an empty reference list means nobody calls it, and two homonymous methods are
 two different symbols. `grep` can say neither.
 
 It is not always the cheaper route either way. On the 29-question benchmark
-`grep` costs fewer tokens than these tools on five questions — rare names in a
-single repository, where both sides answer correctly. See the
+`grep` costs fewer tokens than these tools on five questions — three absence
+questions, one two-hop impact question and one lookup of a name that occurs
+twice — and both sides answer all five correctly. See the
 [comparison](/comparison/).
 
 See [Using it from an agent](/mcp/usage/) for the response envelope, the cursor

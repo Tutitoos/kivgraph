@@ -47,8 +47,9 @@ That is deliberate — publishing twelve graph tools that all answer
 `INDEX_NOT_READY` teaches an agent that the tools do not work — but it does mean
 a fresh install cannot answer a code question until the first index completes.
 
-There is no incremental path: a rebuild is a full pass over every registered
-repository.
+No generation is patched from the one before it: a rebuild is a full pass over
+every registered repository. What a second pass saves is analysis, through the
+fact cache, which reuses the units whose inputs did not change.
 
 ## Rust does not index `core`, `std` or `alloc` by default
 

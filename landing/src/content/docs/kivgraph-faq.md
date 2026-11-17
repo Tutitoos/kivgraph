@@ -5,7 +5,7 @@ description: Answers about Kivgraph, cross-repository code graphs, MCP clients, 
 
 ## What is Kivgraph?
 
-Kivgraph is a local **cross-repository code intelligence MCP server** for AI coding agents. It indexes Go, TypeScript, Rust, Python, Dart, Java and C# repositories into a canonical semantic code graph and serves that graph to a client over stdio.
+Kivgraph is a local **cross-repository code intelligence MCP server** for AI coding agents. It indexes Go, TypeScript, Rust, Python, Dart, Java and C# repositories into a canonical semantic code graph and serves that graph to a client on the same machine, over stdio or through a local daemon.
 
 ## Which languages are supported, and are they equal?
 
@@ -17,11 +17,15 @@ No, and the benchmark names where it loses. On the current 29-question run `grep
 
 ## Does Kivgraph save tokens?
 
-On the current run it does: 35,961 tokens over 36 tool calls against 267,980 tokens over 101 calls for `grep` plus reading, at precision 1.00 on both sides. That is 7.45x on totals, but the median per-question ratio is 5.95x — the total is pulled up by a few wide questions, the widest at 86.8x. Because the spread is that large, Kivgraph publishes the whole run rather than one headline percentage; see [token-efficient code understanding](/token-efficient-code-understanding/).
+Per question, yes. Over a whole agent session, it has not been demonstrated.
+
+On the current run, 29 questions cost 35,961 tokens over 36 tool calls through the graph against 267,980 tokens over 101 calls for `grep` plus reading, at precision 1.00 on both sides. That is 7.45x on totals, but the median per-question ratio is 5.95x — the total is pulled up by a few wide questions, the widest at 86.8x.
+
+Those are answers to isolated questions. Two end-to-end benchmarks, where an agent completes a task with and without the graph, disagree with each other and neither is conclusive: one measured 15% more cost with the graph (six tasks, kivgraph `0.3.0`), the other 18% less (twelve fixes in this project's own Go repository, `p = 0.146`). The graph payloads are added to the context, and the agent does not always read less because of them. See [token-efficient code understanding](/token-efficient-code-understanding/).
 
 ## Does my code leave my machine?
 
-No. The indexer, the canonical store, the published snapshot and the MCP server all run locally, and the server speaks stdio to a client on the same machine. One caveat deserves to be stated plainly: `kivgraph ui` is a local HTTP listener that binds `127.0.0.1:7777` by default and carries **no authentication**. If you bind it to another address with `--addr` or `web.address`, anything that can reach that port reads your repository paths, file paths, symbol names and signatures, so do that only if you intend it to be reachable. A configuration written by an earlier `init` carries `0.0.0.0:7777`; change it — see [limits](/limits/) and the [viewer guide](/guides/viewer/).
+No. The indexer, the canonical store, the published snapshot and the MCP server all run locally. A client reaches the server over stdio or over the daemon's loopback HTTP endpoint, which requires a token; `kivgraph daemon --allow-remote` is the one way to bind that endpoint elsewhere, and it has to be asked for. One caveat deserves to be stated plainly: `kivgraph ui` is a local HTTP listener that binds `127.0.0.1:7777` by default and carries **no authentication**. If you bind it to another address with `--addr` or `web.address`, anything that can reach that port reads your repository paths, file paths, symbol names and signatures, so do that only if you intend it to be reachable. A configuration written by an earlier `init` carries `0.0.0.0:7777`; change it — see [limits](/limits/) and the [viewer guide](/guides/viewer/).
 
 ## Does Kivgraph require an LLM or an API key?
 
@@ -41,7 +45,11 @@ An empty list is a claim, not a failure — but it is only as strong as the evid
 
 ## How much does indexing cost, and how often must I re-index?
 
-A rebuild is always a full pass over every registered repository; there is no incremental mode. In the cold-index measurement of the five-way comparison, a 37-repository corpus took 37.6 s, produced 1,423 MB of on-disk state and published 96,482 symbols, and required the Go module cache per indexed module and `cargo` per Rust workspace. Re-index when the code you are asking about has moved: [`graph_status`](/docs/tools/graph-status/) reports per-repository freshness against the commit each repository was indexed at, so a stale answer is visible rather than silent.
+A rebuild is always a full pass over every registered repository that publishes a new generation; none is patched from the one before. What a second pass saves is analysis: the fact cache reuses the units whose inputs did not change.
+
+In the cold-index measurement of the five-way comparison, with kivgraph `0.3.2`, a 37-repository corpus took 37.6 s, produced 1,423 MB of on-disk state and published 96,482 symbols, and required the Go module cache per indexed module and `cargo` per Rust workspace. With a warm cache, a pass after a one-file edit took 17.2 s on a corpus of 53 repositories, and 3.2 s on one repository of 12,465 symbols; most of that time is publication, not analysis.
+
+A running server rebuilds on its own when a registered repository changes. [`graph_status`](/docs/tools/graph-status/) reports per-repository freshness against the commit each repository was indexed at, so a stale answer is visible rather than silent.
 
 ## What happens if I query before publishing a generation?
 

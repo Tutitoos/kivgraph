@@ -49,7 +49,8 @@ are substituted. The counts, the calls and the token figures are the measured
 ones.
 
 That margin is not universal. On five of the 29 questions `grep` is the cheaper
-arm, all of them single-repository lookups of a rare name. Read the
+arm: three that ask whether a symbol has any caller, one two-hop impact
+question and one lookup of a name that occurs twice. Read the
 [comparison](/comparison/) before assuming the graph is always the shorter
 path.
 

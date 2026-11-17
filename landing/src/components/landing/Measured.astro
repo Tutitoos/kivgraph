@@ -23,19 +23,22 @@ const figures = [
 ];
 
 const provenance = [
-  ["questions", "29 across six sets"],
+  ["questions", "29 across seven sets"],
   ["corpus", "37 git repositories"],
   ["version", "kivgraph 0.5.0"],
   ["commit", "954b9eb"],
   ["tokenizer", "o200k_base"],
 ];
 
-// The counterweight is part of the evidence, not a disclaimer under it. Both
-// numbers are from the same file as the figures above.
+// The counterweight is part of the evidence, not a disclaimer under it. The
+// first three are from the same file as the figures above; the fourth is from
+// `benchmarks/agent-e2e/report.md` and `benchmarks/agent-e2e/self-repo/report.md`,
+// and is the one the figures cannot answer for themselves.
 const counterweight = [
   "Precision was 1.00 on both arms. Kivgraph missed one TypeScript test file; grep missed one cross-repository consumer that never spells the symbol.",
   "The median question cost 5.95x less through the graph, with the widest margin at 86.8x. grep was cheaper on five of the twenty-nine, between 0.26x and 0.53x, and every one of those five was a question both arms answered fully.",
   "One corpus, one machine, one tokenizer. o200k_base is a proxy for the tokenizer an agent actually pays, so the ratio between the rows is the claim and the absolute values are not.",
+  "These are costs per question, not the cost of a whole agent session. Two end-to-end runs with a coding agent did not show a reliable saving. On six tasks with kivgraph 0.3.0 the agent with the graph cost 15% more and took 20% longer than the agent without it, a difference inside the noise of twelve runs per arm. On twelve fixes in this project's own Go repository it cost 18% less at the same recall, with a per-task sign test of p = 0.146. Fewer tokens per answer has not been shown to mean fewer tokens per task.",
 ];
 ---
 

@@ -129,7 +129,7 @@ error strings rather than measurements:
 - code-review-graph — `exit status 1`
 - codebase-memory-mcp — `project not found or not indexed`
 - graft — `chdir /private/tmp/st11/graft-ctx: no such file or directory`
-- graphify started, but answered only 4 of the 29.
+- graphify started, but was exact on only 4 of the 29.
 
 A failure to start is an operational fact about one machine on one afternoon, not
 a measurement of a tool's accuracy, so those columns are not published in any
@@ -263,7 +263,7 @@ it did not run at all.
 `affected` walks an undirected graph, so the answer is not reverse reachability at
 all. Its graph is per-repository, and its `build` truncates the data directory it
 is given, so each repository needs its own. It writes `graphify-out/` inside the
-tree it indexes. In Pass B it answered 4 of 29.
+tree it indexes. In Pass B it was exact on 4 of 29.
 
 ## Entry cost
 

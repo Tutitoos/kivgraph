@@ -13,17 +13,22 @@ const questions = [
   {
     question: "Does Kivgraph replace grep?",
     answer:
-      "No, and the benchmark says where it should not. grep is cheaper for a rare name in one small repository: over the 29 published questions it cost fewer tokens on five of them, between 0.26x and 0.53x of ours, and both arms were fully correct on all five. Kivgraph is for type-checked references, transitive impact, consumers in another repository, and empty answers you can rely on.",
+      "No, and the benchmark says where it should not. Over the 29 published questions grep cost fewer tokens on five of them, between 0.26x and 0.53x of ours, and both arms were fully correct on all five: three that ask whether a symbol has any caller, one two-hop impact question and one lookup of a name that occurs twice. Kivgraph is for type-checked references, transitive impact, consumers in another repository, and empty answers you can rely on.",
+  },
+  {
+    question: "Does Kivgraph save tokens?",
+    answer:
+      "Per question, yes. Over a whole agent session, it has not been demonstrated. On the current run, 29 questions cost 35,961 tokens over 36 tool calls through the graph against 267,980 tokens over 101 calls for grep plus reading, at precision 1.00 on both sides. Those are answers to isolated questions. Two end-to-end benchmarks, where an agent completes a task with and without the graph, disagree with each other and neither is conclusive: one measured 15% more cost with the graph (six tasks, kivgraph 0.3.0), the other 18% less (twelve fixes in this project's own Go repository, p = 0.146). The graph payloads are added to the context, and the agent does not always read less because of them.",
   },
   {
     question: "Does my code leave my machine?",
     answer:
-      "No. The server is a local process that speaks MCP over stdio, and no query path makes a network call. One thing to know: kivgraph ui, the optional viewer, opens a local HTTP listener that binds 127.0.0.1:7777 with no authentication. If you bind it to another address, it exposes repository paths, file paths, symbol names and signatures to whoever can reach it.",
+      "No. The server is a local process, reached over stdio or over a loopback HTTP endpoint that requires a token, and no query path makes a network call off the machine. One thing to know: kivgraph ui, the optional viewer, opens a local HTTP listener that binds 127.0.0.1:7777 with no authentication. If you bind it to another address, it exposes repository paths, file paths, symbol names and signatures to whoever can reach it.",
   },
   {
     question: "Does Kivgraph need an LLM, an API key or an embedding step?",
     answer:
-      "None of the three. The edges are resolved by go/types, the TypeScript checker, rust-analyzer and the Dart analysis server, all running locally. There is no model in the indexing path and no key to configure.",
+      "None of the three. The edges are resolved by go/types, the TypeScript checker, rust-analyzer, the Dart analysis server and the Java and C# compiler indexers, all running locally. There is no model in the indexing path and no key to configure.",
   },
   {
     question: "How is this different from a vector database over my code?",
@@ -48,7 +53,7 @@ const questions = [
   {
     question: "How much does indexing cost, and how often must I re-index?",
     answer:
-      "A full rebuild is the only path; there is no incremental mode. Measured cold on the benchmark corpus of 37 repositories and 96,482 published symbols, one pass took 37.6 seconds and left 1,423 MB of on-disk state — the slowest and heaviest of the five tools compared. Re-index when a repository has moved; graph_status reports whether one has.",
+      "A rebuild is always a full pass that publishes a new generation; none is patched from the one before. What a second pass saves is analysis, through the fact cache. Measured cold with kivgraph 0.3.2 on the benchmark corpus of 37 repositories and 96,482 published symbols, one pass took 37.6 seconds and left 1,423 MB of on-disk state — the slowest and heaviest of the five tools compared. With a warm cache, a pass after a one-file edit took 17.2 seconds on a corpus of 53 repositories and 3.2 seconds on one repository of 12,465 symbols. A running server rebuilds when a registered repository changes; graph_status reports whether one has.",
   },
   {
     question: "What can it answer before I have indexed anything?",
