@@ -72,6 +72,11 @@ jobs:
 
       # The lockfile is the input: nothing is installed, so a project whose
       # install is broken is still audited.
+      #
+      # `--ignore-unfixable` leaves out an advisory whose patched version is not
+      # published yet (picomatch GHSA-fc5q-39xc-vjpf was one when this was
+      # written): the run is a prompt to act, and there is nothing to do until
+      # a fix exists. It reports again once one does.
       - name: pnpm audit
         working-directory: ${{ matrix.project }}
-        run: pnpm audit --audit-level moderate
+        run: pnpm audit --audit-level moderate --ignore-unfixable
