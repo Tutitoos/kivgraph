@@ -59,13 +59,13 @@ On Linux and macOS, where the same line covers both because the installer reads
 `uname` and picks its own archive:
 
 ```bash
-curl -fsSL https://github.com/Tutitoos/kivgraph_official/releases/latest/download/install.sh | bash
+curl -fsSL https://github.com/Luqueee/kivgraph/releases/latest/download/install.sh | bash
 ```
 
 On Windows:
 
 ```powershell
-irm https://github.com/Tutitoos/kivgraph_official/releases/latest/download/install.ps1 | iex
+irm https://github.com/Luqueee/kivgraph/releases/latest/download/install.ps1 | iex
 ```
 
 That is the PowerShell shape of the line above it, and it gives up one thing in
@@ -77,7 +77,7 @@ would have failed anyway. Download it and run it as a file to keep the guard:
 
 ```powershell
 $installer = "$env:TEMP\kivgraph-install.ps1"
-irm https://github.com/Tutitoos/kivgraph_official/releases/latest/download/install.ps1 -OutFile $installer
+irm https://github.com/Luqueee/kivgraph/releases/latest/download/install.ps1 -OutFile $installer
 & $installer
 ```
 
@@ -182,7 +182,7 @@ then select that channel for later checks:
 ```bash
 release=vX.Y.Z-dev.N
 curl -fsSL \
-  "https://github.com/Tutitoos/kivgraph_official/releases/download/$release/install.sh" |
+  "https://github.com/Luqueee/kivgraph/releases/download/$release/install.sh" |
   KIVGRAPH_VERSION="$release" bash
 kivgraph update --channel dev
 ```
