@@ -21,8 +21,8 @@ Intervals are 95 % percentile intervals from resampling declarations.
 
 |language|configuration|declarations measured|with dependents|file recall|file precision|fully recalled|
 |---|---|---|---|---|---|---|
-|go|default|100|96|99.2 % (97.8 to 100.0)|100.0 % (100.0 to 100.0)|97.9 % (92.7 to 99.4)|
-|typescript|default|100|85|100.0 % (100.0 to 100.0)|90.9 % (84.0 to 96.9)|100.0 % (95.7 to 100.0)|
+|go|default|100|96|100.0 % (100.0 to 100.0)|100.0 % (100.0 to 100.0)|100.0 % (96.2 to 100.0)|
+|typescript|default|100|85|100.0 % (100.0 to 100.0)|96.2 % (93.0 to 98.7)|100.0 % (95.7 to 100.0)|
 |rust|default|100|86|100.0 % (100.0 to 100.0)|97.8 % (94.9 to 100.0)|100.0 % (95.7 to 100.0)|
 |dart|default|100|73|99.0 % (96.8 to 100.0)|88.4 % (81.0 to 94.6)|98.6 % (92.6 to 99.8)|
 |go|go.tests_excluded|100|96|65.9 % (59.4 to 74.6)|100.0 % (100.0 to 100.0)|57.3 % (47.3 to 66.7)|
@@ -33,7 +33,7 @@ Intervals are 95 % percentile intervals from resampling declarations.
 ## go (default)
 
 - Declarations listed 443, eligible for the rename 442, measured 100 (oracle failed on 0, Kivgraph refused 0).
-- Recall on non-test files: 100.0 % (100.0 to 100.0). On test files: 97.7 % (93.2 to 100.0).
+- Recall on non-test files: 100.0 % (100.0 to 100.0). On test files: 100.0 % (100.0 to 100.0).
 - Declarations with no dependents for which Kivgraph still reports a file: 0 of 4.
 - Completeness verdicts: COMPLETE 95, LOWER_BOUND 5.
 - Answers that said `COMPLETE` and missed at least one non-test file: 0 of 95.
@@ -41,20 +41,13 @@ Intervals are 95 % percentile intervals from resampling declarations.
 
 |kind|declarations with dependents|file recall|
 |---|---|---|
-|alias|2|85.7 % (66.7 to 100.0)|
+|alias|2|100.0 % (100.0 to 100.0)|
 |const|18|100.0 % (100.0 to 100.0)|
 |field|18|100.0 % (100.0 to 100.0)|
 |func|17|100.0 % (100.0 to 100.0)|
 |method|15|100.0 % (100.0 to 100.0)|
-|type|15|98.4 % (91.2 to 100.0)|
+|type|15|100.0 % (100.0 to 100.0)|
 |var|11|100.0 % (100.0 to 100.0)|
-
-Declarations with a missed file (first 15 of 2):
-
-|declaration|kind|missed|verdict|
-|---|---|---|---|
-|`CompletionFunc` (completions.go:139)|alias|completions_test.go|COMPLETE|
-|`SliceValue` (completions.go:311)|type|completions_test.go|COMPLETE|
 
 ## typescript (default)
 
@@ -76,17 +69,13 @@ Declarations with a missed file (first 15 of 2):
 |type|19|100.0 % (100.0 to 100.0)|
 |variable|19|100.0 % (100.0 to 100.0)|
 
-Declarations with a reported file the compiler did not flag (first 15 of 10). These are unaudited: a use the compiler does not reject, such as one in a comment, is not a false positive.
+Declarations with a reported file the compiler did not flag (first 15 of 6). These are unaudited: a use the compiler does not reject, such as one in a comment, is not a false positive.
 
 |declaration|kind|extra|
 |---|---|---|
-|`Ky` (source/core/Ky.ts:348)|class|source/core/constants.ts, source/errors/ForceRetryError.ts|
 |`value` (source/utils/body.ts:149)|method|source/utils/body.ts|
-|`SchemaValidationError` (source/errors/SchemaValidationError.ts:25)|class|source/types/standard-schema.ts|
 |`delay` (source/utils/delay.ts:9)|function|source/core/Ky.ts|
-|`ResponseSizeError` (source/errors/ResponseSizeError.ts:20)|class|source/core/Ky.ts, source/types/hooks.ts, source/types/ky.ts, source/types/options.ts, source/utils/merge.ts|
 |`isRawNetworkError` (source/utils/is-network-error.ts:15)|function|source/core/Ky.ts|
-|`HTTPError` (source/errors/HTTPError.ts:15)|class|source/types/hooks.ts|
 |`ShouldRetryState` (source/types/retry.ts:9)|type|source/index.ts|
 |`timeout` (source/utils/timeout.ts:11)|function|source/core/Ky.ts|
 |`KyRequest` (source/types/request.ts:1)|type|source/types/hooks.ts|
