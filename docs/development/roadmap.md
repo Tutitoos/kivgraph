@@ -2132,9 +2132,9 @@ declarations per language, seed 1, stratified by kind.
   `go.include_tests: true`. On non-test files it is `100 %` in both. The whole
   gap of the default run is `_test.go` files, which the default does not read;
   two files are still missed with tests on. Precision `100 %`.
-- TypeScript, file recall `92.7 %`, precision `90.3 %` (unaudited: a reported
-  file the compiler does not flag can be a use in a comment). Classes,
-  functions, interfaces, types and variables: `100 %`.
+- TypeScript, file recall `98.0 %`, precision `90.7 %` (unaudited: a reported
+  file the compiler does not flag can be a use in a comment). It was `84.0 %`
+  and `89.4 %` on the first run, before the two fixes below.
 - **Finding, fixed: ES private names (`#x`) were never found.** The first run
   measured `84.0 %` and `89.4 %`: `0 of 13` private declarations, `0 of 13`
   dependent files, and every one of those answers carried the verdict
@@ -2142,12 +2142,23 @@ declarations per language, seed 1, stratified by kind.
   empty and said "this is an absence rather than a miss". Cause:
   `reference-extractor.ts` only visited `Identifier` nodes, and a private name
   is a `PrivateIdentifier`, so no use of one was ever resolved. Now `13 of 13`.
-  The same run, repeated on the fixed worker, is what is recorded here.
-- Still missed, not fixed: properties used through destructuring
-  (`const {throwHttpErrors} = options`) and as object literal keys
-  (`{maxResponseSize: true}`). `8 of 100` TypeScript answers still say
-  `COMPLETE` and miss a file, down from `21`. That is what `tool-honesty`
-  exists to prevent, seen on real code, and it is the next result to act on.
+  The figures recorded here are from the run after both fixes.
+- **Finding, fixed: properties used as object literal keys and through
+  destructuring were not found.** `{maxResponseSize: true}` and
+  `const {throwHttpErrors} = options` name a property without the checker
+  pointing at it: `getSymbolAtLocation` answers with the literal's own member
+  or with the new local variable. Those keys are now resolved through the type
+  the literal is checked against (`getContextualType`) or the value being
+  destructured (`getTypeAtLocation` of the pattern), after removing `null` and
+  `undefined`, and only for names some local property or method has. A
+  `{name: alias}` pattern already worked. File recall went from `92.7 %` to
+  `98.0 %` and the answers that said `COMPLETE` and missed a file from `8 of
+  100` to `2 of 100`.
+- Still missed, not fixed: a property named by an indexed access type
+  (`Options['onDownloadProgress']`, where the property is a string literal in a
+  type). That is the `2 of 100` that still say `COMPLETE`. Not tested: a key
+  whose contextual type is a union probably points at the first local member
+  only, because the resolver takes the first declaration that is local.
 - Pilot limits: one repository per language, and the TypeScript dependencies
   are not pinned by a lockfile. Not done: Rust, Dart, Java, C# and Python
   (their toolchains are not installed here, and Python has no compiler to use
