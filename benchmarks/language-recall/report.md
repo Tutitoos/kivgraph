@@ -20,7 +20,7 @@ Intervals are 95 % percentile intervals from resampling declarations.
 |language|configuration|declarations measured|with dependents|file recall|file precision|fully recalled|
 |---|---|---|---|---|---|---|
 |go|default|100|96|65.9 % (59.4 to 74.6)|100.0 % (100.0 to 100.0)|57.3 % (47.3 to 66.7)|
-|typescript|default|100|85|98.0 % (94.8 to 100.0)|90.7 % (83.7 to 96.8)|97.6 % (91.8 to 99.4)|
+|typescript|default|100|85|100.0 % (100.0 to 100.0)|90.9 % (84.0 to 96.9)|100.0 % (95.7 to 100.0)|
 |go|go.include_tests|100|96|99.2 % (97.8 to 100.0)|100.0 % (100.0 to 100.0)|97.9 % (92.7 to 99.4)|
 
 `file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.include_tests` is the default configuration with `go.include_tests: true`; the two Go rows draw the same declarations.
@@ -67,11 +67,11 @@ Declarations with a missed file (first 15 of 41):
 ## typescript (default)
 
 - Declarations listed 1062, eligible for the rename 398, measured 100 (oracle failed on 0, Kivgraph refused 0).
-- Recall on non-test files: 98.0 % (94.8 to 100.0). On test files: n/a.
-- Recall on ES private names (`#x`): 100.0 % (100.0 to 100.0) over 13 declarations. On every other declaration: 97.8 % (94.4 to 100.0).
+- Recall on non-test files: 100.0 % (100.0 to 100.0). On test files: n/a.
+- Recall on ES private names (`#x`): 100.0 % (100.0 to 100.0) over 13 declarations. On every other declaration: 100.0 % (100.0 to 100.0).
 - Declarations with no dependents for which Kivgraph still reports a file: 4 of 15.
 - Completeness verdicts: COMPLETE 100.
-- Answers that said `COMPLETE` and missed at least one non-test file: 2 of 100.
+- Answers that said `COMPLETE` and missed at least one non-test file: 0 of 100.
 - Not sampled: kind not sampled: 391; name not found in declaring position: 273; outline refused: 21.
 
 |kind|declarations with dependents|file recall|
@@ -80,16 +80,9 @@ Declarations with a missed file (first 15 of 41):
 |function|9|100.0 % (100.0 to 100.0)|
 |interface|2|100.0 % (100.0 to 100.0)|
 |method|13|100.0 % (100.0 to 100.0)|
-|property|13|85.7 % (72.0 to 100.0)|
+|property|13|100.0 % (100.0 to 100.0)|
 |type|19|100.0 % (100.0 to 100.0)|
 |variable|19|100.0 % (100.0 to 100.0)|
-
-Declarations with a missed file (first 15 of 2):
-
-|declaration|kind|missed|verdict|
-|---|---|---|---|
-|`onDownloadProgress` (source/types/options.ts:317)|property|source/types/options.ts, source/utils/body.ts|COMPLETE|
-|`baseUrl` (source/types/options.ts:151)|property|source/types/options.ts|COMPLETE|
 
 Declarations with a reported file the compiler did not flag (first 15 of 10). These are unaudited: a use the compiler does not reject, such as one in a comment, is not a false positive.
 
