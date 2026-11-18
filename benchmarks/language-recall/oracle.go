@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"os"
 	"os/exec"
@@ -118,6 +119,12 @@ func isRelationError(language string, e oracleError) bool {
 	case "go":
 		return strings.Contains(e.Message, "does not implement") || strings.Contains(e.Message, "missing method") ||
 			strings.Contains(e.Message, "wrong type for method")
+	case "rust":
+		switch e.Code {
+		case "E0046", "E0053", "E0185", "E0186", "E0195", "E0407", "E0437", "E0438":
+			return true
+		}
+		return false
 	default:
 		switch e.Code {
 		case "TS2415", "TS2416", "TS2420", "TS2515", "TS2559":
@@ -145,8 +152,11 @@ func (o *oracle) checkOnDisk(ctx context.Context, file string, renamed []byte) (
 // check runs the type checker. For Go the rename travels as an overlay and the
 // disk is never written; for TypeScript the caller has already written it.
 func (o *oracle) check(ctx context.Context, file string, content []byte) ([]oracleError, error) {
-	if o.repository.Language == "go" {
+	switch o.repository.Language {
+	case "go":
 		return o.checkGo(ctx, file, content)
+	case "rust":
+		return o.checkRust(ctx)
 	}
 	return o.checkTypeScript(ctx)
 }
@@ -226,6 +236,63 @@ func (o *oracle) checkTypeScript(ctx context.Context) ([]oracleError, error) {
 	}
 	if runErr != nil && len(errs) == 0 {
 		return nil, fmt.Errorf("tsc: %w: %s", runErr, strings.TrimSpace(out.String()))
+	}
+	return errs, nil
+}
+
+// cargoMessage is the part of a `cargo check --message-format=json` line the
+// oracle reads.
+type cargoMessage struct {
+	Reason  string `json:"reason"`
+	Message struct {
+		Level   string `json:"level"`
+		Message string `json:"message"`
+		Code    *struct {
+			Code string `json:"code"`
+		} `json:"code"`
+		Spans []struct {
+			FileName  string `json:"file_name"`
+			LineStart int    `json:"line_start"`
+			IsPrimary bool   `json:"is_primary"`
+		} `json:"spans"`
+	} `json:"message"`
+}
+
+// checkRust runs `cargo check` over every target of the workspace, so the
+// files it reads are the files the package itself builds, tests included.
+// rustc stops after name resolution when that fails, so an error that needs
+// type inference can be hidden behind an unresolved name elsewhere: the truth
+// can only be too small, never contain a file that does not use the name.
+func (o *oracle) checkRust(ctx context.Context) ([]oracleError, error) {
+	process := exec.CommandContext(ctx, "cargo", "check", "--workspace", "--all-targets", "--locked", "--message-format=json", "--color=never")
+	process.Dir = o.repository.Path
+	process.Env = toolEnvironment()
+	var stdout, stderr bytes.Buffer
+	process.Stdout, process.Stderr = &stdout, &stderr
+	runErr := process.Run()
+	var errs []oracleError
+	for _, line := range strings.Split(stdout.String(), "\n") {
+		if !strings.HasPrefix(line, "{") {
+			continue
+		}
+		var message cargoMessage
+		if json.Unmarshal([]byte(line), &message) != nil || message.Reason != "compiler-message" || message.Message.Level != "error" {
+			continue
+		}
+		for _, span := range message.Message.Spans {
+			if !span.IsPrimary || filepath.IsAbs(span.FileName) || strings.HasPrefix(span.FileName, "<") {
+				continue
+			}
+			code := ""
+			if message.Message.Code != nil {
+				code = message.Message.Code.Code
+			}
+			errs = append(errs, oracleError{File: filepath.ToSlash(span.FileName), Line: span.LineStart, Code: code, Message: message.Message.Message})
+			break
+		}
+	}
+	if runErr != nil && len(errs) == 0 {
+		return nil, fmt.Errorf("cargo check: %w: %s", runErr, strings.TrimSpace(stderr.String()))
 	}
 	return errs, nil
 }

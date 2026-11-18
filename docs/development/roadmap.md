@@ -2169,6 +2169,26 @@ declarations per language, seed 1, stratified by kind.
   as an oracle), a second repository per language, and an audit of the
   TypeScript extras.
 
+#### Recall on real code: Rust added (2026-11-18)
+
+`sharkdp/fd` at `b80cd53e6561`, 100 declarations, seed 1, same method. The
+oracle is `rustc` through `cargo check --workspace --all-targets --locked`;
+Kivgraph reads `rust-analyzer`, so unlike Go and TypeScript the two front ends
+are different. `rust-analyzer` and `cargo` are needed on the machine
+(`scripts/fetch-rust-analyzer.sh`; a sibling binary next to `kivgraph` is
+used).
+
+- File recall `98.5 %`, precision `97.7 %`; every kind is `100 %` except
+  functions (7 of 8 files) and trait methods (2 of 3).
+- Finding, not fixed: a name used inside a `macro_rules!` body is never
+  found. `fd`'s `sanitize` (a trait method called as
+  `$crate::error::SanitizeErr::sanitize($arg)` in `src/error.rs`) and
+  `correct` (called inside a macro in `src/fmt/input.rs`) are the two files
+  missed, and both answers said `COMPLETE` (2 of 96). `rust-analyzer scip`
+  does not resolve tokens in macro definitions, so the loader has nothing to
+  turn into an edge.
+- Still limited to one repository. Dart, Java, C# and Python are not measured.
+
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
 `kivgraph impact --base <ref>`: symbols touched by `git diff`, aggregated

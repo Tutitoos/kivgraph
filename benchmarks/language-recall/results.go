@@ -19,6 +19,7 @@ type environment struct {
 	Kivgraph   string `json:"kivgraph"`
 	Node       string `json:"node,omitempty"`
 	TypeScript string `json:"typescript,omitempty"`
+	Rust       string `json:"rust,omitempty"`
 }
 
 type metric struct {
@@ -75,7 +76,7 @@ type results struct {
 
 func limitations() []string {
 	return []string{
-		"The oracle and Kivgraph share each language's type checker. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other. Type resolution is not what this measures. What it measures is the rest: which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out.",
+		"The oracle and Kivgraph share each language's type checker for Go and TypeScript. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other. Type resolution is not what this measures there: it measures which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out. Rust is the exception: the oracle is `rustc` through `cargo check` and Kivgraph reads `rust-analyzer`, two different front ends.",
 		"The unit is the file, not the reference. A rename makes the compiler reject some uses and not others (after a failed import, the uses of the imported name are not reported), so reference-level ground truth would differ by language. A file is a dependent if it gains an error.",
 		"Implementation and inheritance relations are left out of the truth: an error that says a type no longer satisfies an interface or a base class is not a use of the renamed name, and `find_references` is not the tool for it.",
 		"The sample frame is what Kivgraph lists for each file, so a declaration Kivgraph never recorded cannot be sampled. A recall measured this way is conditional on the declaration being known.",
@@ -83,7 +84,8 @@ func limitations() []string {
 		"Go declarations are sampled from non-test files; references from `_test.go` files are part of the truth and are reported apart, because Kivgraph reads test files only with `go.include_tests: true` and this run used the default.",
 		"One repository per language: the figures describe these repositories at these commits, not the language. A second repository would show how much they move.",
 		"A declaration with no dependents says nothing about recall. It is reported through the share of such declarations for which Kivgraph still reports a reference.",
-		"The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions.",
+		"The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions. The Rust dependencies are fetched with `--locked`.",
+		"`rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The Rust truth can be too small and cannot contain a file that does not use the name.",
 	}
 }
 
@@ -116,6 +118,9 @@ func renderReport(measured results) string {
 	fmt.Fprintf(&b, "- Kivgraph `%s` on %s/%s, %s", measured.Environment.Kivgraph, measured.Environment.OS, measured.Environment.Arch, measured.Environment.Go)
 	if measured.Environment.TypeScript != "" {
 		fmt.Fprintf(&b, ", %s, node %s", measured.Environment.TypeScript, measured.Environment.Node)
+	}
+	if measured.Environment.Rust != "" {
+		fmt.Fprintf(&b, ", %s", measured.Environment.Rust)
 	}
 	fmt.Fprintf(&b, "\n\n## Corpus\n\n|language|repository|commit|\n|---|---|---|\n")
 	for _, repository := range measured.Corpus {
