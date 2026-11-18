@@ -2132,20 +2132,22 @@ declarations per language, seed 1, stratified by kind.
   `go.include_tests: true`. On non-test files it is `100 %` in both. The whole
   gap of the default run is `_test.go` files, which the default does not read;
   two files are still missed with tests on. Precision `100 %`.
-- TypeScript, file recall `84.0 %`, precision `89.4 %` (unaudited: a reported
+- TypeScript, file recall `92.7 %`, precision `90.3 %` (unaudited: a reported
   file the compiler does not flag can be a use in a comment). Classes,
   functions, interfaces, types and variables: `100 %`.
-- **Finding: ES private names (`#x`) are never found.** `0 of 13`
-  declarations, `0 of 13` dependent files, and every one of those answers
-  carries the verdict `COMPLETE`. For `#parseJson`, which is called three times
-  in `Ky.ts`, the answer is empty and says "this is an absence rather than a
-  miss".
-  Every other declaration: `92.0 %`; the misses there are properties used
-  through destructuring (`const {throwHttpErrors} = options`) and as object
-  literal keys (`{maxResponseSize: true}`). Not fixed.
-- `21 of 100` TypeScript answers said `COMPLETE` and missed a file. That is
-  what `tool-honesty` exists to prevent, seen on real code, and it is the
-  result to act on first.
+- **Finding, fixed: ES private names (`#x`) were never found.** The first run
+  measured `84.0 %` and `89.4 %`: `0 of 13` private declarations, `0 of 13`
+  dependent files, and every one of those answers carried the verdict
+  `COMPLETE`. For `#parseJson`, called three times in `Ky.ts`, the answer was
+  empty and said "this is an absence rather than a miss". Cause:
+  `reference-extractor.ts` only visited `Identifier` nodes, and a private name
+  is a `PrivateIdentifier`, so no use of one was ever resolved. Now `13 of 13`.
+  The same run, repeated on the fixed worker, is what is recorded here.
+- Still missed, not fixed: properties used through destructuring
+  (`const {throwHttpErrors} = options`) and as object literal keys
+  (`{maxResponseSize: true}`). `8 of 100` TypeScript answers still say
+  `COMPLETE` and miss a file, down from `21`. That is what `tool-honesty`
+  exists to prevent, seen on real code, and it is the next result to act on.
 - Pilot limits: one repository per language, and the TypeScript dependencies
   are not pinned by a lockfile. Not done: Rust, Dart, Java, C# and Python
   (their toolchains are not installed here, and Python has no compiler to use

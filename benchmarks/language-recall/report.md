@@ -20,7 +20,7 @@ Intervals are 95 % percentile intervals from resampling declarations.
 |language|configuration|declarations measured|with dependents|file recall|file precision|fully recalled|
 |---|---|---|---|---|---|---|
 |go|default|100|96|65.9 % (59.4 to 74.6)|100.0 % (100.0 to 100.0)|57.3 % (47.3 to 66.7)|
-|typescript|default|100|85|84.0 % (76.1 to 90.4)|89.4 % (81.7 to 95.8)|75.3 % (65.2 to 83.2)|
+|typescript|default|100|85|92.7 % (86.6 to 97.4)|90.3 % (83.4 to 96.2)|90.6 % (82.5 to 95.2)|
 |go|go.include_tests|100|96|99.2 % (97.8 to 100.0)|100.0 % (100.0 to 100.0)|97.9 % (92.7 to 99.4)|
 
 `file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.include_tests` is the default configuration with `go.include_tests: true`; the two Go rows draw the same declarations.
@@ -67,11 +67,11 @@ Declarations with a missed file (first 15 of 41):
 ## typescript (default)
 
 - Declarations listed 1062, eligible for the rename 398, measured 100 (oracle failed on 0, Kivgraph refused 0).
-- Recall on non-test files: 84.0 % (76.5 to 90.7). On test files: n/a.
-- Recall on ES private names (`#x`): 0.0 % (0.0 to 0.0) over 13 declarations. On every other declaration: 92.0 % (85.3 to 97.1).
+- Recall on non-test files: 92.7 % (86.8 to 97.5). On test files: n/a.
+- Recall on ES private names (`#x`): 100.0 % (100.0 to 100.0) over 13 declarations. On every other declaration: 92.0 % (85.6 to 96.9).
 - Declarations with no dependents for which Kivgraph still reports a file: 4 of 15.
 - Completeness verdicts: COMPLETE 100.
-- Answers that said `COMPLETE` and missed at least one non-test file: 21 of 100.
+- Answers that said `COMPLETE` and missed at least one non-test file: 8 of 100.
 - Not sampled: kind not sampled: 391; name not found in declaring position: 273; outline refused: 21.
 
 |kind|declarations with dependents|file recall|
@@ -79,30 +79,23 @@ Declarations with a missed file (first 15 of 41):
 |class|10|100.0 % (100.0 to 100.0)|
 |function|9|100.0 % (100.0 to 100.0)|
 |interface|2|100.0 % (100.0 to 100.0)|
-|method|13|7.7 % (0.0 to 23.1)|
-|property|13|42.9 % (26.3 to 63.2)|
+|method|13|100.0 % (100.0 to 100.0)|
+|property|13|47.6 % (30.0 to 70.0)|
 |type|19|100.0 % (100.0 to 100.0)|
 |variable|19|100.0 % (100.0 to 100.0)|
 
-Declarations with a missed file (first 15 of 21):
+Declarations with a missed file (first 15 of 8):
 
 |declaration|kind|missed|verdict|
 |---|---|---|---|
-|`#raceBodyRead` (source/core/Ky.ts:881)|method|source/core/Ky.ts|COMPLETE|
-|`#retryLimit` (source/core/Ky.ts:441)|property|source/core/Ky.ts|COMPLETE|
 |`beforeRetry` (source/types/hooks.ts:301)|property|source/utils/merge.ts|COMPLETE|
-|`#getResponseData` (source/core/Ky.ts:814)|method|source/core/Ky.ts|COMPLETE|
 |`maxResponseSize` (source/types/options.ts:268)|property|source/core/constants.ts|COMPLETE|
-|`#parseJson` (source/core/Ky.ts:1008)|method|source/core/Ky.ts|COMPLETE|
 |`throwHttpErrors` (source/types/options.ts:534)|property|source/core/Ky.ts|COMPLETE|
-|`#assignRequest` (source/core/Ky.ts:1330)|method|source/core/Ky.ts|COMPLETE|
 |`onDownloadProgress` (source/types/options.ts:317)|property|source/core/constants.ts, source/types/options.ts, source/utils/body.ts|COMPLETE|
-|`#throwIfTotalTimeoutExhausted` (source/core/Ky.ts:1035)|method|source/core/Ky.ts|COMPLETE|
 |`error` (source/types/retry.ts:13)|property|source/core/Ky.ts|COMPLETE|
-|`#raceWithTotalTimeout` (source/core/Ky.ts:931)|method|source/core/Ky.ts|COMPLETE|
 |`baseUrl` (source/types/options.ts:151)|property|source/core/constants.ts, source/types/options.ts|COMPLETE|
-|`#getEffectiveTimeout` (source/core/Ky.ts:869)|method|source/core/Ky.ts|COMPLETE|
 |`request` (source/types/hooks.ts:33)|property|source/core/Ky.ts|COMPLETE|
+|`request` (source/types/hooks.ts:45)|property|source/core/Ky.ts|COMPLETE|
 
 Declarations with a reported file the compiler did not flag (first 15 of 10). These are unaudited: a use the compiler does not reject, such as one in a comment, is not a false positive.
 
