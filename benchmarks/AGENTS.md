@@ -25,6 +25,23 @@ declarado en la raíz.
   de `graph_status`, no del fixture. El brazo Rust se salta declarándose
   cuando falta su toolchain, y preserva `RUSTUP_HOME` porque un `HOME` aislado
   deja a `rustup` sin toolchains.
+- `benchmarks/language-recall/` mide, por lenguaje, qué parte de los archivos
+  que dependen de una declaración devuelve `find_references`. La verdad de
+  referencia sale de renombrar la declaración y volver a comprobar tipos: los
+  archivos que ganan un error son los que la usan. **El oráculo y Kivgraph
+  comparten el comprobador de tipos de cada lenguaje**, así que no se mide la
+  resolución de tipos sino todo lo que la rodea: qué archivos y variantes se
+  cargan, cómo un uso resuelto se vuelve arista y qué se filtra. La unidad es el
+  archivo, no la referencia, porque tras un import roto el compilador no
+  reporta los usos del nombre importado. Un error solo cuenta si su línea
+  nombra el identificador original (los errores en cascada no) y se excluyen
+  las relaciones de implementación y los errores sobre la propia línea de la
+  declaración. Corpus público fijado por commit; un repositorio por lenguaje
+  en el piloto, así que las cifras describen esos repositorios y no el
+  lenguaje. Go se mide con la configuración por defecto y con
+  `go.include_tests: true`, porque la diferencia entre las dos es lo que cuesta
+  ese ajuste. Un resultado sin la lista de lo que no se pudo muestrear no se
+  publica.
 - `benchmarks/edit-frequency` no mide una reconstrucción contra otra: mide qué
   le cuesta el grafo a **un agente que edita**, que es la carga por la que la
   issue `#106` reabrió el ADR 0057. Sus dos brazos se encuentran en una sola

@@ -2113,6 +2113,45 @@ waiting for its owner.
   handling of the `pnpm-workspace.yaml` overrides and of the `patchedDependencies`
   in `web` is unknown. CodeQL findings have not been read.
 
+#### Recall on real code, per language: pilot (2026-11-18)
+
+`benchmarks/language-recall/`. There was no per-language figure for how much
+of real code `find_references` finds, only fixture benchmarks. Method: rename a
+declaration, type-check again, and the files that gain an error are the files
+that use it; compare with what Kivgraph reports. Public repositories pinned by
+commit (`spf13/cobra` for Go, `sindresorhus/ky` for TypeScript), 100
+declarations per language, seed 1, stratified by kind.
+
+- The oracle and Kivgraph share each language's type checker, so this measures
+  everything around it (which files and variants load, how uses become edges,
+  what is filtered), not type resolution. The unit is the file. Errors count
+  only when their line names the original identifier (a rename cascades), and
+  implementation relations and errors on the declaration's own line are left
+  out. All of this is in the report.
+- Go, file recall: `65.9 %` with the default configuration and `99.2 %` with
+  `go.include_tests: true`. On non-test files it is `100 %` in both. The whole
+  gap of the default run is `_test.go` files, which the default does not read;
+  two files are still missed with tests on. Precision `100 %`.
+- TypeScript, file recall `84.0 %`, precision `89.4 %` (unaudited: a reported
+  file the compiler does not flag can be a use in a comment). Classes,
+  functions, interfaces, types and variables: `100 %`.
+- **Finding: ES private names (`#x`) are never found.** `0 of 13`
+  declarations, `0 of 13` dependent files, and every one of those answers
+  carries the verdict `COMPLETE`. For `#parseJson`, which is called three times
+  in `Ky.ts`, the answer is empty and says "this is an absence rather than a
+  miss".
+  Every other declaration: `92.0 %`; the misses there are properties used
+  through destructuring (`const {throwHttpErrors} = options`) and as object
+  literal keys (`{maxResponseSize: true}`). Not fixed.
+- `21 of 100` TypeScript answers said `COMPLETE` and missed a file. That is
+  what `tool-honesty` exists to prevent, seen on real code, and it is the
+  result to act on first.
+- Pilot limits: one repository per language, and the TypeScript dependencies
+  are not pinned by a lockfile. Not done: Rust, Dart, Java, C# and Python
+  (their toolchains are not installed here, and Python has no compiler to use
+  as an oracle), a second repository per language, and an audit of the
+  TypeScript extras.
+
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
 `kivgraph impact --base <ref>`: symbols touched by `git diff`, aggregated
