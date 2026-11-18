@@ -76,16 +76,17 @@ type results struct {
 
 func limitations() []string {
 	return []string{
-		"The oracle and Kivgraph share each language's type checker for Go and TypeScript. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other. Type resolution is not what this measures there: it measures which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out. Rust is the exception: the oracle is `rustc` through `cargo check` and Kivgraph reads `rust-analyzer`, two different front ends.",
+		"The oracle and Kivgraph share each language's type checker for Go, TypeScript and Dart. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other, Dart with `dart analyze` on one side and the Analysis Server on the other. Type resolution is not what this measures there: it measures which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out. Rust is the exception: the oracle is `rustc` through `cargo check` and Kivgraph reads `rust-analyzer`, two different front ends.",
 		"The unit is the file, not the reference. A rename makes the compiler reject some uses and not others (after a failed import, the uses of the imported name are not reported), so reference-level ground truth would differ by language. A file is a dependent if it gains an error.",
 		"Implementation and inheritance relations are left out of the truth: an error that says a type no longer satisfies an interface or a base class is not a use of the renamed name, and `find_references` is not the tool for it.",
 		"The sample frame is what Kivgraph lists for each file, so a declaration Kivgraph never recorded cannot be sampled. A recall measured this way is conditional on the declaration being known.",
 		"Only declarations whose name appears in its declaring position on its first line are renamed, so the rename is exact. Declarations written another way are counted as not sampled.",
-		"Go declarations are sampled from non-test files; references from `_test.go` files are part of the truth and are reported apart, because Kivgraph reads test files only with `go.include_tests: true` and this run used the default.",
+		"Go and Dart declarations are sampled from non-test files; references from test files are part of the truth and are reported apart, because Kivgraph reads test files only with `go.include_tests` or `dart.include_tests` set to true and the default arm uses neither.",
 		"One repository per language: the figures describe these repositories at these commits, not the language. A second repository would show how much they move.",
 		"A declaration with no dependents says nothing about recall. It is reported through the share of such declarations for which Kivgraph still reports a reference.",
 		"The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions. The Rust dependencies are fetched with `--locked`.",
 		"`rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The Rust truth can be too small and cannot contain a file that does not use the name.",
+		"Renaming a Dart class breaks its constructors' own declarations (a constructor is written with the class's name), and an `implements` clause is an implementation relation: those errors are left out of the truth. The Dart dependencies are resolved with `dart pub get`, and the repository ships no lockfile.",
 	}
 }
 
@@ -132,7 +133,7 @@ func renderReport(measured results) string {
 		fmt.Fprintf(&b, "|%s|%s|%d|%d|%s|%s|%s|\n", language.Language, language.Arm, language.Sampled, language.WithDependents,
 			percent(language.Recall), percent(language.Precision), percent(language.FullRecallSymbols))
 	}
-	fmt.Fprintf(&b, "\n`file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.include_tests` is the default configuration with `go.include_tests: true`; the two Go rows draw the same declarations.\n")
+	fmt.Fprintf(&b, "\n`file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.include_tests` and `dart.include_tests` are the default configuration with that language's `include_tests: true`; each pair draws the same declarations.\n")
 	for _, language := range measured.Languages {
 		fmt.Fprintf(&b, "\n## %s (%s)\n\n", language.Language, language.Arm)
 		fmt.Fprintf(&b, "- Declarations listed %d, eligible for the rename %d, measured %d (oracle failed on %d, Kivgraph refused %d).\n",

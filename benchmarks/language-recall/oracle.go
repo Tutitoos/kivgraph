@@ -125,6 +125,20 @@ func isRelationError(language string, e oracleError) bool {
 			return true
 		}
 		return false
+	case "dart":
+		switch e.Code {
+		case "NON_ABSTRACT_CLASS_INHERITS_ABSTRACT_MEMBER", "INVALID_OVERRIDE", "CONCRETE_CLASS_WITH_ABSTRACT_MEMBER",
+			"INVALID_IMPLEMENTATION_OVERRIDE", "NON_ABSTRACT_CLASS_INHERITS_ABSTRACT_MEMBER_ONE",
+			"NON_ABSTRACT_CLASS_INHERITS_ABSTRACT_MEMBER_TWO", "NON_ABSTRACT_CLASS_INHERITS_ABSTRACT_MEMBER_THREE",
+			"NON_ABSTRACT_CLASS_INHERITS_ABSTRACT_MEMBER_FOUR", "NON_ABSTRACT_CLASS_INHERITS_ABSTRACT_MEMBER_FIVE_PLUS",
+			// A constructor is written with its class's name, so renaming the
+			// class breaks the constructors' own declarations; an `implements`
+			// clause is an implementation relation. Neither is a use.
+			"INVALID_CONSTRUCTOR_NAME", "INVALID_FACTORY_NAME_NOT_A_CLASS", "REDIRECT_TO_INVALID_RETURN_TYPE", "IMPLEMENTS_NON_CLASS",
+			"CONST_METHOD", "FIELD_INITIALIZER_OUTSIDE_CONSTRUCTOR":
+			return true
+		}
+		return false
 	default:
 		switch e.Code {
 		case "TS2415", "TS2416", "TS2420", "TS2515", "TS2559":
@@ -157,6 +171,8 @@ func (o *oracle) check(ctx context.Context, file string, content []byte) ([]orac
 		return o.checkGo(ctx, file, content)
 	case "rust":
 		return o.checkRust(ctx)
+	case "dart":
+		return o.checkDart(ctx)
 	}
 	return o.checkTypeScript(ctx)
 }
@@ -293,6 +309,44 @@ func (o *oracle) checkRust(ctx context.Context) ([]oracleError, error) {
 	}
 	if runErr != nil && len(errs) == 0 {
 		return nil, fmt.Errorf("cargo check: %w: %s", runErr, strings.TrimSpace(stderr.String()))
+	}
+	return errs, nil
+}
+
+// checkDart runs `dart analyze` over the package, tests included, and keeps
+// the errors, and the two warnings a rename turns an `export ... show` or
+// `hide` clause into: an export that names a declaration is a dependency the
+// analyzer only warns about. The machine format is
+// `SEVERITY|TYPE|CODE|file|line|column|length|message`.
+func (o *oracle) checkDart(ctx context.Context) ([]oracleError, error) {
+	process := exec.CommandContext(ctx, "dart", "analyze", "--format=machine")
+	process.Dir = o.repository.Path
+	process.Env = toolEnvironment()
+	var stdout, stderr bytes.Buffer
+	process.Stdout, process.Stderr = &stdout, &stderr
+	runErr := process.Run()
+	root, err := filepath.EvalSymlinks(o.repository.Path)
+	if err != nil {
+		return nil, err
+	}
+	var errs []oracleError
+	for _, line := range strings.Split(stdout.String()+stderr.String(), "\n") {
+		fields := strings.SplitN(strings.TrimRight(line, "\r"), "|", 8)
+		if len(fields) != 8 || (fields[0] != "ERROR" && fields[2] != "UNDEFINED_SHOWN_NAME" && fields[2] != "UNDEFINED_HIDDEN_NAME") {
+			continue
+		}
+		number, err := strconv.Atoi(fields[4])
+		if err != nil {
+			continue
+		}
+		file, err := filepath.Rel(root, fields[3])
+		if err != nil || strings.HasPrefix(file, "..") {
+			continue
+		}
+		errs = append(errs, oracleError{File: filepath.ToSlash(file), Line: number, Code: fields[2], Message: fields[7]})
+	}
+	if runErr != nil && len(errs) == 0 && strings.Contains(stderr.String(), "Could not") {
+		return nil, fmt.Errorf("dart analyze: %w: %s", runErr, strings.TrimSpace(stderr.String()))
 	}
 	return errs, nil
 }

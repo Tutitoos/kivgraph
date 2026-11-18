@@ -23,6 +23,7 @@ var kinds = map[string][]string{
 	"go":         {"func", "method", "type", "alias", "const", "var", "field"},
 	"typescript": {"function", "class", "interface", "enum", "type", "method", "property", "variable"},
 	"rust":       {"function", "method", "static_method", "trait_method", "struct", "enum", "enum_member", "field", "trait", "constant", "static", "type_alias"},
+	"dart":       {"class", "mixin", "enum", "enum_member", "extension", "type_alias", "getter", "setter", "function", "method", "field", "variable"},
 }
 
 var skippedNames = map[string]bool{"_": true, "main": true, "init": true}
@@ -59,6 +60,8 @@ func isSourceFile(language, path string) bool {
 		return strings.HasSuffix(path, ".go") && !isTestFile(language, path)
 	case "rust":
 		return strings.HasSuffix(path, ".rs") && !isTestFile(language, path)
+	case "dart":
+		return strings.HasSuffix(path, ".dart") && !isTestFile(language, path)
 	default:
 		return (strings.HasSuffix(path, ".ts") || strings.HasSuffix(path, ".tsx")) &&
 			!strings.HasSuffix(path, ".d.ts") && !isTestFile(language, path)
@@ -71,6 +74,9 @@ func isTestFile(language, path string) bool {
 	}
 	if language == "rust" {
 		return strings.HasPrefix(path, "tests/") || strings.Contains(path, "/tests/") || strings.HasSuffix(path, "_test.rs") || strings.HasSuffix(path, "_tests.rs")
+	}
+	if language == "dart" {
+		return strings.HasPrefix(path, "test/") || strings.Contains(path, "/test/") || strings.HasSuffix(path, "_test.dart")
 	}
 	base := filepath.Base(path)
 	return strings.Contains(base, ".test.") || strings.Contains(base, ".spec.") ||
@@ -119,6 +125,26 @@ func declarationPattern(language, kind, name string) *regexp.Regexp {
 		pattern = `^\s*(?:pub(?:\([^)]*\))?\s+)?(` + quoted + `)\s*:[^:]`
 	case "rust/enum_member":
 		pattern = `^\s*(` + quoted + `)\s*(?:[,({=]|$)`
+	case "dart/class":
+		pattern = `\bclass\s+(` + quoted + `)\b`
+	case "dart/mixin":
+		pattern = `\bmixin\s+(` + quoted + `)\b`
+	case "dart/enum":
+		pattern = `\benum\s+(` + quoted + `)\b`
+	case "dart/extension":
+		pattern = `\bextension\s+(` + quoted + `)\b`
+	case "dart/type_alias":
+		pattern = `\btypedef\s+(` + quoted + `)\b`
+	case "dart/getter":
+		pattern = `\bget\s+(` + quoted + `)\b`
+	case "dart/setter":
+		pattern = `\bset\s+(` + quoted + `)\b`
+	case "dart/function", "dart/method":
+		pattern = `^\s*(?:@\w+(?:\([^)]*\))?\s+)*[^(=;{}]*?\b(` + quoted + `)\s*(?:<[^>(]*>)?\s*\(`
+	case "dart/field", "dart/variable":
+		pattern = `^\s*(?:@\w+(?:\([^)]*\))?\s+)*(?:(?:static|late|final|const|var|external|covariant)\s+)*(?:[\w<>?,.\[\]\s]*?\s)?(` + quoted + `)\s*(?:=[^>]|;|,|$)`
+	case "dart/enum_member":
+		pattern = `^\s*(?:@\w+(?:\([^)]*\))?\s+)*(` + quoted + `)\s*(?:[,;(<{]|$)`
 	default:
 		return nil
 	}

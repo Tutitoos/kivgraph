@@ -2194,7 +2194,44 @@ used).
   receiver inside a macro, a name passed through a metavariable, and the
   expansion of a macro at each call site. Existing graphs need
   `kivgraph index --full`.
-- Still limited to one repository. Dart, Java, C# and Python are not measured.
+- Still limited to one repository. Java, C# and Python are not measured.
+
+#### Recall on real code: Dart added (2026-11-18)
+
+`dart-lang/collection` at `96afcc2fce62`, 100 declarations, seed 1. The oracle
+is `dart analyze --format=machine` (errors, plus the two warnings an
+`export ... show`/`hide` clause becomes when the name goes), Kivgraph reads the
+Analysis Server. Dart is measured in two arms like Go: tests are read only with
+`dart.include_tests: true`. Errors that come from renaming a class (its
+constructors' own declarations, an `implements` clause) are not uses and are
+left out of the truth.
+
+- First run: file recall `49.0 %` (`64.9 %` on non-test files), precision
+  `76.9 %`, and `25` answers that said `COMPLETE` and missed a file.
+- **Finding, fixed: a file with a non-ASCII character published no
+  references.** The navigation request carried the length in bytes and the
+  server counts UTF-16 code units; an accent in a comment made the request run
+  past the end of the file and the server answered an empty navigation, with no
+  error. Two of the twenty files in `lib/src` were silent.
+- **Finding, fixed: instantiating a class was not a use of it.** With an
+  explicit constructor the call resolves to the constructor, so the class had no
+  reference from the file that builds it. The class now gets a `CALLS_DIRECT`
+  from the same evidence. Classes `0.37` to `0.63` file recall before the next
+  fix.
+- **Finding, fixed: doc links were published as relations.** `[name]` in a `///`
+  comment is navigated like code and sourced at the module; "compatible with
+  [hash]" became a module `EMBEDS` the function. Comment lines now publish
+  nothing. Precision `76.4 %` to `92.5 %`.
+- Result (ADR 0129): non-test file recall `98.7 %`, with `dart.include_tests`
+  `99.0 %` overall and precision `88.4 %`; default overall `74.0 %` because
+  the test files are not read. `COMPLETE` answers missing a non-test file:
+  `25` to `1`.
+- Still missed, not fixed: an explicit extension application
+  (`IterableExtension(this)`), for which the server gives no navigation
+  target; and `/** */` doc links. Not audited: the remaining extras
+  (`UnionSet`, `equals`, `where` in their own files).
+- Still limited to one repository. Java, C# and Python are not measured, and
+  the first two need `scip-java` and `scip-dotnet`, which are not installed.
 
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 

@@ -31,7 +31,7 @@ func indexEnvironment(home string) []string {
 
 // index registers the corpus and builds the graph with the real binary. It runs
 // from a Kivgraph checkout because the TypeScript worker is started from there.
-func index(ctx context.Context, binary, root, home string, repositories []corpusRepository, goTests bool) error {
+func index(ctx context.Context, binary, root, home string, repositories []corpusRepository, testsSection string) error {
 	var languages []string
 	seen := map[string]bool{}
 	arguments := []string{"init"}
@@ -44,8 +44,8 @@ func index(ctx context.Context, binary, root, home string, repositories []corpus
 	}
 	arguments = append(arguments, "--languages", strings.Join(languages, ","))
 	for _, step := range [][]string{arguments, {"index", "--full"}} {
-		if step[0] == "index" && goTests {
-			if err := enableGoTests(home); err != nil {
+		if step[0] == "index" && testsSection != "" {
+			if err := enableTests(home, testsSection); err != nil {
 				return err
 			}
 		}
@@ -59,25 +59,25 @@ func index(ctx context.Context, binary, root, home string, repositories []corpus
 	return nil
 }
 
-// enableGoTests sets `go.include_tests` in the configuration `init` wrote. The
-// key is the first `include_tests` after the `go:` section, which the check
-// below confirms rather than assumes.
-func enableGoTests(home string) error {
+// enableTests sets `<section>.include_tests` in the configuration `init` wrote.
+// The key is the first `include_tests` after the section, which the check below
+// confirms rather than assumes.
+func enableTests(home, section string) error {
 	path := filepath.Join(home, ".config", "kivgraph", "config.yaml")
 	content, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}
-	section := strings.Index(string(content), "\ngo:\n")
-	if section < 0 {
-		return fmt.Errorf("%s has no go section", path)
+	start := strings.Index(string(content), "\n"+section+":\n")
+	if start < 0 {
+		return fmt.Errorf("%s has no %s section", path, section)
 	}
 	const off, on = "    include_tests: false\n", "    include_tests: true\n"
-	offset := strings.Index(string(content[section:]), off)
+	offset := strings.Index(string(content[start:]), off)
 	if offset < 0 {
-		return fmt.Errorf("%s does not declare go.include_tests as false", path)
+		return fmt.Errorf("%s does not declare %s.include_tests as false", path, section)
 	}
-	offset += section
+	offset += start
 	updated := string(content[:offset]) + on + string(content[offset+len(off):])
 	return os.WriteFile(path, []byte(updated), 0o644)
 }

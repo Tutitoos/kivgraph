@@ -13,6 +13,7 @@ How many of the files that depend on a declaration does `find_references` report
 |go|[cobra](https://github.com/spf13/cobra)|`adbc8813901b`|
 |typescript|[ky](https://github.com/sindresorhus/ky)|`3541888878c4`|
 |rust|[fd](https://github.com/sharkdp/fd)|`b80cd53e6561`|
+|dart|[collection](https://github.com/dart-lang/collection)|`96afcc2fce62`|
 
 ## Result
 
@@ -23,9 +24,11 @@ Intervals are 95 % percentile intervals from resampling declarations.
 |go|default|100|96|65.9 % (59.4 to 74.6)|100.0 % (100.0 to 100.0)|57.3 % (47.3 to 66.7)|
 |typescript|default|100|85|100.0 % (100.0 to 100.0)|90.9 % (84.0 to 96.9)|100.0 % (95.7 to 100.0)|
 |rust|default|100|86|100.0 % (100.0 to 100.0)|97.8 % (94.9 to 100.0)|100.0 % (95.7 to 100.0)|
+|dart|default|100|73|74.0 % (65.1 to 82.7)|92.5 % (86.2 to 97.6)|67.1 % (55.7 to 76.8)|
 |go|go.include_tests|100|96|99.2 % (97.8 to 100.0)|100.0 % (100.0 to 100.0)|97.9 % (92.7 to 99.4)|
+|dart|dart.include_tests|100|73|99.0 % (96.8 to 100.0)|88.4 % (81.0 to 94.6)|98.6 % (92.6 to 99.8)|
 
-`file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.include_tests` is the default configuration with `go.include_tests: true`; the two Go rows draw the same declarations.
+`file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.include_tests` and `dart.include_tests` are the default configuration with that language's `include_tests: true`; each pair draws the same declarations.
 
 ## go (default)
 
@@ -133,6 +136,55 @@ Declarations with a reported file the compiler did not flag (first 15 of 3). The
 |`Never` (src/cli.rs:863)|enum_member|src/cli.rs|
 |`cmp` (src/dir_entry.rs:136)|method|src/dir_entry.rs|
 
+## dart (default)
+
+- Declarations listed 772, eligible for the rename 540, measured 100 (oracle failed on 0, Kivgraph refused 0).
+- Recall on non-test files: 98.7 % (95.6 to 100.0). On test files: 0.0 % (0.0 to 0.0).
+- Declarations with no dependents for which Kivgraph still reports a file: 3 of 27.
+- Completeness verdicts: COMPLETE 99, LOWER_BOUND 1.
+- Answers that said `COMPLETE` and missed at least one non-test file: 1 of 99.
+- Not sampled: kind not sampled: 204; name not found in declaring position: 28.
+
+|kind|declarations with dependents|file recall|
+|---|---|---|
+|class|20|63.6 % (47.1 to 80.0)|
+|extension|1|0.0 % (0.0 to 0.0)|
+|field|21|95.5 % (87.5 to 100.0)|
+|function|20|72.7 % (56.7 to 86.2)|
+|method|3|0.0 % (0.0 to 0.0)|
+|variable|8|100.0 % (100.0 to 100.0)|
+
+Declarations with a missed file (first 15 of 24):
+
+|declaration|kind|missed|verdict|
+|---|---|---|---|
+|`IterableExtension` (lib/src/iterable_extensions.dart:20)|extension|lib/src/iterable_extensions.dart|COMPLETE|
+|`binarySearch` (lib/src/algorithms.dart:21)|function|test/algorithms_test.dart|COMPLETE|
+|`binarySearchByCompare` (lib/src/list_extensions.dart:38)|method|test/extensions_test.dart|COMPLETE|
+|`CombinedIterableView` (lib/src/combined_wrappers/combined_iterable.dart:16)|class|test/combined_wrapper/iterable_test.dart|COMPLETE|
+|`lowerBound` (lib/src/algorithms.dart:70)|function|test/algorithms_test.dart|COMPLETE|
+|`DelegatingList` (lib/src/wrappers.dart:151)|class|test/wrapper_test.dart|COMPLETE|
+|`stronglyConnectedComponents` (lib/src/functions.dart:163)|function|test/functions_test.dart|COMPLETE|
+|`groupFoldBy` (lib/src/iterable_extensions.dart:397)|method|test/extensions_test.dart|COMPLETE|
+|`BoolList` (lib/src/boollist.dart:13)|class|test/boollist_test.dart|COMPLETE|
+|`equalsIgnoreAsciiCase` (lib/src/comparators.dart:27)|function|test/ignore_ascii_case_test.dart|COMPLETE|
+|`IterableZip` (lib/src/iterable_zip.dart:16)|class|test/iterable_zip_test.dart|COMPLETE|
+|`quickSortBy` (lib/src/algorithms.dart:420)|function|test/algorithms_test.dart|COMPLETE|
+|`UnorderedIterableEquality` (lib/src/equality.dart:254)|class|test/algorithms_test.dart, test/equality_test.dart, test/extensions_test.dart|COMPLETE|
+|`mapMap` (lib/src/functions.dart:15)|function|test/functions_test.dart|COMPLETE|
+|`IdentityEquality` (lib/src/equality.dart:95)|class|test/equality_test.dart|COMPLETE|
+
+Declarations with a reported file the compiler did not flag (first 15 of 6). These are unaudited: a use the compiler does not reject, such as one in a comment, is not a false positive.
+
+|declaration|kind|extra|
+|---|---|---|
+|`addAll` (lib/src/wrappers.dart:509)|method|lib/src/equality_map.dart|
+|`UnionSet` (lib/src/union_set.dart:16)|class|lib/src/union_set.dart|
+|`removeWhere` (lib/src/wrappers.dart:795)|method|lib/src/wrappers.dart|
+|`equals` (lib/src/equality.dart:212)|method|lib/src/equality.dart|
+|`UnionSetController` (lib/src/union_set_controller.dart:24)|class|lib/src/union_set_controller.dart|
+|`where` (lib/src/wrappers.dart:112)|method|lib/src/wrappers.dart|
+
 ## go (go.include_tests)
 
 - Declarations listed 443, eligible for the rename 442, measured 100 (oracle failed on 0, Kivgraph refused 0).
@@ -159,15 +211,56 @@ Declarations with a missed file (first 15 of 2):
 |`CompletionFunc` (completions.go:139)|alias|completions_test.go|COMPLETE|
 |`SliceValue` (completions.go:311)|type|completions_test.go|COMPLETE|
 
+## dart (dart.include_tests)
+
+- Declarations listed 772, eligible for the rename 540, measured 100 (oracle failed on 0, Kivgraph refused 0).
+- Recall on non-test files: 98.7 % (95.6 to 100.0). On test files: 100.0 % (100.0 to 100.0).
+- Declarations with no dependents for which Kivgraph still reports a file: 7 of 27.
+- Completeness verdicts: COMPLETE 100.
+- Answers that said `COMPLETE` and missed at least one non-test file: 1 of 100.
+- Not sampled: kind not sampled: 204; name not found in declaring position: 28.
+
+|kind|declarations with dependents|file recall|
+|---|---|---|
+|class|20|100.0 % (100.0 to 100.0)|
+|extension|1|0.0 % (0.0 to 0.0)|
+|field|21|100.0 % (100.0 to 100.0)|
+|function|20|100.0 % (100.0 to 100.0)|
+|method|3|100.0 % (100.0 to 100.0)|
+|variable|8|100.0 % (100.0 to 100.0)|
+
+Declarations with a missed file (first 15 of 1):
+
+|declaration|kind|missed|verdict|
+|---|---|---|---|
+|`IterableExtension` (lib/src/iterable_extensions.dart:20)|extension|lib/src/iterable_extensions.dart|COMPLETE|
+
+Declarations with a reported file the compiler did not flag (first 15 of 11). These are unaudited: a use the compiler does not reject, such as one in a comment, is not a false positive.
+
+|declaration|kind|extra|
+|---|---|---|
+|`containsKey` (lib/src/canonicalized_map.dart:107)|method|test/canonicalized_map_test.dart|
+|`remove` (lib/src/priority_queue.dart:261)|method|test/priority_queue_test.dart|
+|`addAll` (lib/src/wrappers.dart:509)|method|lib/src/equality_map.dart|
+|`forEachWhile` (lib/src/list_extensions.dart:130)|method|test/extensions_test.dart|
+|`UnionSet` (lib/src/union_set.dart:16)|class|lib/src/union_set.dart|
+|`whereIndexed` (lib/src/list_extensions.dart:155)|method|test/extensions_test.dart|
+|`removeWhere` (lib/src/wrappers.dart:795)|method|lib/src/wrappers.dart|
+|`equals` (lib/src/equality.dart:212)|method|lib/src/equality.dart, test/algorithms_test.dart, test/extensions_test.dart|
+|`UnionSetController` (lib/src/union_set_controller.dart:24)|class|lib/src/union_set_controller.dart|
+|`where` (lib/src/wrappers.dart:112)|method|lib/src/wrappers.dart|
+|`ListSlice` (lib/src/list_extensions.dart:337)|class|test/extensions_test.dart|
+
 ## What this does not show
 
-- The oracle and Kivgraph share each language's type checker for Go and TypeScript. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other. Type resolution is not what this measures there: it measures which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out. Rust is the exception: the oracle is `rustc` through `cargo check` and Kivgraph reads `rust-analyzer`, two different front ends.
+- The oracle and Kivgraph share each language's type checker for Go, TypeScript and Dart. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other, Dart with `dart analyze` on one side and the Analysis Server on the other. Type resolution is not what this measures there: it measures which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out. Rust is the exception: the oracle is `rustc` through `cargo check` and Kivgraph reads `rust-analyzer`, two different front ends.
 - The unit is the file, not the reference. A rename makes the compiler reject some uses and not others (after a failed import, the uses of the imported name are not reported), so reference-level ground truth would differ by language. A file is a dependent if it gains an error.
 - Implementation and inheritance relations are left out of the truth: an error that says a type no longer satisfies an interface or a base class is not a use of the renamed name, and `find_references` is not the tool for it.
 - The sample frame is what Kivgraph lists for each file, so a declaration Kivgraph never recorded cannot be sampled. A recall measured this way is conditional on the declaration being known.
 - Only declarations whose name appears in its declaring position on its first line are renamed, so the rename is exact. Declarations written another way are counted as not sampled.
-- Go declarations are sampled from non-test files; references from `_test.go` files are part of the truth and are reported apart, because Kivgraph reads test files only with `go.include_tests: true` and this run used the default.
+- Go and Dart declarations are sampled from non-test files; references from test files are part of the truth and are reported apart, because Kivgraph reads test files only with `go.include_tests` or `dart.include_tests` set to true and the default arm uses neither.
 - One repository per language: the figures describe these repositories at these commits, not the language. A second repository would show how much they move.
 - A declaration with no dependents says nothing about recall. It is reported through the share of such declarations for which Kivgraph still reports a reference.
 - The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions. The Rust dependencies are fetched with `--locked`.
 - `rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The Rust truth can be too small and cannot contain a file that does not use the name.
+- Renaming a Dart class breaks its constructors' own declarations (a constructor is written with the class's name), and an `implements` clause is an implementation relation: those errors are left out of the truth. The Dart dependencies are resolved with `dart pub get`, and the repository ships no lockfile.

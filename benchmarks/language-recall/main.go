@@ -54,7 +54,7 @@ func run(ctx context.Context) error {
 	flag.StringVar(&cfg.RepoRoot, "repo-root", ".", "a Kivgraph checkout: its ts-worker runs the TypeScript facts")
 	flag.StringVar(&cfg.Work, "work", "", "directory for the cloned corpus; kept between runs when given")
 	flag.StringVar(&cfg.Output, "output", "benchmarks/"+benchmarkName, "directory for results.json and report.md")
-	flag.StringVar(&cfg.Languages, "languages", "go,typescript,rust", "comma-separated languages to measure")
+	flag.StringVar(&cfg.Languages, "languages", "go,typescript,rust,dart", "comma-separated languages to measure")
 	flag.IntVar(&cfg.Count, "count", 100, "declarations sampled per language")
 	flag.Int64Var(&cfg.Seed, "seed", 1, "sampling seed")
 	flag.Parse()
@@ -126,12 +126,15 @@ func run(ctx context.Context) error {
 		Corpus:      describe(repositories),
 		Limitations: limitations(),
 	}
-	// Two configurations of Kivgraph are measured: the default, and Go with its
-	// test files read. They differ in one setting, and the gap between them is
-	// that setting's cost, which a single run would fold into the recall.
+	// Two configurations of Kivgraph are measured for the languages that read
+	// test files only when asked: the default, and the language with them read.
+	// They differ in one setting, and the gap between them is that setting's
+	// cost, which a single run would fold into the recall.
 	arms := []arm{{Name: "default"}}
-	if wanted["go"] {
-		arms = append(arms, arm{Name: "go.include_tests", Language: "go", GoTests: true})
+	for _, language := range []string{"go", "dart"} {
+		if wanted[language] {
+			arms = append(arms, arm{Name: language + ".include_tests", Language: language, Tests: language})
+		}
 	}
 	for _, current := range arms {
 		var members []corpusRepository
@@ -160,7 +163,7 @@ func run(ctx context.Context) error {
 type arm struct {
 	Name     string
 	Language string
-	GoTests  bool
+	Tests    string // the config section whose include_tests is switched on
 }
 
 // measureArm indexes the corpus with a configuration, serves it, and measures
@@ -171,7 +174,7 @@ func measureArm(ctx context.Context, binary, root string, current arm, members [
 		return nil, err
 	}
 	defer os.RemoveAll(state)
-	if err := index(ctx, binary, root, state, members, current.GoTests); err != nil {
+	if err := index(ctx, binary, root, state, members, current.Tests); err != nil {
 		return nil, err
 	}
 	session, stop, err := connect(ctx, binary, state)
@@ -180,7 +183,7 @@ func measureArm(ctx context.Context, binary, root string, current arm, members [
 	}
 	defer stop()
 	var out []languageResult
-	for _, language := range []string{"go", "typescript", "rust"} {
+	for _, language := range []string{"go", "typescript", "rust", "dart"} {
 		var byLanguage []corpusRepository
 		for _, repository := range members {
 			if repository.Language == language {
