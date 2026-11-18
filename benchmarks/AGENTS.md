@@ -28,10 +28,12 @@ declarado en la raíz.
 - `benchmarks/language-recall/` mide, por lenguaje, qué parte de los archivos
   que dependen de una declaración devuelve `find_references`. La verdad de
   referencia sale de renombrar la declaración y volver a comprobar tipos: los
-  archivos que ganan un error son los que la usan. **El oráculo y Kivgraph
-  comparten el comprobador de tipos de cada lenguaje**, así que no se mide la
-  resolución de tipos sino todo lo que la rodea: qué archivos y variantes se
-  cargan, cómo un uso resuelto se vuelve arista y qué se filtra. La unidad es el
+  archivos que ganan un error son los que la usan. **En Go y TypeScript el
+  oráculo y Kivgraph comparten el comprobador de tipos**, así que no se mide
+  la resolución de tipos sino todo lo que la rodea. En Rust no: el oráculo es
+  `rustc` por `cargo check` y Kivgraph lee `rust-analyzer`. Lo que se mide en
+  los otros dos es qué archivos y variantes se cargan, cómo un uso resuelto se
+  vuelve arista y qué se filtra. La unidad es el
   archivo, no la referencia, porque tras un import roto el compilador no
   reporta los usos del nombre importado. Un error solo cuenta si su línea
   nombra el identificador original (los errores en cascada no) y se excluyen

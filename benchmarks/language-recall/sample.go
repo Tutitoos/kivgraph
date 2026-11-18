@@ -22,6 +22,7 @@ const renameSuffix = "Kvg"
 var kinds = map[string][]string{
 	"go":         {"func", "method", "type", "alias", "const", "var", "field"},
 	"typescript": {"function", "class", "interface", "enum", "type", "method", "property", "variable"},
+	"rust":       {"function", "method", "static_method", "trait_method", "struct", "enum", "enum_member", "field", "trait", "constant", "static", "type_alias"},
 }
 
 var skippedNames = map[string]bool{"_": true, "main": true, "init": true}
@@ -56,6 +57,8 @@ func isSourceFile(language, path string) bool {
 	switch language {
 	case "go":
 		return strings.HasSuffix(path, ".go") && !isTestFile(language, path)
+	case "rust":
+		return strings.HasSuffix(path, ".rs") && !isTestFile(language, path)
 	default:
 		return (strings.HasSuffix(path, ".ts") || strings.HasSuffix(path, ".tsx")) &&
 			!strings.HasSuffix(path, ".d.ts") && !isTestFile(language, path)
@@ -65,6 +68,9 @@ func isSourceFile(language, path string) bool {
 func isTestFile(language, path string) bool {
 	if language == "go" {
 		return strings.HasSuffix(path, "_test.go")
+	}
+	if language == "rust" {
+		return strings.HasPrefix(path, "tests/") || strings.Contains(path, "/tests/") || strings.HasSuffix(path, "_test.rs") || strings.HasSuffix(path, "_tests.rs")
 	}
 	base := filepath.Base(path)
 	return strings.Contains(base, ".test.") || strings.Contains(base, ".spec.") ||
@@ -95,6 +101,24 @@ func declarationPattern(language, kind, name string) *regexp.Regexp {
 		pattern = `^(?:export\s+)?(?:declare\s+)?(?:const|let|var)\s+(` + quoted + `)\b`
 	case "typescript/method", "typescript/property":
 		pattern = `^\s*(?:(?:public|private|protected|static|readonly|async|abstract|override|declare|get|set)\s+)*(` + quoted + `)\s*[?!]?\s*[(:=<]`
+	case "rust/function", "rust/method", "rust/static_method", "rust/trait_method":
+		pattern = `\bfn\s+(` + quoted + `)\b`
+	case "rust/struct":
+		pattern = `\bstruct\s+(` + quoted + `)\b`
+	case "rust/enum":
+		pattern = `\benum\s+(` + quoted + `)\b`
+	case "rust/trait":
+		pattern = `\btrait\s+(` + quoted + `)\b`
+	case "rust/type_alias":
+		pattern = `\btype\s+(` + quoted + `)\b`
+	case "rust/constant":
+		pattern = `\bconst\s+(` + quoted + `)\b`
+	case "rust/static":
+		pattern = `\bstatic\s+(?:mut\s+)?(` + quoted + `)\b`
+	case "rust/field":
+		pattern = `^\s*(?:pub(?:\([^)]*\))?\s+)?(` + quoted + `)\s*:[^:]`
+	case "rust/enum_member":
+		pattern = `^\s*(` + quoted + `)\s*(?:[,({=]|$)`
 	default:
 		return nil
 	}

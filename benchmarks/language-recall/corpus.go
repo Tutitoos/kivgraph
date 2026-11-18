@@ -40,6 +40,11 @@ func corpus() []corpusRepository {
 			Project: "tsconfig.json",
 			Setup:   []string{"npm install --no-audit --no-fund --ignore-scripts --fetch-retries=5 --fetch-timeout=120000"},
 		},
+		{
+			Language: "rust", Name: "fd", URL: "https://github.com/sharkdp/fd.git",
+			Commit: "b80cd53e65615060a62a5ea349a0d78b65d7029e",
+			Setup:  []string{"cargo fetch --locked"},
+		},
 	}
 }
 

@@ -54,7 +54,7 @@ func run(ctx context.Context) error {
 	flag.StringVar(&cfg.RepoRoot, "repo-root", ".", "a Kivgraph checkout: its ts-worker runs the TypeScript facts")
 	flag.StringVar(&cfg.Work, "work", "", "directory for the cloned corpus; kept between runs when given")
 	flag.StringVar(&cfg.Output, "output", "benchmarks/"+benchmarkName, "directory for results.json and report.md")
-	flag.StringVar(&cfg.Languages, "languages", "go,typescript", "comma-separated languages to measure")
+	flag.StringVar(&cfg.Languages, "languages", "go,typescript,rust", "comma-separated languages to measure")
 	flag.IntVar(&cfg.Count, "count", 100, "declarations sampled per language")
 	flag.Int64Var(&cfg.Seed, "seed", 1, "sampling seed")
 	flag.Parse()
@@ -121,6 +121,7 @@ func run(ctx context.Context) error {
 			OS: runtime.GOOS, Arch: runtime.GOARCH, Go: runtime.Version(),
 			Kivgraph: kivgraphVersion(ctx, binary), Node: toolVersion(ctx, "node", "--version"),
 			TypeScript: typescriptVersion(ctx, work, repositories),
+			Rust:       toolVersion(ctx, "rustc", "--version"),
 		},
 		Corpus:      describe(repositories),
 		Limitations: limitations(),
@@ -179,7 +180,7 @@ func measureArm(ctx context.Context, binary, root string, current arm, members [
 	}
 	defer stop()
 	var out []languageResult
-	for _, language := range []string{"go", "typescript"} {
+	for _, language := range []string{"go", "typescript", "rust"} {
 		var byLanguage []corpusRepository
 		for _, repository := range members {
 			if repository.Language == language {

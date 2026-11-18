@@ -10,7 +10,8 @@
     "go": "go1.26.11",
     "kivgraph": "0.10.0",
     "node": "v25.9.0",
-    "typescript": "Version 5.9.3"
+    "typescript": "Version 5.9.3",
+    "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13) (Homebrew)"
   },
   "corpus": [
     {
@@ -25,6 +26,12 @@
       "url": "https://github.com/sindresorhus/ky.git",
       "commit": "3541888878c4d303a8bc2ad61815f4e048f55a5d",
       "project": "tsconfig.json"
+    },
+    {
+      "language": "rust",
+      "name": "fd",
+      "url": "https://github.com/sharkdp/fd.git",
+      "commit": "b80cd53e65615060a62a5ea349a0d78b65d7029e"
     }
   ],
   "languages": [
@@ -106,8 +113,8 @@
         "symbols": 4
       },
       "completeness_verdicts": {
-        "COMPLETE": 96,
-        "LOWER_BOUND": 4
+        "COMPLETE": 95,
+        "LOWER_BOUND": 5
       },
       "complete_verdicts_that_missed_a_non_test_file": 0,
       "by_kind": [
@@ -1159,7 +1166,7 @@
             "powershell_completions_test.go",
             "zsh_completions_test.go"
           ],
-          "verdict": "COMPLETE"
+          "verdict": "LOWER_BOUND"
         },
         {
           "repository": "cobra",
@@ -2061,7 +2068,8 @@
         "symbols": 15
       },
       "completeness_verdicts": {
-        "COMPLETE": 100
+        "COMPLETE": 98,
+        "LOWER_BOUND": 2
       },
       "complete_verdicts_that_missed_a_non_test_file": 0,
       "by_kind": [
@@ -2344,7 +2352,7 @@
           "extra_files": [
             "source/utils/body.ts"
           ],
-          "verdict": "COMPLETE"
+          "verdict": "LOWER_BOUND"
         },
         {
           "repository": "ky",
@@ -2994,7 +3002,7 @@
           "reported_files": [
             "source/core/Ky.ts"
           ],
-          "verdict": "COMPLETE"
+          "verdict": "LOWER_BOUND"
         },
         {
           "repository": "ky",
@@ -3672,6 +3680,1689 @@
           ],
           "reported_files": [
             "source/utils/body.ts"
+          ],
+          "verdict": "COMPLETE"
+        }
+      ]
+    },
+    {
+      "arm": "default",
+      "language": "rust",
+      "declarations_listed": 646,
+      "declarations_eligible": 487,
+      "not_sampled": {
+        "kind not sampled": 50,
+        "name not found in declaring position": 109
+      },
+      "declarations_measured": 100,
+      "with_dependents": 86,
+      "oracle_failures": 0,
+      "kivgraph_failures": 0,
+      "file_recall": {
+        "value": 0.9848484848484849,
+        "low": 0.9603174603174603,
+        "high": 1,
+        "numerator": 130,
+        "denominator": 132,
+        "symbols": 86
+      },
+      "file_recall_non_test": {
+        "value": 0.9848484848484849,
+        "low": 0.96,
+        "high": 1,
+        "numerator": 130,
+        "denominator": 132,
+        "symbols": 86
+      },
+      "file_recall_test": {
+        "value": 0,
+        "low": 0,
+        "high": 0,
+        "numerator": 0,
+        "denominator": 0,
+        "symbols": 0
+      },
+      "file_recall_private_names": {
+        "value": 0,
+        "low": 0,
+        "high": 0,
+        "numerator": 0,
+        "denominator": 0,
+        "symbols": 0
+      },
+      "file_recall_without_private_names": {
+        "value": 0.9848484848484849,
+        "low": 0.96,
+        "high": 1,
+        "numerator": 130,
+        "denominator": 132,
+        "symbols": 86
+      },
+      "file_precision": {
+        "value": 0.9774436090225563,
+        "low": 0.9477611940298507,
+        "high": 1,
+        "numerator": 130,
+        "denominator": 133,
+        "symbols": 86
+      },
+      "symbols_fully_recalled": {
+        "value": 0.9767441860465116,
+        "low": 0.9191198537004109,
+        "high": 0.9935990738533299,
+        "numerator": 84,
+        "denominator": 86,
+        "symbols": 86
+      },
+      "symbols_without_dependents_that_report_references": {
+        "value": 0.14285714285714285,
+        "low": 0.04009392090764893,
+        "high": 0.39941379723733705,
+        "numerator": 2,
+        "denominator": 14,
+        "symbols": 14
+      },
+      "completeness_verdicts": {
+        "COMPLETE": 96,
+        "LOWER_BOUND": 4
+      },
+      "complete_verdicts_that_missed_a_non_test_file": 2,
+      "by_kind": [
+        {
+          "kind": "constant",
+          "symbols_with_dependents": 12,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 12,
+            "denominator": 12,
+            "symbols": 12
+          }
+        },
+        {
+          "kind": "enum",
+          "symbols_with_dependents": 12,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 26,
+            "denominator": 26,
+            "symbols": 12
+          }
+        },
+        {
+          "kind": "enum_member",
+          "symbols_with_dependents": 11,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 20,
+            "denominator": 20,
+            "symbols": 11
+          }
+        },
+        {
+          "kind": "field",
+          "symbols_with_dependents": 12,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 17,
+            "denominator": 17,
+            "symbols": 12
+          }
+        },
+        {
+          "kind": "function",
+          "symbols_with_dependents": 5,
+          "file_recall": {
+            "value": 0.875,
+            "low": 0.5,
+            "high": 1,
+            "numerator": 7,
+            "denominator": 8,
+            "symbols": 5
+          }
+        },
+        {
+          "kind": "method",
+          "symbols_with_dependents": 4,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 4,
+            "denominator": 4,
+            "symbols": 4
+          }
+        },
+        {
+          "kind": "static",
+          "symbols_with_dependents": 3,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 3,
+            "denominator": 3,
+            "symbols": 3
+          }
+        },
+        {
+          "kind": "static_method",
+          "symbols_with_dependents": 11,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 16,
+            "denominator": 16,
+            "symbols": 11
+          }
+        },
+        {
+          "kind": "struct",
+          "symbols_with_dependents": 11,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 19,
+            "denominator": 19,
+            "symbols": 11
+          }
+        },
+        {
+          "kind": "trait",
+          "symbols_with_dependents": 2,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 2,
+            "denominator": 2,
+            "symbols": 2
+          }
+        },
+        {
+          "kind": "trait_method",
+          "symbols_with_dependents": 2,
+          "file_recall": {
+            "value": 0.6666666666666666,
+            "low": 0,
+            "high": 1,
+            "numerator": 2,
+            "denominator": 3,
+            "symbols": 2
+          }
+        },
+        {
+          "kind": "type_alias",
+          "symbols_with_dependents": 1,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 2,
+            "denominator": 2,
+            "symbols": 1
+          }
+        }
+      ],
+      "symbols": [
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "TEBI",
+          "kind": "constant",
+          "line": 25,
+          "truth_files": [
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/fmt/mod.rs",
+          "name": "Token",
+          "kind": "enum",
+          "line": 18,
+          "truth_files": [
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs"
+          ],
+          "reported_files": [
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "Directory",
+          "kind": "enum_member",
+          "line": 828,
+          "truth_files": [
+            "src/filetypes.rs"
+          ],
+          "reported_files": [
+            "src/filetypes.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/config.rs",
+          "name": "command",
+          "kind": "field",
+          "line": 91,
+          "truth_files": [
+            "src/config.rs",
+            "src/main.rs",
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/config.rs",
+            "src/main.rs",
+            "src/walk.rs"
+          ],
+          "verdict": "LOWER_BOUND"
+        },
+        {
+          "repository": "fd",
+          "path": "src/output.rs",
+          "name": "print_trailing_slash",
+          "kind": "function",
+          "line": 49,
+          "truth_files": [
+            "src/output.rs"
+          ],
+          "reported_files": [
+            "src/output.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/patterns.rs",
+          "name": "matches_path",
+          "kind": "method",
+          "line": 52,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/fmt/mod.rs",
+          "name": "PLACEHOLDERS",
+          "kind": "static",
+          "line": 51,
+          "truth_files": [
+            "src/fmt/mod.rs"
+          ],
+          "reported_files": [
+            "src/fmt/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/time.rs",
+          "name": "new",
+          "kind": "static_method",
+          "line": 73,
+          "truth_files": [
+            "src/filter/time.rs"
+          ],
+          "reported_files": [
+            "src/filter/time.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exec/command.rs",
+          "name": "OutputBuffer",
+          "kind": "struct",
+          "line": 12,
+          "truth_files": [
+            "src/exec/command.rs",
+            "src/exec/mod.rs"
+          ],
+          "reported_files": [
+            "src/exec/command.rs",
+            "src/exec/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/error.rs",
+          "name": "SanitizeErr",
+          "kind": "trait",
+          "line": 14,
+          "truth_files": [
+            "src/error.rs"
+          ],
+          "reported_files": [
+            "src/error.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/patterns.rs",
+          "name": "matches_path",
+          "kind": "trait_method",
+          "line": 11,
+          "truth_files": [
+            "src/patterns.rs",
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/patterns.rs",
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/patterns.rs",
+          "name": "Patterns",
+          "kind": "type_alias",
+          "line": 14,
+          "truth_files": [
+            "src/patterns.rs",
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/patterns.rs",
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "KILO",
+          "kind": "constant",
+          "line": 16,
+          "truth_files": [
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "WorkerResult",
+          "kind": "enum",
+          "line": 38,
+          "truth_files": [
+            "src/exec/job.rs",
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/exec/job.rs",
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exit_codes.rs",
+          "name": "KilledBySigint",
+          "kind": "enum_member",
+          "line": 11,
+          "truth_files": [
+            "src/exit_codes.rs",
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/exit_codes.rs",
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exec/command.rs",
+          "name": "outputs",
+          "kind": "field",
+          "line": 14,
+          "truth_files": [
+            "src/exec/command.rs"
+          ],
+          "reported_files": [
+            "src/exec/command.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "search_str_no_base_dir",
+          "kind": "function",
+          "line": 750,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/patterns.rs",
+          "name": "matches_path",
+          "kind": "method",
+          "line": 25,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "SIZE_CAPTURES",
+          "kind": "static",
+          "line": 6,
+          "truth_files": [
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/hyperlink.rs",
+          "name": "new",
+          "kind": "static_method",
+          "line": 8,
+          "truth_files": [
+            "src/output.rs"
+          ],
+          "reported_files": [
+            "src/output.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/dir_entry.rs",
+          "name": "DirEntry",
+          "kind": "struct",
+          "line": 20,
+          "truth_files": [
+            "src/dir_entry.rs",
+            "src/filesystem.rs",
+            "src/filetypes.rs",
+            "src/output.rs",
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/dir_entry.rs",
+            "src/filesystem.rs",
+            "src/filetypes.rs",
+            "src/output.rs",
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/patterns.rs",
+          "name": "Matcher",
+          "kind": "trait",
+          "line": 10,
+          "truth_files": [
+            "src/patterns.rs"
+          ],
+          "reported_files": [
+            "src/patterns.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/error.rs",
+          "name": "sanitize",
+          "kind": "trait_method",
+          "line": 17,
+          "truth_files": [
+            "src/error.rs"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "src/error.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "MEBI",
+          "kind": "constant",
+          "line": 23,
+          "truth_files": [
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/time.rs",
+          "name": "TimeFilter",
+          "kind": "enum",
+          "line": 7,
+          "truth_files": [
+            "src/config.rs",
+            "src/filter/mod.rs",
+            "src/filter/time.rs"
+          ],
+          "reported_files": [
+            "src/config.rs",
+            "src/filter/mod.rs",
+            "src/filter/time.rs",
+            "src/main.rs"
+          ],
+          "extra_files": [
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/fmt/mod.rs",
+          "name": "NoExt",
+          "kind": "enum_member",
+          "line": 22,
+          "truth_files": [
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs"
+          ],
+          "reported_files": [
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "deadline",
+          "kind": "field",
+          "line": 142,
+          "truth_files": [
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filesystem.rs",
+          "name": "absolute_path",
+          "kind": "function",
+          "line": 21,
+          "truth_files": [
+            "src/cli.rs",
+            "src/hyperlink.rs"
+          ],
+          "reported_files": [
+            "src/cli.rs",
+            "src/hyperlink.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exec/mod.rs",
+          "name": "push",
+          "kind": "method",
+          "line": 173,
+          "truth_files": [
+            "src/exec/mod.rs"
+          ],
+          "reported_files": [
+            "src/exec/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/hyperlink.rs",
+          "name": "HOSTNAME",
+          "kind": "static",
+          "line": 47,
+          "truth_files": [
+            "src/hyperlink.rs"
+          ],
+          "reported_files": [
+            "src/hyperlink.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/fmt/mod.rs",
+          "name": "parse",
+          "kind": "static_method",
+          "line": 58,
+          "truth_files": [
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs",
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs",
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exec/mod.rs",
+          "name": "CommandTemplate",
+          "kind": "struct",
+          "line": 215,
+          "truth_files": [
+            "src/exec/mod.rs"
+          ],
+          "reported_files": [
+            "src/exec/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "DEFAULT_MAX_BUFFER_TIME",
+          "kind": "constant",
+          "line": 125,
+          "truth_files": [
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/fmt/mod.rs",
+          "name": "FormatTemplate",
+          "kind": "enum",
+          "line": 46,
+          "truth_files": [
+            "src/config.rs",
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs",
+            "src/main.rs",
+            "src/output.rs"
+          ],
+          "reported_files": [
+            "src/config.rs",
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs",
+            "src/main.rs",
+            "src/output.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "Auto",
+          "kind": "enum_member",
+          "line": 859,
+          "truth_files": [
+            "src/cli.rs"
+          ],
+          "reported_files": [
+            "src/cli.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "exact",
+          "kind": "field",
+          "line": 216,
+          "truth_files": [
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filesystem.rs",
+          "name": "path_absolute_form",
+          "kind": "function",
+          "line": 12,
+          "truth_files": [
+            "src/filesystem.rs"
+          ],
+          "reported_files": [
+            "src/filesystem.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "scan",
+          "kind": "method",
+          "line": 602,
+          "truth_files": [
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exec/mod.rs",
+          "name": "new_command",
+          "kind": "static_method",
+          "line": 164,
+          "truth_files": [
+            "src/exec/mod.rs"
+          ],
+          "reported_files": [
+            "src/exec/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/hyperlink.rs",
+          "name": "PathUrl",
+          "kind": "struct",
+          "line": 5,
+          "truth_files": [
+            "src/hyperlink.rs",
+            "src/output.rs"
+          ],
+          "reported_files": [
+            "src/hyperlink.rs",
+            "src/output.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "MEGA",
+          "kind": "constant",
+          "line": 17,
+          "truth_files": [
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "SizeFilter",
+          "kind": "enum",
+          "line": 9,
+          "truth_files": [
+            "src/cli.rs",
+            "src/config.rs",
+            "src/filter/mod.rs",
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/cli.rs",
+            "src/config.rs",
+            "src/filter/mod.rs",
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "Never",
+          "kind": "enum_member",
+          "line": 853,
+          "truth_files": [
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "one_file_system",
+          "kind": "field",
+          "line": 713,
+          "truth_files": [
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exec/mod.rs",
+          "name": "tokens_multiple",
+          "kind": "function",
+          "line": 386,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exec/command.rs",
+          "name": "push",
+          "kind": "method",
+          "line": 25,
+          "truth_files": [
+            "src/exec/command.rs"
+          ],
+          "reported_files": [
+            "src/exec/command.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/fmt/mod.rs",
+          "name": "replace_separator",
+          "kind": "static_method",
+          "line": 147,
+          "truth_files": [
+            "src/fmt/mod.rs"
+          ],
+          "reported_files": [
+            "src/fmt/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filetypes.rs",
+          "name": "FileTypes",
+          "kind": "struct",
+          "line": 9,
+          "truth_files": [
+            "src/config.rs",
+            "src/filetypes.rs",
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/config.rs",
+            "src/filetypes.rs",
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/fmt/mod.rs",
+          "name": "BRACE_LEN",
+          "kind": "constant",
+          "line": 60,
+          "truth_files": [
+            "src/fmt/mod.rs"
+          ],
+          "reported_files": [
+            "src/fmt/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/owner.rs",
+          "name": "Check",
+          "kind": "enum",
+          "line": 12,
+          "truth_files": [
+            "src/filter/owner.rs"
+          ],
+          "reported_files": [
+            "src/filter/owner.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/time.rs",
+          "name": "After",
+          "kind": "enum_member",
+          "line": 9,
+          "truth_files": [
+            "src/filter/time.rs"
+          ],
+          "reported_files": [
+            "src/filter/time.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "threads",
+          "kind": "field",
+          "line": 576,
+          "truth_files": [
+            "src/cli.rs"
+          ],
+          "reported_files": [
+            "src/cli.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filesystem.rs",
+          "name": "strip_current_dir",
+          "kind": "function",
+          "line": 162,
+          "truth_files": [
+            "src/dir_entry.rs",
+            "src/filesystem.rs",
+            "src/fmt/input.rs"
+          ],
+          "reported_files": [
+            "src/dir_entry.rs",
+            "src/filesystem.rs",
+            "src/fmt/input.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "search_paths",
+          "kind": "method",
+          "line": 721,
+          "truth_files": [
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exec/mod.rs",
+          "name": "new",
+          "kind": "static_method",
+          "line": 136,
+          "truth_files": [
+            "src/exec/mod.rs"
+          ],
+          "reported_files": [
+            "src/exec/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "WorkerState",
+          "kind": "struct",
+          "line": 304,
+          "truth_files": [
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "GIBI",
+          "kind": "constant",
+          "line": 24,
+          "truth_files": [
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "ColorWhen",
+          "kind": "enum",
+          "line": 847,
+          "truth_files": [
+            "src/cli.rs",
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/cli.rs",
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/patterns.rs",
+          "name": "Fixed",
+          "kind": "enum_member",
+          "line": 19,
+          "truth_files": [
+            "src/main.rs",
+            "src/patterns.rs"
+          ],
+          "reported_files": [
+            "src/main.rs",
+            "src/patterns.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/config.rs",
+          "name": "ls_colors",
+          "kind": "field",
+          "line": 72,
+          "truth_files": [
+            "src/main.rs",
+            "src/output.rs",
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/main.rs",
+            "src/output.rs",
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "is_within_greater_than_equal",
+          "kind": "function",
+          "line": 216,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/dir_entry.rs",
+          "name": "metadata",
+          "kind": "method",
+          "line": 166,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "parse_opt",
+          "kind": "static_method",
+          "line": 33,
+          "truth_files": [
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "ReceiverBuffer",
+          "kind": "struct",
+          "line": 128,
+          "truth_files": [
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "KIBI",
+          "kind": "constant",
+          "line": 22,
+          "truth_files": [
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/dir_entry.rs",
+          "name": "DirEntryInner",
+          "kind": "enum",
+          "line": 12,
+          "truth_files": [
+            "src/dir_entry.rs"
+          ],
+          "reported_files": [
+            "src/dir_entry.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/fmt/mod.rs",
+          "name": "Text",
+          "kind": "enum_member",
+          "line": 24,
+          "truth_files": [
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs"
+          ],
+          "reported_files": [
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/dir_entry.rs",
+          "name": "inner",
+          "kind": "field",
+          "line": 21,
+          "truth_files": [
+            "src/dir_entry.rs"
+          ],
+          "reported_files": [
+            "src/dir_entry.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "search_str_no_base_dir_with_file_in_current_dir",
+          "kind": "function",
+          "line": 766,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/hyperlink.rs",
+          "name": "fmt",
+          "kind": "method",
+          "line": 14,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "LOWER_BOUND"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "from_string",
+          "kind": "static_method",
+          "line": 28,
+          "truth_files": [
+            "src/cli.rs",
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/cli.rs",
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/hyperlink.rs",
+          "name": "Encoded",
+          "kind": "struct",
+          "line": 69,
+          "truth_files": [
+            "src/hyperlink.rs"
+          ],
+          "reported_files": [
+            "src/hyperlink.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/main.rs",
+          "name": "DEFAULT_LS_COLORS",
+          "kind": "constant",
+          "line": 63,
+          "truth_files": [
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "StripCwdWhen",
+          "kind": "enum",
+          "line": 857,
+          "truth_files": [
+            "src/cli.rs"
+          ],
+          "reported_files": [
+            "src/cli.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "Never",
+          "kind": "enum_member",
+          "line": 863,
+          "truth_files": null,
+          "reported_files": [
+            "src/cli.rs"
+          ],
+          "extra_files": [
+            "src/cli.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "full_path",
+          "kind": "field",
+          "line": 282,
+          "truth_files": [
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filetypes.rs",
+          "name": "empty_with_explicit_file_keeps_directories_off",
+          "kind": "function",
+          "line": 94,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/error.rs",
+          "name": "fmt",
+          "kind": "method",
+          "line": 47,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "LOWER_BOUND"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "new",
+          "kind": "static_method",
+          "line": 52,
+          "truth_files": [
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "BatchSender",
+          "kind": "struct",
+          "line": 73,
+          "truth_files": [
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/owner.rs",
+          "name": "IGNORE",
+          "kind": "constant",
+          "line": 19,
+          "truth_files": [
+            "src/filter/owner.rs"
+          ],
+          "reported_files": [
+            "src/filter/owner.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "ReceiverMode",
+          "kind": "enum",
+          "line": 26,
+          "truth_files": [
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exit_codes.rs",
+          "name": "GeneralError",
+          "kind": "enum_member",
+          "line": 10,
+          "truth_files": [
+            "src/exec/command.rs",
+            "src/exec/mod.rs",
+            "src/exit_codes.rs",
+            "src/main.rs",
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/exec/command.rs",
+            "src/exec/mod.rs",
+            "src/exit_codes.rs",
+            "src/main.rs",
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "no_global_ignore_file",
+          "kind": "field",
+          "line": 135,
+          "truth_files": [
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/fmt/input.rs",
+          "name": "correct",
+          "kind": "function",
+          "line": 39,
+          "truth_files": [
+            "src/fmt/input.rs"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "src/fmt/input.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "into_iter",
+          "kind": "method",
+          "line": 67,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "new",
+          "kind": "static_method",
+          "line": 151,
+          "truth_files": [
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/time.rs",
+          "name": "TestTime",
+          "kind": "struct",
+          "line": 70,
+          "truth_files": [
+            "src/filter/time.rs"
+          ],
+          "reported_files": [
+            "src/filter/time.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/walk.rs",
+          "name": "MAX_BUFFER_LENGTH",
+          "kind": "constant",
+          "line": 123,
+          "truth_files": [
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "FileType",
+          "kind": "enum",
+          "line": 824,
+          "truth_files": [
+            "src/cli.rs",
+            "src/filetypes.rs"
+          ],
+          "reported_files": [
+            "src/cli.rs",
+            "src/filetypes.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "Empty",
+          "kind": "enum_member",
+          "line": 839,
+          "truth_files": [
+            "src/filetypes.rs"
+          ],
+          "reported_files": [
+            "src/filetypes.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/config.rs",
+          "name": "prune",
+          "kind": "field",
+          "line": 56,
+          "truth_files": [
+            "src/main.rs",
+            "src/walk.rs"
+          ],
+          "reported_files": [
+            "src/main.rs",
+            "src/walk.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/sanitize.rs",
+          "name": "strips_osc52_clipboard_payload",
+          "kind": "function",
+          "line": 100,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/dir_entry.rs",
+          "name": "cmp",
+          "kind": "method",
+          "line": 136,
+          "truth_files": null,
+          "reported_files": [
+            "src/dir_entry.rs"
+          ],
+          "extra_files": [
+            "src/dir_entry.rs"
+          ],
+          "verdict": "LOWER_BOUND"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exec/mod.rs",
+          "name": "new_batch",
+          "kind": "static_method",
+          "line": 51,
+          "truth_files": [
+            "src/cli.rs",
+            "src/exec/mod.rs",
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/cli.rs",
+            "src/exec/mod.rs",
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/patterns.rs",
+          "name": "FixedStrings",
+          "kind": "struct",
+          "line": 49,
+          "truth_files": [
+            "src/patterns.rs"
+          ],
+          "reported_files": [
+            "src/patterns.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/filter/size.rs",
+          "name": "GIGA",
+          "kind": "constant",
+          "line": 18,
+          "truth_files": [
+            "src/filter/size.rs"
+          ],
+          "reported_files": [
+            "src/filter/size.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/cli.rs",
+          "name": "HyperlinkWhen",
+          "kind": "enum",
+          "line": 867,
+          "truth_files": [
+            "src/cli.rs",
+            "src/main.rs"
+          ],
+          "reported_files": [
+            "src/cli.rs",
+            "src/main.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/fmt/mod.rs",
+          "name": "Tokens",
+          "kind": "enum_member",
+          "line": 47,
+          "truth_files": [
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs"
+          ],
+          "reported_files": [
+            "src/exec/mod.rs",
+            "src/fmt/mod.rs"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "fd",
+          "path": "src/exec/mod.rs",
+          "name": "cmd",
+          "kind": "field",
+          "line": 129,
+          "truth_files": [
+            "src/exec/mod.rs"
+          ],
+          "reported_files": [
+            "src/exec/mod.rs"
           ],
           "verdict": "COMPLETE"
         }
@@ -5562,7 +7253,7 @@
     }
   ],
   "limitations": [
-    "The oracle and Kivgraph share each language's type checker. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other. Type resolution is not what this measures. What it measures is the rest: which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out.",
+    "The oracle and Kivgraph share each language's type checker for Go and TypeScript. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other. Type resolution is not what this measures there: it measures which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out. Rust is the exception: the oracle is `rustc` through `cargo check` and Kivgraph reads `rust-analyzer`, two different front ends.",
     "The unit is the file, not the reference. A rename makes the compiler reject some uses and not others (after a failed import, the uses of the imported name are not reported), so reference-level ground truth would differ by language. A file is a dependent if it gains an error.",
     "Implementation and inheritance relations are left out of the truth: an error that says a type no longer satisfies an interface or a base class is not a use of the renamed name, and `find_references` is not the tool for it.",
     "The sample frame is what Kivgraph lists for each file, so a declaration Kivgraph never recorded cannot be sampled. A recall measured this way is conditional on the declaration being known.",
@@ -5570,7 +7261,8 @@
     "Go declarations are sampled from non-test files; references from `_test.go` files are part of the truth and are reported apart, because Kivgraph reads test files only with `go.include_tests: true` and this run used the default.",
     "One repository per language: the figures describe these repositories at these commits, not the language. A second repository would show how much they move.",
     "A declaration with no dependents says nothing about recall. It is reported through the share of such declarations for which Kivgraph still reports a reference.",
-    "The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions."
+    "The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions. The Rust dependencies are fetched with `--locked`.",
+    "`rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The Rust truth can be too small and cannot contain a file that does not use the name."
   ],
-  "wall_seconds": 149.704032
+  "wall_seconds": 254.722279709
 }
