@@ -2308,6 +2308,41 @@ tests read, on 40 declarations per repository (100 for `cobra` and
 - The benchmark's second configuration is now `go.tests_excluded` and
   `dart.tests_excluded`; `-repos` measures extra repositories by name.
 
+#### Trust in `COMPLETE`: the misses, the extras and the filter (2026-11-18)
+
+The three answers that said `COMPLETE` and left out a non-test file, the extras
+of the precision column, and `exclude_tests` on the traversal tools.
+
+- **Go, three misses fixed (ADR 0133).** A use inside a local `var`/`type` was
+  sourced at a name nobody published, and so was the blank `_` of
+  `var _ I = T{}`. Two defects behind the second only showed once it was
+  reached: the module symbol had an empty discriminator (one assertion aborted
+  the index) and was appended to a list `NormalizeGo` rebuilt at the end.
+  Tests read, `gin`, `caddy`, `prometheus`, `cobra`: file recall `98.9 %`,
+  `95.8 %`, `97.1 %`, `99.2 %` to `100 %` each; `COMPLETE` answers missing a
+  non-test file `3` to `0`.
+- **Audit of the extras.** `gin` `Use` (`11` files): `Engine` embeds
+  `RouterGroup` and has its own `Use`; renaming it leaves `router.Use(...)`
+  compiling through the promoted one, so the oracle cannot see the calls. Real
+  uses. Dart (`13`): overrides and implementations of interface members
+  (`CanonicalizedMap implements Map`, `HeapPriorityQueue implements
+  PriorityQueue`), a method defined in two extensions (`forEachWhile`) and
+  `UnionSet` constructors in its own file. Checked on four, the rest by the same
+  pattern. TypeScript (`15`): default imports (`delay`, `timeout`,
+  `isRawNetworkError`) and re-export chains (`KyRequest`, `ShouldRetryState`)
+  are not errors after a rename; `9` were ours (ADR 0134).
+- **TypeScript, fixed (ADR 0134).** A class that merely carried a field of a
+  data type or an options bag was its "only implementation", and the references
+  to the type were forwarded to it. A structural implementation now needs a
+  required method. `ky`: precision `90.9 %` to `96.2 %`, recall `100 %`.
+- **Not confirmed.** The method `value` of `source/utils/body.ts:149`, an
+  object-literal method with no dependents for which Kivgraph reports its own
+  file. One of `156`; the row was not traced.
+- **`exclude_tests`** on `find_implementations`, `trace_dependencies` and
+  `get_blast_radius` (ADR 0132, amendment). In the blast radius it leaves the
+  axes too. `trace_dependencies` refuses it with `to`. Surface `18.128` to
+  `18.494` bytes, ceiling `18.600`.
+
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
 `kivgraph impact --base <ref>`: symbols touched by `git diff`, aggregated

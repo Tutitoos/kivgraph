@@ -55,10 +55,10 @@
       "oracle_failures": 0,
       "kivgraph_failures": 0,
       "file_recall": {
-        "value": 0.9922480620155039,
-        "low": 0.9781420765027322,
+        "value": 1,
+        "low": 1,
         "high": 1,
-        "numerator": 256,
+        "numerator": 258,
         "denominator": 258,
         "symbols": 96
       },
@@ -71,10 +71,10 @@
         "symbols": 89
       },
       "file_recall_test": {
-        "value": 0.9772727272727273,
-        "low": 0.9324324324324325,
+        "value": 1,
+        "low": 1,
         "high": 1,
-        "numerator": 86,
+        "numerator": 88,
         "denominator": 88,
         "symbols": 41
       },
@@ -87,10 +87,10 @@
         "symbols": 0
       },
       "file_recall_without_private_names": {
-        "value": 0.9922480620155039,
-        "low": 0.9787234042553191,
+        "value": 1,
+        "low": 1,
         "high": 1,
-        "numerator": 256,
+        "numerator": 258,
         "denominator": 258,
         "symbols": 96
       },
@@ -98,15 +98,15 @@
         "value": 1,
         "low": 1,
         "high": 1,
-        "numerator": 256,
-        "denominator": 256,
+        "numerator": 258,
+        "denominator": 258,
         "symbols": 96
       },
       "symbols_fully_recalled": {
-        "value": 0.9791666666666666,
-        "low": 0.9271928642112758,
-        "high": 0.9942680301991423,
-        "numerator": 94,
+        "value": 1,
+        "low": 0.9615244115586972,
+        "high": 1,
+        "numerator": 96,
         "denominator": 96,
         "symbols": 96
       },
@@ -128,10 +128,10 @@
           "kind": "alias",
           "symbols_with_dependents": 2,
           "file_recall": {
-            "value": 0.8571428571428571,
-            "low": 0.6666666666666666,
+            "value": 1,
+            "low": 1,
             "high": 1,
-            "numerator": 6,
+            "numerator": 7,
             "denominator": 7,
             "symbols": 2
           }
@@ -188,10 +188,10 @@
           "kind": "type",
           "symbols_with_dependents": 15,
           "file_recall": {
-            "value": 0.984375,
-            "low": 0.9117647058823529,
+            "value": 1,
+            "low": 1,
             "high": 1,
-            "numerator": 63,
+            "numerator": 64,
             "denominator": 64,
             "symbols": 15
           }
@@ -341,9 +341,7 @@
           ],
           "reported_files": [
             "command.go",
-            "completions.go"
-          ],
-          "missed_files": [
+            "completions.go",
             "completions_test.go"
           ],
           "verdict": "COMPLETE"
@@ -977,9 +975,7 @@
             "completions_test.go"
           ],
           "reported_files": [
-            "completions.go"
-          ],
-          "missed_files": [
+            "completions.go",
             "completions_test.go"
           ],
           "verdict": "COMPLETE"
@@ -1979,11 +1975,11 @@
         "symbols": 72
       },
       "file_precision": {
-        "value": 0.9090909090909091,
-        "low": 0.8404255319148937,
-        "high": 0.9685534591194969,
+        "value": 0.9615384615384616,
+        "low": 0.9295774647887324,
+        "high": 0.9871794871794872,
         "numerator": 150,
-        "denominator": 165,
+        "denominator": 156,
         "symbols": 89
       },
       "symbols_fully_recalled": {
@@ -2106,13 +2102,7 @@
           ],
           "reported_files": [
             "source/core/Ky.ts",
-            "source/core/constants.ts",
-            "source/errors/ForceRetryError.ts",
             "source/index.ts"
-          ],
-          "extra_files": [
-            "source/core/constants.ts",
-            "source/errors/ForceRetryError.ts"
           ],
           "verdict": "COMPLETE"
         },
@@ -2601,11 +2591,7 @@
           ],
           "reported_files": [
             "source/core/Ky.ts",
-            "source/index.ts",
-            "source/types/standard-schema.ts"
-          ],
-          "extra_files": [
-            "source/types/standard-schema.ts"
+            "source/index.ts"
           ],
           "verdict": "COMPLETE"
         },
@@ -2780,21 +2766,9 @@
             "source/utils/type-guards.ts"
           ],
           "reported_files": [
-            "source/core/Ky.ts",
             "source/index.ts",
-            "source/types/hooks.ts",
-            "source/types/ky.ts",
-            "source/types/options.ts",
             "source/utils/body.ts",
-            "source/utils/merge.ts",
             "source/utils/type-guards.ts"
-          ],
-          "extra_files": [
-            "source/core/Ky.ts",
-            "source/types/hooks.ts",
-            "source/types/ky.ts",
-            "source/types/options.ts",
-            "source/utils/merge.ts"
           ],
           "verdict": "COMPLETE"
         },
@@ -2889,11 +2863,7 @@
           "reported_files": [
             "source/core/Ky.ts",
             "source/index.ts",
-            "source/types/hooks.ts",
             "source/utils/type-guards.ts"
-          ],
-          "extra_files": [
-            "source/types/hooks.ts"
           ],
           "verdict": "COMPLETE"
         },
@@ -10398,5 +10368,5 @@
     "`rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The Rust truth can be too small and cannot contain a file that does not use the name.",
     "Renaming a Dart class breaks its constructors' own declarations (a constructor is written with the class's name), and an `implements` clause is an implementation relation: those errors are left out of the truth. The Dart dependencies are resolved with `dart pub get`, and the repository ships no lockfile."
   ],
-  "wall_seconds": 357.992021125
+  "wall_seconds": 496.255433834
 }
