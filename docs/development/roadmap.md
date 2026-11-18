@@ -2251,10 +2251,31 @@ them. `cobra`, the benchmark corpus, has none, so nothing had seen it.
   `403 to 697`; edges `3212 to 9744`, `27423 to 41543`, `93921 to 209969`;
   index time `3 to 3 s`, `5 to 6 s`, `14 to 20 s`; state `531 to 544 MB`,
   `571 to 602 MB`, `670 to 872 MB`.
-- Not fixed: `etcd` aborts the pass on a symlink in the source inventory.
+- Not fixed in that change: `etcd` aborts the pass on a symlink in the source
+  inventory. Fixed afterwards, see below.
 - Still open: whether `go.include_tests` becomes the default. The cost on these
   three is small; recall with tests read is `99.2 %` on `cobra` against `65.9 %`.
   Decision parked until `find_references` can say it did not read tests.
+
+#### Source symlinks no longer abort the index (2026-11-18)
+
+`etcd` links integration examples into the package that documents them
+(`client/v3/concurrency/example_election_test.go`). The source inventory refused
+any symlink with a source extension with an error, and one was enough to abort
+`index --full`. Not following symlinks is the policy; failing the pass was only
+how it was enforced (ADR 0131).
+
+- The inventory digest now covers the link's text, so a retargeted, added or
+  removed link still makes a generation stale. An explicit `manifests` entry
+  that is a symlink is still refused.
+- Tests: `TestSourceSymlinksAreNotFollowedAndNotFatal` (red on `main`; the
+  digest does not change with the content behind the link, does change with its
+  target, and changes when it is removed) and
+  `TestExplicitManifestSymlinksAreRefused`.
+- A throwaway module with a linked `_test.go` indexes and publishes with the
+  rebuilt binary. `etcd` now gets past the inventory and stops at its Go 1.27
+  requirement, which this build (type-checks up to 1.26) does not meet. Not
+  measured: `etcd` itself.
 
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
