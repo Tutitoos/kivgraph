@@ -2178,15 +2178,22 @@ are different. `rust-analyzer` and `cargo` are needed on the machine
 (`scripts/fetch-rust-analyzer.sh`; a sibling binary next to `kivgraph` is
 used).
 
-- File recall `98.5 %`, precision `97.7 %`; every kind is `100 %` except
-  functions (7 of 8 files) and trait methods (2 of 3).
-- Finding, not fixed: a name used inside a `macro_rules!` body is never
-  found. `fd`'s `sanitize` (a trait method called as
+- First run: file recall `98.5 %`, precision `97.7 %`; every kind is `100 %`
+  except functions (7 of 8 files) and trait methods (2 of 3).
+- **Finding, fixed: a name used inside a `macro_rules!` body was never found.**
+  `fd`'s `sanitize` (a trait method called as
   `$crate::error::SanitizeErr::sanitize($arg)` in `src/error.rs`) and
-  `correct` (called inside a macro in `src/fmt/input.rs`) are the two files
+  `correct` (called inside a macro in `src/fmt/input.rs`) were the two files
   missed, and both answers said `COMPLETE` (2 of 96). `rust-analyzer scip`
-  does not resolve tokens in macro definitions, so the loader has nothing to
-  turn into an edge.
+  emits no occurrence for tokens in a macro definition. The loader now reads
+  those paths with the grammar and publishes a `CANDIDATE` edge
+  (`TREE_SITTER_SYNTAX`) when exactly one declaration of the macro's crate
+  ends with the written path (ADR 0128). File recall `98.5 %` to `100 %`,
+  precision `97.8 %`, no `COMPLETE` answer misses a file.
+- Still absent: a name that fits two declarations, a method called on a
+  receiver inside a macro, a name passed through a metavariable, and the
+  expansion of a macro at each call site. Existing graphs need
+  `kivgraph index --full`.
 - Still limited to one repository. Dart, Java, C# and Python are not measured.
 
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)

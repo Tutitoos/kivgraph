@@ -22,7 +22,7 @@ Intervals are 95 % percentile intervals from resampling declarations.
 |---|---|---|---|---|---|---|
 |go|default|100|96|65.9 % (59.4 to 74.6)|100.0 % (100.0 to 100.0)|57.3 % (47.3 to 66.7)|
 |typescript|default|100|85|100.0 % (100.0 to 100.0)|90.9 % (84.0 to 96.9)|100.0 % (95.7 to 100.0)|
-|rust|default|100|86|98.5 % (96.0 to 100.0)|97.7 % (94.8 to 100.0)|97.7 % (91.9 to 99.4)|
+|rust|default|100|86|100.0 % (100.0 to 100.0)|97.8 % (94.9 to 100.0)|100.0 % (95.7 to 100.0)|
 |go|go.include_tests|100|96|99.2 % (97.8 to 100.0)|100.0 % (100.0 to 100.0)|97.9 % (92.7 to 99.4)|
 
 `file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.include_tests` is the default configuration with `go.include_tests: true`; the two Go rows draw the same declarations.
@@ -104,10 +104,10 @@ Declarations with a reported file the compiler did not flag (first 15 of 10). Th
 ## rust (default)
 
 - Declarations listed 646, eligible for the rename 487, measured 100 (oracle failed on 0, Kivgraph refused 0).
-- Recall on non-test files: 98.5 % (96.0 to 100.0). On test files: n/a.
+- Recall on non-test files: 100.0 % (100.0 to 100.0). On test files: n/a.
 - Declarations with no dependents for which Kivgraph still reports a file: 2 of 14.
 - Completeness verdicts: COMPLETE 96, LOWER_BOUND 4.
-- Answers that said `COMPLETE` and missed at least one non-test file: 2 of 96.
+- Answers that said `COMPLETE` and missed at least one non-test file: 0 of 96.
 - Not sampled: kind not sampled: 50; name not found in declaring position: 109.
 
 |kind|declarations with dependents|file recall|
@@ -116,21 +116,14 @@ Declarations with a reported file the compiler did not flag (first 15 of 10). Th
 |enum|12|100.0 % (100.0 to 100.0)|
 |enum_member|11|100.0 % (100.0 to 100.0)|
 |field|12|100.0 % (100.0 to 100.0)|
-|function|5|87.5 % (50.0 to 100.0)|
+|function|5|100.0 % (100.0 to 100.0)|
 |method|4|100.0 % (100.0 to 100.0)|
 |static|3|100.0 % (100.0 to 100.0)|
 |static_method|11|100.0 % (100.0 to 100.0)|
 |struct|11|100.0 % (100.0 to 100.0)|
 |trait|2|100.0 % (100.0 to 100.0)|
-|trait_method|2|66.7 % (0.0 to 100.0)|
+|trait_method|2|100.0 % (100.0 to 100.0)|
 |type_alias|1|100.0 % (100.0 to 100.0)|
-
-Declarations with a missed file (first 15 of 2):
-
-|declaration|kind|missed|verdict|
-|---|---|---|---|
-|`sanitize` (src/error.rs:17)|trait_method|src/error.rs|COMPLETE|
-|`correct` (src/fmt/input.rs:39)|function|src/fmt/input.rs|COMPLETE|
 
 Declarations with a reported file the compiler did not flag (first 15 of 3). These are unaudited: a use the compiler does not reject, such as one in a comment, is not a false positive.
 

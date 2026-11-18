@@ -3699,18 +3699,18 @@
       "oracle_failures": 0,
       "kivgraph_failures": 0,
       "file_recall": {
-        "value": 0.9848484848484849,
-        "low": 0.9603174603174603,
+        "value": 1,
+        "low": 1,
         "high": 1,
-        "numerator": 130,
+        "numerator": 132,
         "denominator": 132,
         "symbols": 86
       },
       "file_recall_non_test": {
-        "value": 0.9848484848484849,
-        "low": 0.96,
+        "value": 1,
+        "low": 1,
         "high": 1,
-        "numerator": 130,
+        "numerator": 132,
         "denominator": 132,
         "symbols": 86
       },
@@ -3731,26 +3731,26 @@
         "symbols": 0
       },
       "file_recall_without_private_names": {
-        "value": 0.9848484848484849,
-        "low": 0.96,
+        "value": 1,
+        "low": 1,
         "high": 1,
-        "numerator": 130,
+        "numerator": 132,
         "denominator": 132,
         "symbols": 86
       },
       "file_precision": {
-        "value": 0.9774436090225563,
-        "low": 0.9477611940298507,
+        "value": 0.9777777777777777,
+        "low": 0.9485294117647058,
         "high": 1,
-        "numerator": 130,
-        "denominator": 133,
-        "symbols": 86
+        "numerator": 132,
+        "denominator": 135,
+        "symbols": 88
       },
       "symbols_fully_recalled": {
-        "value": 0.9767441860465116,
-        "low": 0.9191198537004109,
-        "high": 0.9935990738533299,
-        "numerator": 84,
+        "value": 1,
+        "low": 0.9572418020685576,
+        "high": 1,
+        "numerator": 86,
         "denominator": 86,
         "symbols": 86
       },
@@ -3766,7 +3766,7 @@
         "COMPLETE": 96,
         "LOWER_BOUND": 4
       },
-      "complete_verdicts_that_missed_a_non_test_file": 2,
+      "complete_verdicts_that_missed_a_non_test_file": 0,
       "by_kind": [
         {
           "kind": "constant",
@@ -3820,10 +3820,10 @@
           "kind": "function",
           "symbols_with_dependents": 5,
           "file_recall": {
-            "value": 0.875,
-            "low": 0.5,
+            "value": 1,
+            "low": 1,
             "high": 1,
-            "numerator": 7,
+            "numerator": 8,
             "denominator": 8,
             "symbols": 5
           }
@@ -3892,10 +3892,10 @@
           "kind": "trait_method",
           "symbols_with_dependents": 2,
           "file_recall": {
-            "value": 0.6666666666666666,
-            "low": 0,
+            "value": 1,
+            "low": 1,
             "high": 1,
-            "numerator": 2,
+            "numerator": 3,
             "denominator": 3,
             "symbols": 2
           }
@@ -4243,8 +4243,7 @@
           "truth_files": [
             "src/error.rs"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "src/error.rs"
           ],
           "verdict": "COMPLETE"
@@ -5145,8 +5144,7 @@
           "truth_files": [
             "src/fmt/input.rs"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "src/fmt/input.rs"
           ],
           "verdict": "COMPLETE"
@@ -7264,5 +7262,5 @@
     "The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions. The Rust dependencies are fetched with `--locked`.",
     "`rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The Rust truth can be too small and cannot contain a file that does not use the name."
   ],
-  "wall_seconds": 254.722279709
+  "wall_seconds": 265.455467917
 }
