@@ -81,7 +81,7 @@ func limitations() []string {
 		"Implementation and inheritance relations are left out of the truth: an error that says a type no longer satisfies an interface or a base class is not a use of the renamed name, and `find_references` is not the tool for it.",
 		"The sample frame is what Kivgraph lists for each file, so a declaration Kivgraph never recorded cannot be sampled. A recall measured this way is conditional on the declaration being known.",
 		"Only declarations whose name appears in its declaring position on its first line are renamed, so the rename is exact. Declarations written another way are counted as not sampled.",
-		"Go and Dart declarations are sampled from non-test files; references from test files are part of the truth and are reported apart, because Kivgraph reads test files only with `go.include_tests` or `dart.include_tests` set to true and the default arm uses neither.",
+		"Go and Dart declarations are sampled from non-test files; references from test files are part of the truth and are reported apart, and the default arm reads them (`go.include_tests` and `dart.include_tests` are true by default). The `tests_excluded` arm sets that key to false for one language, and its test files are then missed by construction.",
 		"One repository per language: the figures describe these repositories at these commits, not the language. A second repository would show how much they move.",
 		"A declaration with no dependents says nothing about recall. It is reported through the share of such declarations for which Kivgraph still reports a reference.",
 		"The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions. The Rust dependencies are fetched with `--locked`.",
@@ -133,7 +133,7 @@ func renderReport(measured results) string {
 		fmt.Fprintf(&b, "|%s|%s|%d|%d|%s|%s|%s|\n", language.Language, language.Arm, language.Sampled, language.WithDependents,
 			percent(language.Recall), percent(language.Precision), percent(language.FullRecallSymbols))
 	}
-	fmt.Fprintf(&b, "\n`file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.include_tests` and `dart.include_tests` are the default configuration with that language's `include_tests: true`; each pair draws the same declarations.\n")
+	fmt.Fprintf(&b, "\n`file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.tests_excluded` and `dart.tests_excluded` are the default configuration with that language's `include_tests: false`; each pair draws the same declarations.\n")
 	for _, language := range measured.Languages {
 		fmt.Fprintf(&b, "\n## %s (%s)\n\n", language.Language, language.Arm)
 		fmt.Fprintf(&b, "- Declarations listed %d, eligible for the rename %d, measured %d (oracle failed on %d, Kivgraph refused %d).\n",

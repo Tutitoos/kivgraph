@@ -21,19 +21,19 @@ Intervals are 95 % percentile intervals from resampling declarations.
 
 |language|configuration|declarations measured|with dependents|file recall|file precision|fully recalled|
 |---|---|---|---|---|---|---|
-|go|default|100|96|65.9 % (59.4 to 74.6)|100.0 % (100.0 to 100.0)|57.3 % (47.3 to 66.7)|
+|go|default|100|96|99.2 % (97.8 to 100.0)|100.0 % (100.0 to 100.0)|97.9 % (92.7 to 99.4)|
 |typescript|default|100|85|100.0 % (100.0 to 100.0)|90.9 % (84.0 to 96.9)|100.0 % (95.7 to 100.0)|
 |rust|default|100|86|100.0 % (100.0 to 100.0)|97.8 % (94.9 to 100.0)|100.0 % (95.7 to 100.0)|
-|dart|default|100|73|74.0 % (65.1 to 82.7)|92.5 % (86.2 to 97.6)|67.1 % (55.7 to 76.8)|
-|go|go.include_tests|100|96|99.2 % (97.8 to 100.0)|100.0 % (100.0 to 100.0)|97.9 % (92.7 to 99.4)|
-|dart|dart.include_tests|100|73|99.0 % (96.8 to 100.0)|88.4 % (81.0 to 94.6)|98.6 % (92.6 to 99.8)|
+|dart|default|100|73|99.0 % (96.8 to 100.0)|88.4 % (81.0 to 94.6)|98.6 % (92.6 to 99.8)|
+|go|go.tests_excluded|100|96|65.9 % (59.4 to 74.6)|100.0 % (100.0 to 100.0)|57.3 % (47.3 to 66.7)|
+|dart|dart.tests_excluded|100|73|74.0 % (65.1 to 82.7)|92.5 % (86.2 to 97.6)|67.1 % (55.7 to 76.8)|
 
-`file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.include_tests` and `dart.include_tests` are the default configuration with that language's `include_tests: true`; each pair draws the same declarations.
+`file recall` pools the dependent files of every declaration. `fully recalled` is the share of declarations with dependents for which no file was missed (Wilson interval). `go.tests_excluded` and `dart.tests_excluded` are the default configuration with that language's `include_tests: false`; each pair draws the same declarations.
 
 ## go (default)
 
 - Declarations listed 443, eligible for the rename 442, measured 100 (oracle failed on 0, Kivgraph refused 0).
-- Recall on non-test files: 100.0 % (100.0 to 100.0). On test files: 0.0 % (0.0 to 0.0).
+- Recall on non-test files: 100.0 % (100.0 to 100.0). On test files: 97.7 % (93.2 to 100.0).
 - Declarations with no dependents for which Kivgraph still reports a file: 0 of 4.
 - Completeness verdicts: COMPLETE 95, LOWER_BOUND 5.
 - Answers that said `COMPLETE` and missed at least one non-test file: 0 of 95.
@@ -41,33 +41,20 @@ Intervals are 95 % percentile intervals from resampling declarations.
 
 |kind|declarations with dependents|file recall|
 |---|---|---|
-|alias|2|71.4 % (66.7 to 75.0)|
-|const|18|79.5 % (68.6 to 90.9)|
-|field|18|55.6 % (44.7 to 77.1)|
-|func|17|82.6 % (65.0 to 95.7)|
-|method|15|57.4 % (40.0 to 70.2)|
-|type|15|60.9 % (52.7 to 84.6)|
-|var|11|78.9 % (65.0 to 94.4)|
+|alias|2|85.7 % (66.7 to 100.0)|
+|const|18|100.0 % (100.0 to 100.0)|
+|field|18|100.0 % (100.0 to 100.0)|
+|func|17|100.0 % (100.0 to 100.0)|
+|method|15|100.0 % (100.0 to 100.0)|
+|type|15|98.4 % (91.2 to 100.0)|
+|var|11|100.0 % (100.0 to 100.0)|
 
-Declarations with a missed file (first 15 of 41):
+Declarations with a missed file (first 15 of 2):
 
 |declaration|kind|missed|verdict|
 |---|---|---|---|
-|`Completion` (completions.go:136)|alias|completions_test.go|COMPLETE|
-|`BashCompSubdirsInDir` (bash_completions.go:33)|const|bash_completions_test.go, completions_test.go|COMPLETE|
-|`ShellCompDirective` (completions.go:45)|type|active_help_test.go, completions_test.go|COMPLETE|
 |`CompletionFunc` (completions.go:139)|alias|completions_test.go|COMPLETE|
-|`FParseErrWhitelist` (command.go:42)|type|command_test.go|COMPLETE|
-|`EnableTraverseRunHooks` (cobra.go:66)|var|command_test.go|COMPLETE|
-|`DisableDescriptions` (completions.go:115)|field|completions_test.go|COMPLETE|
-|`Group` (command.go:45)|type|command_test.go|COMPLETE|
-|`defaultCaseInsensitive` (cobra.go:48)|const|command_test.go|COMPLETE|
-|`Args` (command.go:93)|field|args_test.go, bash_completions_test.go, command_test.go, completions_test.go, fish_completions_test.go|LOWER_BOUND|
-|`GenYamlTree` (doc/yaml_docs.go:53)|func|doc/yaml_docs_test.go|COMPLETE|
-|`Traverse` (command.go:821)|method|command_test.go|COMPLETE|
-|`ShellCompDirectiveNoFileComp` (completions.go:66)|const|active_help_test.go, completions_test.go|COMPLETE|
-|`defaultCommandSorting` (cobra.go:47)|const|command_test.go|COMPLETE|
-|`SuggestFor` (command.go:71)|field|bash_completions_test.go, command_test.go, doc/cmd_test.go|COMPLETE|
+|`SliceValue` (completions.go:311)|type|completions_test.go|COMPLETE|
 
 ## typescript (default)
 
@@ -139,10 +126,89 @@ Declarations with a reported file the compiler did not flag (first 15 of 3). The
 ## dart (default)
 
 - Declarations listed 772, eligible for the rename 540, measured 100 (oracle failed on 0, Kivgraph refused 0).
-- Recall on non-test files: 98.7 % (95.6 to 100.0). On test files: 0.0 % (0.0 to 0.0).
-- Declarations with no dependents for which Kivgraph still reports a file: 3 of 27.
+- Recall on non-test files: 98.7 % (95.6 to 100.0). On test files: 100.0 % (100.0 to 100.0).
+- Declarations with no dependents for which Kivgraph still reports a file: 7 of 27.
 - Completeness verdicts: COMPLETE 99, LOWER_BOUND 1.
 - Answers that said `COMPLETE` and missed at least one non-test file: 1 of 99.
+- Not sampled: kind not sampled: 204; name not found in declaring position: 28.
+
+|kind|declarations with dependents|file recall|
+|---|---|---|
+|class|20|100.0 % (100.0 to 100.0)|
+|extension|1|0.0 % (0.0 to 0.0)|
+|field|21|100.0 % (100.0 to 100.0)|
+|function|20|100.0 % (100.0 to 100.0)|
+|method|3|100.0 % (100.0 to 100.0)|
+|variable|8|100.0 % (100.0 to 100.0)|
+
+Declarations with a missed file (first 15 of 1):
+
+|declaration|kind|missed|verdict|
+|---|---|---|---|
+|`IterableExtension` (lib/src/iterable_extensions.dart:20)|extension|lib/src/iterable_extensions.dart|COMPLETE|
+
+Declarations with a reported file the compiler did not flag (first 15 of 11). These are unaudited: a use the compiler does not reject, such as one in a comment, is not a false positive.
+
+|declaration|kind|extra|
+|---|---|---|
+|`containsKey` (lib/src/canonicalized_map.dart:107)|method|test/canonicalized_map_test.dart|
+|`remove` (lib/src/priority_queue.dart:261)|method|test/priority_queue_test.dart|
+|`addAll` (lib/src/wrappers.dart:509)|method|lib/src/equality_map.dart|
+|`forEachWhile` (lib/src/list_extensions.dart:130)|method|test/extensions_test.dart|
+|`UnionSet` (lib/src/union_set.dart:16)|class|lib/src/union_set.dart|
+|`whereIndexed` (lib/src/list_extensions.dart:155)|method|test/extensions_test.dart|
+|`removeWhere` (lib/src/wrappers.dart:795)|method|lib/src/wrappers.dart|
+|`equals` (lib/src/equality.dart:212)|method|lib/src/equality.dart, test/algorithms_test.dart, test/extensions_test.dart|
+|`UnionSetController` (lib/src/union_set_controller.dart:24)|class|lib/src/union_set_controller.dart|
+|`where` (lib/src/wrappers.dart:112)|method|lib/src/wrappers.dart|
+|`ListSlice` (lib/src/list_extensions.dart:337)|class|test/extensions_test.dart|
+
+## go (go.tests_excluded)
+
+- Declarations listed 443, eligible for the rename 442, measured 100 (oracle failed on 0, Kivgraph refused 0).
+- Recall on non-test files: 100.0 % (100.0 to 100.0). On test files: 0.0 % (0.0 to 0.0).
+- Declarations with no dependents for which Kivgraph still reports a file: 0 of 4.
+- Completeness verdicts: COMPLETE 96, LOWER_BOUND 4.
+- Answers that said `COMPLETE` and missed at least one non-test file: 0 of 96.
+- Not sampled: name not found in declaring position: 1; outline refused: 1.
+
+|kind|declarations with dependents|file recall|
+|---|---|---|
+|alias|2|71.4 % (66.7 to 75.0)|
+|const|18|79.5 % (68.6 to 90.9)|
+|field|18|55.6 % (44.7 to 77.1)|
+|func|17|82.6 % (65.0 to 95.7)|
+|method|15|57.4 % (40.0 to 70.2)|
+|type|15|60.9 % (52.7 to 84.6)|
+|var|11|78.9 % (65.0 to 94.4)|
+
+Declarations with a missed file (first 15 of 41):
+
+|declaration|kind|missed|verdict|
+|---|---|---|---|
+|`Completion` (completions.go:136)|alias|completions_test.go|COMPLETE|
+|`BashCompSubdirsInDir` (bash_completions.go:33)|const|bash_completions_test.go, completions_test.go|COMPLETE|
+|`ShellCompDirective` (completions.go:45)|type|active_help_test.go, completions_test.go|COMPLETE|
+|`CompletionFunc` (completions.go:139)|alias|completions_test.go|COMPLETE|
+|`FParseErrWhitelist` (command.go:42)|type|command_test.go|COMPLETE|
+|`EnableTraverseRunHooks` (cobra.go:66)|var|command_test.go|COMPLETE|
+|`DisableDescriptions` (completions.go:115)|field|completions_test.go|COMPLETE|
+|`Group` (command.go:45)|type|command_test.go|COMPLETE|
+|`defaultCaseInsensitive` (cobra.go:48)|const|command_test.go|COMPLETE|
+|`Args` (command.go:93)|field|args_test.go, bash_completions_test.go, command_test.go, completions_test.go, fish_completions_test.go|LOWER_BOUND|
+|`GenYamlTree` (doc/yaml_docs.go:53)|func|doc/yaml_docs_test.go|COMPLETE|
+|`Traverse` (command.go:821)|method|command_test.go|COMPLETE|
+|`ShellCompDirectiveNoFileComp` (completions.go:66)|const|active_help_test.go, completions_test.go|COMPLETE|
+|`defaultCommandSorting` (cobra.go:47)|const|command_test.go|COMPLETE|
+|`SuggestFor` (command.go:71)|field|bash_completions_test.go, command_test.go, doc/cmd_test.go|COMPLETE|
+
+## dart (dart.tests_excluded)
+
+- Declarations listed 772, eligible for the rename 540, measured 100 (oracle failed on 0, Kivgraph refused 0).
+- Recall on non-test files: 98.7 % (95.6 to 100.0). On test files: 0.0 % (0.0 to 0.0).
+- Declarations with no dependents for which Kivgraph still reports a file: 3 of 27.
+- Completeness verdicts: COMPLETE 100.
+- Answers that said `COMPLETE` and missed at least one non-test file: 1 of 100.
 - Not sampled: kind not sampled: 204; name not found in declaring position: 28.
 
 |kind|declarations with dependents|file recall|
@@ -185,72 +251,6 @@ Declarations with a reported file the compiler did not flag (first 15 of 6). The
 |`UnionSetController` (lib/src/union_set_controller.dart:24)|class|lib/src/union_set_controller.dart|
 |`where` (lib/src/wrappers.dart:112)|method|lib/src/wrappers.dart|
 
-## go (go.include_tests)
-
-- Declarations listed 443, eligible for the rename 442, measured 100 (oracle failed on 0, Kivgraph refused 0).
-- Recall on non-test files: 100.0 % (100.0 to 100.0). On test files: 97.7 % (93.2 to 100.0).
-- Declarations with no dependents for which Kivgraph still reports a file: 0 of 4.
-- Completeness verdicts: COMPLETE 96, LOWER_BOUND 4.
-- Answers that said `COMPLETE` and missed at least one non-test file: 0 of 96.
-- Not sampled: name not found in declaring position: 1; outline refused: 1.
-
-|kind|declarations with dependents|file recall|
-|---|---|---|
-|alias|2|85.7 % (66.7 to 100.0)|
-|const|18|100.0 % (100.0 to 100.0)|
-|field|18|100.0 % (100.0 to 100.0)|
-|func|17|100.0 % (100.0 to 100.0)|
-|method|15|100.0 % (100.0 to 100.0)|
-|type|15|98.4 % (91.2 to 100.0)|
-|var|11|100.0 % (100.0 to 100.0)|
-
-Declarations with a missed file (first 15 of 2):
-
-|declaration|kind|missed|verdict|
-|---|---|---|---|
-|`CompletionFunc` (completions.go:139)|alias|completions_test.go|COMPLETE|
-|`SliceValue` (completions.go:311)|type|completions_test.go|COMPLETE|
-
-## dart (dart.include_tests)
-
-- Declarations listed 772, eligible for the rename 540, measured 100 (oracle failed on 0, Kivgraph refused 0).
-- Recall on non-test files: 98.7 % (95.6 to 100.0). On test files: 100.0 % (100.0 to 100.0).
-- Declarations with no dependents for which Kivgraph still reports a file: 7 of 27.
-- Completeness verdicts: COMPLETE 100.
-- Answers that said `COMPLETE` and missed at least one non-test file: 1 of 100.
-- Not sampled: kind not sampled: 204; name not found in declaring position: 28.
-
-|kind|declarations with dependents|file recall|
-|---|---|---|
-|class|20|100.0 % (100.0 to 100.0)|
-|extension|1|0.0 % (0.0 to 0.0)|
-|field|21|100.0 % (100.0 to 100.0)|
-|function|20|100.0 % (100.0 to 100.0)|
-|method|3|100.0 % (100.0 to 100.0)|
-|variable|8|100.0 % (100.0 to 100.0)|
-
-Declarations with a missed file (first 15 of 1):
-
-|declaration|kind|missed|verdict|
-|---|---|---|---|
-|`IterableExtension` (lib/src/iterable_extensions.dart:20)|extension|lib/src/iterable_extensions.dart|COMPLETE|
-
-Declarations with a reported file the compiler did not flag (first 15 of 11). These are unaudited: a use the compiler does not reject, such as one in a comment, is not a false positive.
-
-|declaration|kind|extra|
-|---|---|---|
-|`containsKey` (lib/src/canonicalized_map.dart:107)|method|test/canonicalized_map_test.dart|
-|`remove` (lib/src/priority_queue.dart:261)|method|test/priority_queue_test.dart|
-|`addAll` (lib/src/wrappers.dart:509)|method|lib/src/equality_map.dart|
-|`forEachWhile` (lib/src/list_extensions.dart:130)|method|test/extensions_test.dart|
-|`UnionSet` (lib/src/union_set.dart:16)|class|lib/src/union_set.dart|
-|`whereIndexed` (lib/src/list_extensions.dart:155)|method|test/extensions_test.dart|
-|`removeWhere` (lib/src/wrappers.dart:795)|method|lib/src/wrappers.dart|
-|`equals` (lib/src/equality.dart:212)|method|lib/src/equality.dart, test/algorithms_test.dart, test/extensions_test.dart|
-|`UnionSetController` (lib/src/union_set_controller.dart:24)|class|lib/src/union_set_controller.dart|
-|`where` (lib/src/wrappers.dart:112)|method|lib/src/wrappers.dart|
-|`ListSlice` (lib/src/list_extensions.dart:337)|class|test/extensions_test.dart|
-
 ## What this does not show
 
 - The oracle and Kivgraph share each language's type checker for Go, TypeScript and Dart. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other, Dart with `dart analyze` on one side and the Analysis Server on the other. Type resolution is not what this measures there: it measures which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out. Rust is the exception: the oracle is `rustc` through `cargo check` and Kivgraph reads `rust-analyzer`, two different front ends.
@@ -258,7 +258,7 @@ Declarations with a reported file the compiler did not flag (first 15 of 11). Th
 - Implementation and inheritance relations are left out of the truth: an error that says a type no longer satisfies an interface or a base class is not a use of the renamed name, and `find_references` is not the tool for it.
 - The sample frame is what Kivgraph lists for each file, so a declaration Kivgraph never recorded cannot be sampled. A recall measured this way is conditional on the declaration being known.
 - Only declarations whose name appears in its declaring position on its first line are renamed, so the rename is exact. Declarations written another way are counted as not sampled.
-- Go and Dart declarations are sampled from non-test files; references from test files are part of the truth and are reported apart, because Kivgraph reads test files only with `go.include_tests` or `dart.include_tests` set to true and the default arm uses neither.
+- Go and Dart declarations are sampled from non-test files; references from test files are part of the truth and are reported apart, and the default arm reads them (`go.include_tests` and `dart.include_tests` are true by default). The `tests_excluded` arm sets that key to false for one language, and its test files are then missed by construction.
 - One repository per language: the figures describe these repositories at these commits, not the language. A second repository would show how much they move.
 - A declaration with no dependents says nothing about recall. It is reported through the share of such declarations for which Kivgraph still reports a reference.
 - The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions. The Rust dependencies are fetched with `--locked`.

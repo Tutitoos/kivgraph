@@ -37,6 +37,7 @@ type config struct {
 	Work      string
 	Output    string
 	Languages string
+	Repos     string
 	Count     int
 	Seed      int64
 }
@@ -55,6 +56,7 @@ func run(ctx context.Context) error {
 	flag.StringVar(&cfg.Work, "work", "", "directory for the cloned corpus; kept between runs when given")
 	flag.StringVar(&cfg.Output, "output", "benchmarks/"+benchmarkName, "directory for results.json and report.md")
 	flag.StringVar(&cfg.Languages, "languages", "go,typescript,rust,dart", "comma-separated languages to measure")
+	flag.StringVar(&cfg.Repos, "repos", "", "comma-separated repositories to measure instead of the default corpus, extra ones included")
 	flag.IntVar(&cfg.Count, "count", 100, "declarations sampled per language")
 	flag.Int64Var(&cfg.Seed, "seed", 1, "sampling seed")
 	flag.Parse()
@@ -87,9 +89,21 @@ func run(ctx context.Context) error {
 	for _, language := range strings.Split(cfg.Languages, ",") {
 		wanted[strings.TrimSpace(language)] = true
 	}
+	named := map[string]bool{}
+	for _, name := range strings.Split(cfg.Repos, ",") {
+		if name = strings.TrimSpace(name); name != "" {
+			named[name] = true
+		}
+	}
 	var repositories []corpusRepository
 	for _, repository := range corpus() {
-		if wanted[repository.Language] {
+		if len(named) > 0 {
+			if named[repository.Name] {
+				repositories = append(repositories, repository)
+			}
+			continue
+		}
+		if wanted[repository.Language] && !repository.Extra {
 			repositories = append(repositories, repository)
 		}
 	}
@@ -127,13 +141,14 @@ func run(ctx context.Context) error {
 		Limitations: limitations(),
 	}
 	// Two configurations of Kivgraph are measured for the languages that read
-	// test files only when asked: the default, and the language with them read.
-	// They differ in one setting, and the gap between them is that setting's
-	// cost, which a single run would fold into the recall.
+	// test files: the default, which reads them, and the language with
+	// `include_tests: false`. They differ in one setting, and the gap between
+	// them is what reading tests buys, which a single run would fold into the
+	// recall.
 	arms := []arm{{Name: "default"}}
 	for _, language := range []string{"go", "dart"} {
 		if wanted[language] {
-			arms = append(arms, arm{Name: language + ".include_tests", Language: language, Tests: language})
+			arms = append(arms, arm{Name: language + ".tests_excluded", Language: language, ExcludeTests: language})
 		}
 	}
 	for _, current := range arms {
@@ -161,9 +176,9 @@ func run(ctx context.Context) error {
 // arm is one configuration of Kivgraph. Language narrows it to one language's
 // repositories; empty means all of them.
 type arm struct {
-	Name     string
-	Language string
-	Tests    string // the config section whose include_tests is switched on
+	Name         string
+	Language     string
+	ExcludeTests string // the config section whose include_tests is switched off
 }
 
 // measureArm indexes the corpus with a configuration, serves it, and measures
@@ -174,7 +189,7 @@ func measureArm(ctx context.Context, binary, root string, current arm, members [
 		return nil, err
 	}
 	defer os.RemoveAll(state)
-	if err := index(ctx, binary, root, state, members, current.Tests); err != nil {
+	if err := index(ctx, binary, root, state, members, current.ExcludeTests); err != nil {
 		return nil, err
 	}
 	session, stop, err := connect(ctx, binary, state)

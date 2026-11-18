@@ -24,6 +24,11 @@ type corpusRepository struct {
 	// imports, and so does Kivgraph.
 	Setup []string `json:"-"`
 
+	// Extra marks a repository measured only when named with -repos. The default
+	// corpus is the one the published results cover; these answer one question
+	// at a time and cost far more to type-check.
+	Extra bool `json:"-"`
+
 	Path string `json:"-"`
 }
 
@@ -49,6 +54,21 @@ func corpus() []corpusRepository {
 			Language: "dart", Name: "collection", URL: "https://github.com/dart-lang/collection.git",
 			Commit: "96afcc2fce622ea7e75053af5b73f8db07491bc4",
 			Setup:  []string{"dart pub get"},
+		},
+		{
+			Language: "go", Name: "gin", URL: "https://github.com/gin-gonic/gin.git",
+			Commit: "0f09c3a9b4626d9fe9979cf4d0521d6ae32ab646", Extra: true,
+			Setup: []string{"go mod download"},
+		},
+		{
+			Language: "go", Name: "caddy", URL: "https://github.com/caddyserver/caddy.git",
+			Commit: "16618f454ca6f78f37dfd85a90573d8ffd43c1c8", Extra: true,
+			Setup: []string{"go mod download"},
+		},
+		{
+			Language: "go", Name: "prometheus", URL: "https://github.com/prometheus/prometheus.git",
+			Commit: "cb4e01dd1cb1673d4bcde6f3a16fb767b7f8eb88", Extra: true,
+			Setup: []string{"go mod download"},
 		},
 	}
 }

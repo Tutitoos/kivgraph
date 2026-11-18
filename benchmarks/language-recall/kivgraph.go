@@ -31,7 +31,7 @@ func indexEnvironment(home string) []string {
 
 // index registers the corpus and builds the graph with the real binary. It runs
 // from a Kivgraph checkout because the TypeScript worker is started from there.
-func index(ctx context.Context, binary, root, home string, repositories []corpusRepository, testsSection string) error {
+func index(ctx context.Context, binary, root, home string, repositories []corpusRepository, excludeTests string) error {
 	var languages []string
 	seen := map[string]bool{}
 	arguments := []string{"init"}
@@ -44,8 +44,8 @@ func index(ctx context.Context, binary, root, home string, repositories []corpus
 	}
 	arguments = append(arguments, "--languages", strings.Join(languages, ","))
 	for _, step := range [][]string{arguments, {"index", "--full"}} {
-		if step[0] == "index" && testsSection != "" {
-			if err := enableTests(home, testsSection); err != nil {
+		if step[0] == "index" && excludeTests != "" {
+			if err := disableTests(home, excludeTests); err != nil {
 				return err
 			}
 		}
@@ -59,10 +59,11 @@ func index(ctx context.Context, binary, root, home string, repositories []corpus
 	return nil
 }
 
-// enableTests sets `<section>.include_tests` in the configuration `init` wrote.
-// The key is the first `include_tests` after the section, which the check below
-// confirms rather than assumes.
-func enableTests(home, section string) error {
+// disableTests sets `<section>.include_tests: false` in the configuration `init`
+// wrote. Both languages read their tests by default, so this is the arm that
+// shows what reading them buys. The key is the first `include_tests` after the
+// section, which the check below confirms rather than assumes.
+func disableTests(home, section string) error {
 	path := filepath.Join(home, ".config", "kivgraph", "config.yaml")
 	content, err := os.ReadFile(path)
 	if err != nil {
@@ -72,13 +73,13 @@ func enableTests(home, section string) error {
 	if start < 0 {
 		return fmt.Errorf("%s has no %s section", path, section)
 	}
-	const off, on = "    include_tests: false\n", "    include_tests: true\n"
-	offset := strings.Index(string(content[start:]), off)
+	const on, off = "    include_tests: true\n", "    include_tests: false\n"
+	offset := strings.Index(string(content[start:]), on)
 	if offset < 0 {
-		return fmt.Errorf("%s does not declare %s.include_tests as false", path, section)
+		return fmt.Errorf("%s does not declare %s.include_tests as true", path, section)
 	}
 	offset += start
-	updated := string(content[:offset]) + on + string(content[offset+len(off):])
+	updated := string(content[:offset]) + off + string(content[offset+len(on):])
 	return os.WriteFile(path, []byte(updated), 0o644)
 }
 

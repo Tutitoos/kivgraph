@@ -2277,6 +2277,37 @@ how it was enforced (ADR 0131).
   requirement, which this build (type-checks up to 1.26) does not meet. Not
   measured: `etcd` itself.
 
+#### Go and Dart read their tests by default (2026-11-18)
+
+Decision taken after measuring it (ADR 0132). With `include_tests: false` the
+graph lost every file that used a symbol only from its tests, and
+`find_references` still said `COMPLETE`. File recall, tests not read against
+tests read, on 40 declarations per repository (100 for `cobra` and
+`collection`):
+
+|repository|tests not read|tests read|non-test files, both|
+|---|---|---|---|
+|`cobra`|`65.9 %`|`99.2 %`|`100 %`|
+|`gin`|`50.0 %`|`98.9 %`|`97.8 %`|
+|`caddy`|`77.5 %`|`95.8 %`|`94.8 %`|
+|`prometheus`|`53.5 %`|`97.1 %`|`98.9 %`|
+|`collection` (Dart)|`74.0 %`|`99.0 %`|`98.7 %`|
+
+- Cost of reading tests, after the `init` and symlink fixes: edges `x3.0`, `x1.5`
+  and `x2.2` on `gin`, `caddy` and `prometheus`; indexing `3 to 3 s`, `5 to 6 s`,
+  `14 to 20 s`; state `+13`, `+31`, `+202 MB`. Serving memory and query latency
+  were not measured.
+- Done: both defaults are `true`. `find_references` takes `exclude_tests`, which
+  uses the path rule of `impact` and applies before the total and the page.
+- Existing installations keep `false`: the `config.yaml` an earlier `init` wrote
+  spells the key out. A test pins that an explicit `false` is still read as
+  `false`.
+- Found on the way, not fixed: non-test misses on `gin` (`Redirect`, 1 file) and
+  `caddy` (`ClientCertificateVerifier`, `Warning`), each answered `COMPLETE`;
+  and the extras of `gin` (`Use`), unaudited.
+- The benchmark's second configuration is now `go.tests_excluded` and
+  `dart.tests_excluded`; `-repos` measures extra repositories by name.
+
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
 `kivgraph impact --base <ref>`: symbols touched by `git diff`, aggregated
