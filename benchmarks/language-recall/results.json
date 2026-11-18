@@ -1997,18 +1997,18 @@
       "oracle_failures": 0,
       "kivgraph_failures": 0,
       "file_recall": {
-        "value": 0.98,
-        "low": 0.9477124183006536,
+        "value": 1,
+        "low": 1,
         "high": 1,
-        "numerator": 147,
+        "numerator": 150,
         "denominator": 150,
         "symbols": 85
       },
       "file_recall_non_test": {
-        "value": 0.98,
-        "low": 0.9479768786127167,
+        "value": 1,
+        "low": 1,
         "high": 1,
-        "numerator": 147,
+        "numerator": 150,
         "denominator": 150,
         "symbols": 85
       },
@@ -2029,26 +2029,26 @@
         "symbols": 13
       },
       "file_recall_without_private_names": {
-        "value": 0.9781021897810219,
-        "low": 0.9440559440559441,
+        "value": 1,
+        "low": 1,
         "high": 1,
-        "numerator": 134,
+        "numerator": 137,
         "denominator": 137,
         "symbols": 72
       },
       "file_precision": {
-        "value": 0.9074074074074074,
-        "low": 0.8373493975903614,
-        "high": 0.9679144385026738,
-        "numerator": 147,
-        "denominator": 162,
+        "value": 0.9090909090909091,
+        "low": 0.8404255319148937,
+        "high": 0.9685534591194969,
+        "numerator": 150,
+        "denominator": 165,
         "symbols": 89
       },
       "symbols_fully_recalled": {
-        "value": 0.9764705882352941,
-        "low": 0.9182130024405835,
-        "high": 0.9935234888323341,
-        "numerator": 83,
+        "value": 1,
+        "low": 0.9567605155333085,
+        "high": 1,
+        "numerator": 85,
         "denominator": 85,
         "symbols": 85
       },
@@ -2063,7 +2063,7 @@
       "completeness_verdicts": {
         "COMPLETE": 100
       },
-      "complete_verdicts_that_missed_a_non_test_file": 2,
+      "complete_verdicts_that_missed_a_non_test_file": 0,
       "by_kind": [
         {
           "kind": "class",
@@ -2117,10 +2117,10 @@
           "kind": "property",
           "symbols_with_dependents": 13,
           "file_recall": {
-            "value": 0.8571428571428571,
-            "low": 0.72,
+            "value": 1,
+            "low": 1,
             "high": 1,
-            "numerator": 18,
+            "numerator": 21,
             "denominator": 21,
             "symbols": 13
           }
@@ -2898,9 +2898,7 @@
           ],
           "reported_files": [
             "source/core/Ky.ts",
-            "source/core/constants.ts"
-          ],
-          "missed_files": [
+            "source/core/constants.ts",
             "source/types/options.ts",
             "source/utils/body.ts"
           ],
@@ -3091,9 +3089,7 @@
           ],
           "reported_files": [
             "source/core/Ky.ts",
-            "source/core/constants.ts"
-          ],
-          "missed_files": [
+            "source/core/constants.ts",
             "source/types/options.ts"
           ],
           "verdict": "COMPLETE"
@@ -5576,5 +5572,5 @@
     "A declaration with no dependents says nothing about recall. It is reported through the share of such declarations for which Kivgraph still reports a reference.",
     "The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions."
   ],
-  "wall_seconds": 354.291640875
+  "wall_seconds": 149.704032
 }
