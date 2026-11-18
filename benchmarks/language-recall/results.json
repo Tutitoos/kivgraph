@@ -1997,18 +1997,18 @@
       "oracle_failures": 0,
       "kivgraph_failures": 0,
       "file_recall": {
-        "value": 0.84,
-        "low": 0.7605633802816901,
-        "high": 0.903954802259887,
-        "numerator": 126,
+        "value": 0.9266666666666666,
+        "low": 0.8657718120805369,
+        "high": 0.9738562091503268,
+        "numerator": 139,
         "denominator": 150,
         "symbols": 85
       },
       "file_recall_non_test": {
-        "value": 0.84,
-        "low": 0.7651006711409396,
-        "high": 0.9072847682119205,
-        "numerator": 126,
+        "value": 0.9266666666666666,
+        "low": 0.868421052631579,
+        "high": 0.9745222929936306,
+        "numerator": 139,
         "denominator": 150,
         "symbols": 85
       },
@@ -2021,34 +2021,34 @@
         "symbols": 0
       },
       "file_recall_private_names": {
-        "value": 0,
-        "low": 0,
-        "high": 0,
-        "numerator": 0,
+        "value": 1,
+        "low": 1,
+        "high": 1,
+        "numerator": 13,
         "denominator": 13,
         "symbols": 13
       },
       "file_recall_without_private_names": {
         "value": 0.9197080291970803,
-        "low": 0.8529411764705882,
-        "high": 0.9712230215827338,
+        "low": 0.856,
+        "high": 0.9694656488549618,
         "numerator": 126,
         "denominator": 137,
         "symbols": 72
       },
       "file_precision": {
-        "value": 0.8936170212765957,
-        "low": 0.8165680473372781,
-        "high": 0.9577464788732394,
-        "numerator": 126,
-        "denominator": 141,
-        "symbols": 72
+        "value": 0.9025974025974026,
+        "low": 0.834319526627219,
+        "high": 0.9622641509433962,
+        "numerator": 139,
+        "denominator": 154,
+        "symbols": 85
       },
       "symbols_fully_recalled": {
-        "value": 0.7529411764705882,
-        "low": 0.6516544718882196,
-        "high": 0.8323537889109835,
-        "numerator": 64,
+        "value": 0.9058823529411765,
+        "low": 0.8251294795351005,
+        "high": 0.9515349389566441,
+        "numerator": 77,
         "denominator": 85,
         "symbols": 85
       },
@@ -2063,7 +2063,7 @@
       "completeness_verdicts": {
         "COMPLETE": 100
       },
-      "complete_verdicts_that_missed_a_non_test_file": 21,
+      "complete_verdicts_that_missed_a_non_test_file": 8,
       "by_kind": [
         {
           "kind": "class",
@@ -2105,10 +2105,10 @@
           "kind": "method",
           "symbols_with_dependents": 13,
           "file_recall": {
-            "value": 0.07692307692307693,
-            "low": 0,
-            "high": 0.23076923076923078,
-            "numerator": 1,
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 13,
             "denominator": 13,
             "symbols": 13
           }
@@ -2117,10 +2117,10 @@
           "kind": "property",
           "symbols_with_dependents": 13,
           "file_recall": {
-            "value": 0.42857142857142855,
-            "low": 0.2631578947368421,
-            "high": 0.631578947368421,
-            "numerator": 9,
+            "value": 0.47619047619047616,
+            "low": 0.3,
+            "high": 0.7,
+            "numerator": 10,
             "denominator": 21,
             "symbols": 13
           }
@@ -2216,8 +2216,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -2231,8 +2230,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -2519,8 +2517,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -2696,8 +2693,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -2888,8 +2884,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -2989,8 +2984,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -3085,8 +3079,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -3170,8 +3163,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -3301,8 +3293,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -3417,8 +3408,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -3476,8 +3466,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -3543,8 +3532,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -3596,8 +3584,7 @@
           "truth_files": [
             "source/core/Ky.ts"
           ],
-          "reported_files": null,
-          "missed_files": [
+          "reported_files": [
             "source/core/Ky.ts"
           ],
           "verdict": "COMPLETE"
@@ -5597,5 +5584,5 @@
     "A declaration with no dependents says nothing about recall. It is reported through the share of such declarations for which Kivgraph still reports a reference.",
     "The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions."
   ],
-  "wall_seconds": 330.903072083
+  "wall_seconds": 328.689849625
 }
