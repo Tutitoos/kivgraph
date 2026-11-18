@@ -2233,6 +2233,29 @@ left out of the truth.
 - Still limited to one repository. Java, C# and Python are not measured, and
   the first two need `scip-java` and `scip-dotnet`, which are not installed.
 
+#### Go: several `init` functions in one package (2026-11-18)
+
+Found while testing whether `go.include_tests` could become the default.
+Indexing public Go repositories failed with `symbol "init" is defined by two
+files, so two declarations share one identity`: Go allows any number of `init`
+functions per package and they all got one stable key. It does not depend on
+`include_tests`: `caddy` and `prometheus` failed without tests, `gin` only with
+them. `cobra`, the benchmark corpus, has none, so nothing had seen it.
+
+- Fixed (ADR 0130): an `init` is named `init#<file>`, plus `#<n>` when a file has
+  several. Every Go `init` changes key; nothing can reference one.
+- Test: `TestExtractDefinitionsGivesEveryInitFunctionItsOwnIdentity`, red on
+  `main`. It also checks that a use inside each `init` is sourced at its name.
+- After the fix `gin`, `caddy` and `prometheus` index with and without tests.
+  `include_tests: true` on those three: files `52 to 92`, `208 to 400`,
+  `403 to 697`; edges `3212 to 9744`, `27423 to 41543`, `93921 to 209969`;
+  index time `3 to 3 s`, `5 to 6 s`, `14 to 20 s`; state `531 to 544 MB`,
+  `571 to 602 MB`, `670 to 872 MB`.
+- Not fixed: `etcd` aborts the pass on a symlink in the source inventory.
+- Still open: whether `go.include_tests` becomes the default. The cost on these
+  three is small; recall with tests read is `99.2 %` on `cobra` against `65.9 %`.
+  Decision parked until `find_references` can say it did not read tests.
+
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
 `kivgraph impact --base <ref>`: symbols touched by `git diff`, aggregated
