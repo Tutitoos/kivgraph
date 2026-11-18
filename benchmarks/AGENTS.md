@@ -40,9 +40,12 @@ declarado en la raíz.
   las relaciones de implementación y los errores sobre la propia línea de la
   declaración. Corpus público fijado por commit; un repositorio por lenguaje
   en el piloto, así que las cifras describen esos repositorios y no el
-  lenguaje. Go y Dart se miden con la configuración por defecto y con
-  `include_tests: true`, porque la diferencia entre las dos es lo que cuesta
-  ese ajuste. Un resultado sin la lista de lo que no se pudo muestrear no se
+  lenguaje. Go y Dart leen sus tests por defecto (ADR 0132) y se miden con la
+  configuración por defecto y con `include_tests: false`
+  (`go.tests_excluded`), porque la diferencia entre las dos es lo que compra
+  leerlos. `-repos` mide repositorios extra por nombre -- `gin`, `caddy`,
+  `prometheus` -- que no entran en la ejecución por defecto. Un resultado sin la
+  lista de lo que no se pudo muestrear no se
   publica.
 - `benchmarks/edit-frequency` no mide una reconstrucción contra otra: mide qué
   le cuesta el grafo a **un agente que edita**, que es la carga por la que la
