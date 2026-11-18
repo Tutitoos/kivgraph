@@ -45,6 +45,11 @@ func corpus() []corpusRepository {
 			Commit: "b80cd53e65615060a62a5ea349a0d78b65d7029e",
 			Setup:  []string{"cargo fetch --locked"},
 		},
+		{
+			Language: "dart", Name: "collection", URL: "https://github.com/dart-lang/collection.git",
+			Commit: "96afcc2fce622ea7e75053af5b73f8db07491bc4",
+			Setup:  []string{"dart pub get"},
+		},
 	}
 }
 

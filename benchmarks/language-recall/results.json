@@ -32,6 +32,12 @@
       "name": "fd",
       "url": "https://github.com/sharkdp/fd.git",
       "commit": "b80cd53e65615060a62a5ea349a0d78b65d7029e"
+    },
+    {
+      "language": "dart",
+      "name": "collection",
+      "url": "https://github.com/dart-lang/collection.git",
+      "commit": "96afcc2fce622ea7e75053af5b73f8db07491bc4"
     }
   ],
   "languages": [
@@ -5367,6 +5373,1575 @@
       ]
     },
     {
+      "arm": "default",
+      "language": "dart",
+      "declarations_listed": 772,
+      "declarations_eligible": 540,
+      "not_sampled": {
+        "kind not sampled": 204,
+        "name not found in declaring position": 28
+      },
+      "declarations_measured": 100,
+      "with_dependents": 73,
+      "oracle_failures": 0,
+      "kivgraph_failures": 0,
+      "file_recall": {
+        "value": 0.74,
+        "low": 0.6513761467889908,
+        "high": 0.826530612244898,
+        "numerator": 74,
+        "denominator": 100,
+        "symbols": 73
+      },
+      "file_recall_non_test": {
+        "value": 0.9866666666666667,
+        "low": 0.9558823529411765,
+        "high": 1,
+        "numerator": 74,
+        "denominator": 75,
+        "symbols": 61
+      },
+      "file_recall_test": {
+        "value": 0,
+        "low": 0,
+        "high": 0,
+        "numerator": 0,
+        "denominator": 25,
+        "symbols": 23
+      },
+      "file_recall_private_names": {
+        "value": 0,
+        "low": 0,
+        "high": 0,
+        "numerator": 0,
+        "denominator": 0,
+        "symbols": 0
+      },
+      "file_recall_without_private_names": {
+        "value": 0.74,
+        "low": 0.6534653465346535,
+        "high": 0.8279569892473119,
+        "numerator": 74,
+        "denominator": 100,
+        "symbols": 73
+      },
+      "file_precision": {
+        "value": 0.925,
+        "low": 0.8625,
+        "high": 0.9759036144578314,
+        "numerator": 74,
+        "denominator": 80,
+        "symbols": 65
+      },
+      "symbols_fully_recalled": {
+        "value": 0.6712328767123288,
+        "low": 0.5572900604786939,
+        "high": 0.7680551420196056,
+        "numerator": 49,
+        "denominator": 73,
+        "symbols": 73
+      },
+      "symbols_without_dependents_that_report_references": {
+        "value": 0.1111111111111111,
+        "low": 0.03852034798244741,
+        "high": 0.2805780098213858,
+        "numerator": 3,
+        "denominator": 27,
+        "symbols": 27
+      },
+      "completeness_verdicts": {
+        "COMPLETE": 99,
+        "LOWER_BOUND": 1
+      },
+      "complete_verdicts_that_missed_a_non_test_file": 1,
+      "by_kind": [
+        {
+          "kind": "class",
+          "symbols_with_dependents": 20,
+          "file_recall": {
+            "value": 0.6363636363636364,
+            "low": 0.47058823529411764,
+            "high": 0.8,
+            "numerator": 21,
+            "denominator": 33,
+            "symbols": 20
+          }
+        },
+        {
+          "kind": "extension",
+          "symbols_with_dependents": 1,
+          "file_recall": {
+            "value": 0,
+            "low": 0,
+            "high": 0,
+            "numerator": 0,
+            "denominator": 1,
+            "symbols": 1
+          }
+        },
+        {
+          "kind": "field",
+          "symbols_with_dependents": 21,
+          "file_recall": {
+            "value": 0.9545454545454546,
+            "low": 0.875,
+            "high": 1,
+            "numerator": 21,
+            "denominator": 22,
+            "symbols": 21
+          }
+        },
+        {
+          "kind": "function",
+          "symbols_with_dependents": 20,
+          "file_recall": {
+            "value": 0.7272727272727273,
+            "low": 0.5666666666666667,
+            "high": 0.8620689655172413,
+            "numerator": 24,
+            "denominator": 33,
+            "symbols": 20
+          }
+        },
+        {
+          "kind": "method",
+          "symbols_with_dependents": 3,
+          "file_recall": {
+            "value": 0,
+            "low": 0,
+            "high": 0,
+            "numerator": 0,
+            "denominator": 3,
+            "symbols": 3
+          }
+        },
+        {
+          "kind": "variable",
+          "symbols_with_dependents": 8,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 8,
+            "denominator": 8,
+            "symbols": 8
+          }
+        }
+      ],
+      "symbols": [
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_map.dart",
+          "name": "_DeduplicatingIterator",
+          "kind": "class",
+          "line": 85,
+          "truth_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "reported_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableExtension",
+          "kind": "extension",
+          "line": 20,
+          "truth_files": [
+            "lib/src/iterable_extensions.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "lib/src/iterable_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/boollist.dart",
+          "name": "_data",
+          "kind": "field",
+          "line": 26,
+          "truth_files": [
+            "lib/src/boollist.dart"
+          ],
+          "reported_files": [
+            "lib/src/boollist.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "binarySearch",
+          "kind": "function",
+          "line": 21,
+          "truth_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart",
+            "test/algorithms_test.dart"
+          ],
+          "reported_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart"
+          ],
+          "missed_files": [
+            "test/algorithms_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "hash",
+          "kind": "method",
+          "line": 89,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_lowerCaseZ",
+          "kind": "variable",
+          "line": 10,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_zip.dart",
+          "name": "_IteratorZip",
+          "kind": "class",
+          "line": 30,
+          "truth_files": [
+            "lib/src/iterable_zip.dart"
+          ],
+          "reported_files": [
+            "lib/src/iterable_zip.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableComparableExtension",
+          "kind": "extension",
+          "line": 922,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "_base",
+          "kind": "field",
+          "line": 406,
+          "truth_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "binarySearchBy",
+          "kind": "function",
+          "line": 36,
+          "truth_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/list_extensions.dart"
+          ],
+          "reported_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/list_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "binarySearchByCompare",
+          "kind": "method",
+          "line": 38,
+          "truth_files": [
+            "test/extensions_test.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "test/extensions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_upperCaseZ",
+          "kind": "variable",
+          "line": 8,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_iterable.dart",
+          "name": "CombinedIterableView",
+          "kind": "class",
+          "line": 16,
+          "truth_files": [
+            "lib/src/combined_wrappers/combined_map.dart",
+            "test/combined_wrapper/iterable_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "missed_files": [
+            "test/combined_wrapper/iterable_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableNullableExtension",
+          "kind": "extension",
+          "line": 607,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_map.dart",
+          "name": "_emitted",
+          "kind": "field",
+          "line": 88,
+          "truth_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "reported_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "lowerBound",
+          "kind": "function",
+          "line": 70,
+          "truth_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart",
+            "test/algorithms_test.dart"
+          ],
+          "reported_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart"
+          ],
+          "missed_files": [
+            "test/algorithms_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/canonicalized_map.dart",
+          "name": "containsKey",
+          "kind": "method",
+          "line": 107,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_asciiCaseBit",
+          "kind": "variable",
+          "line": 11,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "DelegatingList",
+          "kind": "class",
+          "line": 151,
+          "truth_files": [
+            "lib/src/unmodifiable_wrappers.dart",
+            "test/wrapper_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/unmodifiable_wrappers.dart"
+          ],
+          "missed_files": [
+            "test/wrapper_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableNumberExtension",
+          "kind": "extension",
+          "line": 626,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "start",
+          "kind": "field",
+          "line": 348,
+          "truth_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "reported_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "_quickSort",
+          "kind": "function",
+          "line": 427,
+          "truth_files": [
+            "lib/src/algorithms.dart"
+          ],
+          "reported_files": [
+            "lib/src/algorithms.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "clear",
+          "kind": "method",
+          "line": 162,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_lowerCaseA",
+          "kind": "variable",
+          "line": 9,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_iterator.dart",
+          "name": "CombinedIterator",
+          "kind": "class",
+          "line": 8,
+          "truth_files": [
+            "lib/src/combined_wrappers/combined_iterable.dart",
+            "lib/src/combined_wrappers/combined_list.dart"
+          ],
+          "reported_files": [
+            "lib/src/combined_wrappers/combined_iterable.dart",
+            "lib/src/combined_wrappers/combined_list.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableDoubleExtension",
+          "kind": "extension",
+          "line": 807,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/boollist.dart",
+          "name": "_boolList",
+          "kind": "field",
+          "line": 250,
+          "truth_files": [
+            "lib/src/boollist.dart"
+          ],
+          "reported_files": [
+            "lib/src/boollist.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/functions.dart",
+          "name": "strongConnect",
+          "kind": "function",
+          "line": 177,
+          "truth_files": [
+            "lib/src/functions.dart"
+          ],
+          "reported_files": [
+            "lib/src/functions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "difference",
+          "kind": "method",
+          "line": 635,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "_hashMask",
+          "kind": "variable",
+          "line": 9,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "NonGrowableListMixin",
+          "kind": "class",
+          "line": 28,
+          "truth_files": [
+            "lib/src/boollist.dart",
+            "lib/src/unmodifiable_wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/boollist.dart",
+            "lib/src/unmodifiable_wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableIterableExtension",
+          "kind": "extension",
+          "line": 883,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_map.dart",
+          "name": "_iterable",
+          "kind": "field",
+          "line": 64,
+          "truth_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "reported_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/functions.dart",
+          "name": "stronglyConnectedComponents",
+          "kind": "function",
+          "line": 163,
+          "truth_files": [
+            "test/functions_test.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "test/functions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "removeWhere",
+          "kind": "method",
+          "line": 76,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_zero",
+          "kind": "variable",
+          "line": 6,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "_MapEntry",
+          "kind": "class",
+          "line": 285,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableIntegerExtension",
+          "kind": "extension",
+          "line": 722,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/boollist.dart",
+          "name": "_length",
+          "kind": "field",
+          "line": 248,
+          "truth_files": [
+            "lib/src/boollist.dart"
+          ],
+          "reported_files": [
+            "lib/src/boollist.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/utils.dart",
+          "name": "identity",
+          "kind": "function",
+          "line": 17,
+          "truth_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/list_extensions.dart"
+          ],
+          "reported_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/list_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "groupFoldBy",
+          "kind": "method",
+          "line": 397,
+          "truth_files": [
+            "test/extensions_test.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "test/extensions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_upperCaseA",
+          "kind": "variable",
+          "line": 7,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/boollist.dart",
+          "name": "BoolList",
+          "kind": "class",
+          "line": 13,
+          "truth_files": [
+            "lib/src/boollist.dart",
+            "test/boollist_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/boollist.dart"
+          ],
+          "missed_files": [
+            "test/boollist_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "ListExtensions",
+          "kind": "extension",
+          "line": 15,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "_base",
+          "kind": "field",
+          "line": 422,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "equalsIgnoreAsciiCase",
+          "kind": "function",
+          "line": 27,
+          "truth_files": [
+            "lib/src/equality.dart",
+            "test/ignore_ascii_case_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "missed_files": [
+            "test/ignore_ascii_case_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "remove",
+          "kind": "method",
+          "line": 261,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "_mergeSortLimit",
+          "kind": "variable",
+          "line": 197,
+          "truth_files": [
+            "lib/src/algorithms.dart"
+          ],
+          "reported_files": [
+            "lib/src/algorithms.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_zip.dart",
+          "name": "IterableZip",
+          "kind": "class",
+          "line": 16,
+          "truth_files": [
+            "test/iterable_zip_test.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "test/iterable_zip_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "ComparatorExtension",
+          "kind": "extension",
+          "line": 992,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "_base",
+          "kind": "field",
+          "line": 153,
+          "truth_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "quickSortBy",
+          "kind": "function",
+          "line": 420,
+          "truth_files": [
+            "lib/src/list_extensions.dart",
+            "test/algorithms_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "missed_files": [
+            "test/algorithms_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "typed",
+          "kind": "method",
+          "line": 334,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "UnorderedIterableEquality",
+          "kind": "class",
+          "line": 254,
+          "truth_files": [
+            "lib/src/equality.dart",
+            "test/algorithms_test.dart",
+            "test/equality_test.dart",
+            "test/extensions_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "missed_files": [
+            "test/algorithms_test.dart",
+            "test/equality_test.dart",
+            "test/extensions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "ListComparableExtensions",
+          "kind": "extension",
+          "line": 292,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "_base",
+          "kind": "field",
+          "line": 482,
+          "truth_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/functions.dart",
+          "name": "mapMap",
+          "kind": "function",
+          "line": 15,
+          "truth_files": [
+            "test/functions_test.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "test/functions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "addAll",
+          "kind": "method",
+          "line": 509,
+          "truth_files": null,
+          "reported_files": [
+            "lib/src/equality_map.dart"
+          ],
+          "extra_files": [
+            "lib/src/equality_map.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "IdentityEquality",
+          "kind": "class",
+          "line": 95,
+          "truth_files": [
+            "test/equality_test.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "test/equality_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "value",
+          "kind": "field",
+          "line": 288,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "LOWER_BOUND"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "insertionSort",
+          "kind": "function",
+          "line": 160,
+          "truth_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart",
+            "lib/src/algorithms.dart"
+          ],
+          "reported_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart",
+            "lib/src/algorithms.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "forEachWhile",
+          "kind": "method",
+          "line": 130,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/union_set.dart",
+          "name": "UnionSet",
+          "kind": "class",
+          "line": 16,
+          "truth_files": [
+            "lib/src/union_set_controller.dart",
+            "test/union_set_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/union_set.dart",
+            "lib/src/union_set_controller.dart"
+          ],
+          "missed_files": [
+            "test/union_set_test.dart"
+          ],
+          "extra_files": [
+            "lib/src/union_set.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "_length",
+          "kind": "field",
+          "line": 188,
+          "truth_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_isNonZeroNumberSuffix",
+          "kind": "function",
+          "line": 387,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "whereIndexed",
+          "kind": "method",
+          "line": 155,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "_DelegatingIterableBase",
+          "kind": "class",
+          "line": 14,
+          "truth_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "_unordered",
+          "kind": "field",
+          "line": 423,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_compareNaturally",
+          "kind": "function",
+          "line": 258,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "removeWhere",
+          "kind": "method",
+          "line": 795,
+          "truth_files": null,
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "extra_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "UnmodifiableSetMixin",
+          "kind": "class",
+          "line": 119,
+          "truth_files": [
+            "lib/src/empty_unmodifiable_set.dart",
+            "lib/src/union_set.dart",
+            "lib/src/unmodifiable_wrappers.dart",
+            "lib/src/wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/empty_unmodifiable_set.dart",
+            "lib/src/union_set.dart",
+            "lib/src/unmodifiable_wrappers.dart",
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/queue_list.dart",
+          "name": "_delegate",
+          "kind": "field",
+          "line": 278,
+          "truth_files": [
+            "lib/src/queue_list.dart"
+          ],
+          "reported_files": [
+            "lib/src/queue_list.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/utils.dart",
+          "name": "defaultCompare",
+          "kind": "function",
+          "line": 13,
+          "truth_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/functions.dart",
+            "lib/src/list_extensions.dart",
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/functions.dart",
+            "lib/src/list_extensions.dart",
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_list.dart",
+          "name": "retainWhere",
+          "kind": "method",
+          "line": 76,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/queue_list.dart",
+          "name": "_CastQueueList",
+          "kind": "class",
+          "line": 277,
+          "truth_files": [
+            "lib/src/queue_list.dart"
+          ],
+          "reported_files": [
+            "lib/src/queue_list.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/union_set_controller.dart",
+          "name": "set",
+          "kind": "field",
+          "line": 26,
+          "truth_files": [
+            "lib/src/union_set_controller.dart",
+            "test/union_set_controller_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/union_set_controller.dart"
+          ],
+          "missed_files": [
+            "test/union_set_controller_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_compareDigitCount",
+          "kind": "function",
+          "line": 360,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "add",
+          "kind": "method",
+          "line": 425,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "_UnorderedElementsIterable",
+          "kind": "class",
+          "line": 462,
+          "truth_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "source",
+          "kind": "field",
+          "line": 345,
+          "truth_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "reported_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "compareAsciiUpperCase",
+          "kind": "function",
+          "line": 85,
+          "truth_files": [
+            "test/comparators_test.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "test/comparators_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "equals",
+          "kind": "method",
+          "line": 212,
+          "truth_files": [
+            "test/equality_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "missed_files": [
+            "test/equality_test.dart"
+          ],
+          "extra_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/union_set_controller.dart",
+          "name": "UnionSetController",
+          "kind": "class",
+          "line": 24,
+          "truth_files": [
+            "test/union_set_controller_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/union_set_controller.dart"
+          ],
+          "missed_files": [
+            "test/union_set_controller_test.dart"
+          ],
+          "extra_files": [
+            "lib/src/union_set_controller.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "_queue",
+          "kind": "field",
+          "line": 183,
+          "truth_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_compareNumerically",
+          "kind": "function",
+          "line": 283,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "retainWhere",
+          "kind": "method",
+          "line": 461,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "HeapPriorityQueue",
+          "kind": "class",
+          "line": 171,
+          "truth_files": [
+            "lib/src/priority_queue.dart",
+            "test/priority_queue_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "missed_files": [
+            "test/priority_queue_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "_queue",
+          "kind": "field",
+          "line": 463,
+          "truth_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "compareAsciiUpperCaseNatural",
+          "kind": "function",
+          "line": 224,
+          "truth_files": [
+            "test/comparators_test.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "test/comparators_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "addAll",
+          "kind": "method",
+          "line": 132,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "UnmodifiableMapMixin",
+          "kind": "class",
+          "line": 167,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "equality",
+          "kind": "field",
+          "line": 286,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_isDigit",
+          "kind": "function",
+          "line": 380,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "where",
+          "kind": "method",
+          "line": 112,
+          "truth_files": null,
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "extra_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "PriorityQueue",
+          "kind": "class",
+          "line": 24,
+          "truth_files": [
+            "test/priority_queue_test.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "test/priority_queue_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "_valueEquality",
+          "kind": "field",
+          "line": 314,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "compareAsciiLowerCase",
+          "kind": "function",
+          "line": 122,
+          "truth_files": [
+            "test/comparators_test.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "test/comparators_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/empty_unmodifiable_set.dart",
+          "name": "containsAll",
+          "kind": "method",
+          "line": 25,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "ListSlice",
+          "kind": "class",
+          "line": 337,
+          "truth_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "reported_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "_modificationCount",
+          "kind": "field",
+          "line": 193,
+          "truth_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        }
+      ]
+    },
+    {
       "arm": "go.include_tests",
       "language": "go",
       "declarations_listed": 443,
@@ -7248,19 +8823,1580 @@
           "verdict": "COMPLETE"
         }
       ]
+    },
+    {
+      "arm": "dart.include_tests",
+      "language": "dart",
+      "declarations_listed": 772,
+      "declarations_eligible": 540,
+      "not_sampled": {
+        "kind not sampled": 204,
+        "name not found in declaring position": 28
+      },
+      "declarations_measured": 100,
+      "with_dependents": 73,
+      "oracle_failures": 0,
+      "kivgraph_failures": 0,
+      "file_recall": {
+        "value": 0.99,
+        "low": 0.968421052631579,
+        "high": 1,
+        "numerator": 99,
+        "denominator": 100,
+        "symbols": 73
+      },
+      "file_recall_non_test": {
+        "value": 0.9866666666666667,
+        "low": 0.9558823529411765,
+        "high": 1,
+        "numerator": 74,
+        "denominator": 75,
+        "symbols": 61
+      },
+      "file_recall_test": {
+        "value": 1,
+        "low": 1,
+        "high": 1,
+        "numerator": 25,
+        "denominator": 25,
+        "symbols": 23
+      },
+      "file_recall_private_names": {
+        "value": 0,
+        "low": 0,
+        "high": 0,
+        "numerator": 0,
+        "denominator": 0,
+        "symbols": 0
+      },
+      "file_recall_without_private_names": {
+        "value": 0.99,
+        "low": 0.967032967032967,
+        "high": 1,
+        "numerator": 99,
+        "denominator": 100,
+        "symbols": 73
+      },
+      "file_precision": {
+        "value": 0.8839285714285714,
+        "low": 0.8095238095238095,
+        "high": 0.9459459459459459,
+        "numerator": 99,
+        "denominator": 112,
+        "symbols": 79
+      },
+      "symbols_fully_recalled": {
+        "value": 0.9863013698630136,
+        "low": 0.9264026265348793,
+        "high": 0.997577748560291,
+        "numerator": 72,
+        "denominator": 73,
+        "symbols": 73
+      },
+      "symbols_without_dependents_that_report_references": {
+        "value": 0.25925925925925924,
+        "low": 0.13170374490590095,
+        "high": 0.44678571468694817,
+        "numerator": 7,
+        "denominator": 27,
+        "symbols": 27
+      },
+      "completeness_verdicts": {
+        "COMPLETE": 100
+      },
+      "complete_verdicts_that_missed_a_non_test_file": 1,
+      "by_kind": [
+        {
+          "kind": "class",
+          "symbols_with_dependents": 20,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 33,
+            "denominator": 33,
+            "symbols": 20
+          }
+        },
+        {
+          "kind": "extension",
+          "symbols_with_dependents": 1,
+          "file_recall": {
+            "value": 0,
+            "low": 0,
+            "high": 0,
+            "numerator": 0,
+            "denominator": 1,
+            "symbols": 1
+          }
+        },
+        {
+          "kind": "field",
+          "symbols_with_dependents": 21,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 22,
+            "denominator": 22,
+            "symbols": 21
+          }
+        },
+        {
+          "kind": "function",
+          "symbols_with_dependents": 20,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 33,
+            "denominator": 33,
+            "symbols": 20
+          }
+        },
+        {
+          "kind": "method",
+          "symbols_with_dependents": 3,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 3,
+            "denominator": 3,
+            "symbols": 3
+          }
+        },
+        {
+          "kind": "variable",
+          "symbols_with_dependents": 8,
+          "file_recall": {
+            "value": 1,
+            "low": 1,
+            "high": 1,
+            "numerator": 8,
+            "denominator": 8,
+            "symbols": 8
+          }
+        }
+      ],
+      "symbols": [
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_map.dart",
+          "name": "_DeduplicatingIterator",
+          "kind": "class",
+          "line": 85,
+          "truth_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "reported_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableExtension",
+          "kind": "extension",
+          "line": 20,
+          "truth_files": [
+            "lib/src/iterable_extensions.dart"
+          ],
+          "reported_files": null,
+          "missed_files": [
+            "lib/src/iterable_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/boollist.dart",
+          "name": "_data",
+          "kind": "field",
+          "line": 26,
+          "truth_files": [
+            "lib/src/boollist.dart"
+          ],
+          "reported_files": [
+            "lib/src/boollist.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "binarySearch",
+          "kind": "function",
+          "line": 21,
+          "truth_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart",
+            "test/algorithms_test.dart"
+          ],
+          "reported_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart",
+            "test/algorithms_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "hash",
+          "kind": "method",
+          "line": 89,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_lowerCaseZ",
+          "kind": "variable",
+          "line": 10,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_zip.dart",
+          "name": "_IteratorZip",
+          "kind": "class",
+          "line": 30,
+          "truth_files": [
+            "lib/src/iterable_zip.dart"
+          ],
+          "reported_files": [
+            "lib/src/iterable_zip.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableComparableExtension",
+          "kind": "extension",
+          "line": 922,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "_base",
+          "kind": "field",
+          "line": 406,
+          "truth_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "binarySearchBy",
+          "kind": "function",
+          "line": 36,
+          "truth_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/list_extensions.dart"
+          ],
+          "reported_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/list_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "binarySearchByCompare",
+          "kind": "method",
+          "line": 38,
+          "truth_files": [
+            "test/extensions_test.dart"
+          ],
+          "reported_files": [
+            "test/extensions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_upperCaseZ",
+          "kind": "variable",
+          "line": 8,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_iterable.dart",
+          "name": "CombinedIterableView",
+          "kind": "class",
+          "line": 16,
+          "truth_files": [
+            "lib/src/combined_wrappers/combined_map.dart",
+            "test/combined_wrapper/iterable_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/combined_wrappers/combined_map.dart",
+            "test/combined_wrapper/iterable_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableNullableExtension",
+          "kind": "extension",
+          "line": 607,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_map.dart",
+          "name": "_emitted",
+          "kind": "field",
+          "line": 88,
+          "truth_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "reported_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "lowerBound",
+          "kind": "function",
+          "line": 70,
+          "truth_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart",
+            "test/algorithms_test.dart"
+          ],
+          "reported_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart",
+            "test/algorithms_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/canonicalized_map.dart",
+          "name": "containsKey",
+          "kind": "method",
+          "line": 107,
+          "truth_files": null,
+          "reported_files": [
+            "test/canonicalized_map_test.dart"
+          ],
+          "extra_files": [
+            "test/canonicalized_map_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_asciiCaseBit",
+          "kind": "variable",
+          "line": 11,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "DelegatingList",
+          "kind": "class",
+          "line": 151,
+          "truth_files": [
+            "lib/src/unmodifiable_wrappers.dart",
+            "test/wrapper_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/unmodifiable_wrappers.dart",
+            "test/wrapper_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableNumberExtension",
+          "kind": "extension",
+          "line": 626,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "start",
+          "kind": "field",
+          "line": 348,
+          "truth_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "reported_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "_quickSort",
+          "kind": "function",
+          "line": 427,
+          "truth_files": [
+            "lib/src/algorithms.dart"
+          ],
+          "reported_files": [
+            "lib/src/algorithms.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "clear",
+          "kind": "method",
+          "line": 162,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_lowerCaseA",
+          "kind": "variable",
+          "line": 9,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_iterator.dart",
+          "name": "CombinedIterator",
+          "kind": "class",
+          "line": 8,
+          "truth_files": [
+            "lib/src/combined_wrappers/combined_iterable.dart",
+            "lib/src/combined_wrappers/combined_list.dart"
+          ],
+          "reported_files": [
+            "lib/src/combined_wrappers/combined_iterable.dart",
+            "lib/src/combined_wrappers/combined_list.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableDoubleExtension",
+          "kind": "extension",
+          "line": 807,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/boollist.dart",
+          "name": "_boolList",
+          "kind": "field",
+          "line": 250,
+          "truth_files": [
+            "lib/src/boollist.dart"
+          ],
+          "reported_files": [
+            "lib/src/boollist.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/functions.dart",
+          "name": "strongConnect",
+          "kind": "function",
+          "line": 177,
+          "truth_files": [
+            "lib/src/functions.dart"
+          ],
+          "reported_files": [
+            "lib/src/functions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "difference",
+          "kind": "method",
+          "line": 635,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "_hashMask",
+          "kind": "variable",
+          "line": 9,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "NonGrowableListMixin",
+          "kind": "class",
+          "line": 28,
+          "truth_files": [
+            "lib/src/boollist.dart",
+            "lib/src/unmodifiable_wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/boollist.dart",
+            "lib/src/unmodifiable_wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableIterableExtension",
+          "kind": "extension",
+          "line": 883,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_map.dart",
+          "name": "_iterable",
+          "kind": "field",
+          "line": 64,
+          "truth_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "reported_files": [
+            "lib/src/combined_wrappers/combined_map.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/functions.dart",
+          "name": "stronglyConnectedComponents",
+          "kind": "function",
+          "line": 163,
+          "truth_files": [
+            "test/functions_test.dart"
+          ],
+          "reported_files": [
+            "test/functions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "removeWhere",
+          "kind": "method",
+          "line": 76,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_zero",
+          "kind": "variable",
+          "line": 6,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "_MapEntry",
+          "kind": "class",
+          "line": 285,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "IterableIntegerExtension",
+          "kind": "extension",
+          "line": 722,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/boollist.dart",
+          "name": "_length",
+          "kind": "field",
+          "line": 248,
+          "truth_files": [
+            "lib/src/boollist.dart"
+          ],
+          "reported_files": [
+            "lib/src/boollist.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/utils.dart",
+          "name": "identity",
+          "kind": "function",
+          "line": 17,
+          "truth_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/list_extensions.dart"
+          ],
+          "reported_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/list_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "groupFoldBy",
+          "kind": "method",
+          "line": 397,
+          "truth_files": [
+            "test/extensions_test.dart"
+          ],
+          "reported_files": [
+            "test/extensions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_upperCaseA",
+          "kind": "variable",
+          "line": 7,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/boollist.dart",
+          "name": "BoolList",
+          "kind": "class",
+          "line": 13,
+          "truth_files": [
+            "lib/src/boollist.dart",
+            "test/boollist_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/boollist.dart",
+            "test/boollist_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "ListExtensions",
+          "kind": "extension",
+          "line": 15,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "_base",
+          "kind": "field",
+          "line": 422,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "equalsIgnoreAsciiCase",
+          "kind": "function",
+          "line": 27,
+          "truth_files": [
+            "lib/src/equality.dart",
+            "test/ignore_ascii_case_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart",
+            "test/ignore_ascii_case_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "remove",
+          "kind": "method",
+          "line": 261,
+          "truth_files": null,
+          "reported_files": [
+            "test/priority_queue_test.dart"
+          ],
+          "extra_files": [
+            "test/priority_queue_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "_mergeSortLimit",
+          "kind": "variable",
+          "line": 197,
+          "truth_files": [
+            "lib/src/algorithms.dart"
+          ],
+          "reported_files": [
+            "lib/src/algorithms.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_zip.dart",
+          "name": "IterableZip",
+          "kind": "class",
+          "line": 16,
+          "truth_files": [
+            "test/iterable_zip_test.dart"
+          ],
+          "reported_files": [
+            "test/iterable_zip_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/iterable_extensions.dart",
+          "name": "ComparatorExtension",
+          "kind": "extension",
+          "line": 992,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "_base",
+          "kind": "field",
+          "line": 153,
+          "truth_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "quickSortBy",
+          "kind": "function",
+          "line": 420,
+          "truth_files": [
+            "lib/src/list_extensions.dart",
+            "test/algorithms_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/list_extensions.dart",
+            "test/algorithms_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "typed",
+          "kind": "method",
+          "line": 334,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "UnorderedIterableEquality",
+          "kind": "class",
+          "line": 254,
+          "truth_files": [
+            "lib/src/equality.dart",
+            "test/algorithms_test.dart",
+            "test/equality_test.dart",
+            "test/extensions_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart",
+            "test/algorithms_test.dart",
+            "test/equality_test.dart",
+            "test/extensions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "ListComparableExtensions",
+          "kind": "extension",
+          "line": 292,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "_base",
+          "kind": "field",
+          "line": 482,
+          "truth_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/functions.dart",
+          "name": "mapMap",
+          "kind": "function",
+          "line": 15,
+          "truth_files": [
+            "test/functions_test.dart"
+          ],
+          "reported_files": [
+            "test/functions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "addAll",
+          "kind": "method",
+          "line": 509,
+          "truth_files": null,
+          "reported_files": [
+            "lib/src/equality_map.dart"
+          ],
+          "extra_files": [
+            "lib/src/equality_map.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "IdentityEquality",
+          "kind": "class",
+          "line": 95,
+          "truth_files": [
+            "test/equality_test.dart"
+          ],
+          "reported_files": [
+            "test/equality_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "value",
+          "kind": "field",
+          "line": 288,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/algorithms.dart",
+          "name": "insertionSort",
+          "kind": "function",
+          "line": 160,
+          "truth_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart",
+            "lib/src/algorithms.dart"
+          ],
+          "reported_files": [
+            "lib/algorithms.dart",
+            "lib/collection.dart",
+            "lib/src/algorithms.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "forEachWhile",
+          "kind": "method",
+          "line": 130,
+          "truth_files": null,
+          "reported_files": [
+            "test/extensions_test.dart"
+          ],
+          "extra_files": [
+            "test/extensions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/union_set.dart",
+          "name": "UnionSet",
+          "kind": "class",
+          "line": 16,
+          "truth_files": [
+            "lib/src/union_set_controller.dart",
+            "test/union_set_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/union_set.dart",
+            "lib/src/union_set_controller.dart",
+            "test/union_set_test.dart"
+          ],
+          "extra_files": [
+            "lib/src/union_set.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "_length",
+          "kind": "field",
+          "line": 188,
+          "truth_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_isNonZeroNumberSuffix",
+          "kind": "function",
+          "line": 387,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "whereIndexed",
+          "kind": "method",
+          "line": 155,
+          "truth_files": null,
+          "reported_files": [
+            "test/extensions_test.dart"
+          ],
+          "extra_files": [
+            "test/extensions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "_DelegatingIterableBase",
+          "kind": "class",
+          "line": 14,
+          "truth_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "_unordered",
+          "kind": "field",
+          "line": 423,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_compareNaturally",
+          "kind": "function",
+          "line": 258,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "removeWhere",
+          "kind": "method",
+          "line": 795,
+          "truth_files": null,
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "extra_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "UnmodifiableSetMixin",
+          "kind": "class",
+          "line": 119,
+          "truth_files": [
+            "lib/src/empty_unmodifiable_set.dart",
+            "lib/src/union_set.dart",
+            "lib/src/unmodifiable_wrappers.dart",
+            "lib/src/wrappers.dart"
+          ],
+          "reported_files": [
+            "lib/src/empty_unmodifiable_set.dart",
+            "lib/src/union_set.dart",
+            "lib/src/unmodifiable_wrappers.dart",
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/queue_list.dart",
+          "name": "_delegate",
+          "kind": "field",
+          "line": 278,
+          "truth_files": [
+            "lib/src/queue_list.dart"
+          ],
+          "reported_files": [
+            "lib/src/queue_list.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/utils.dart",
+          "name": "defaultCompare",
+          "kind": "function",
+          "line": 13,
+          "truth_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/functions.dart",
+            "lib/src/list_extensions.dart",
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/algorithms.dart",
+            "lib/src/functions.dart",
+            "lib/src/list_extensions.dart",
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/combined_wrappers/combined_list.dart",
+          "name": "retainWhere",
+          "kind": "method",
+          "line": 76,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/queue_list.dart",
+          "name": "_CastQueueList",
+          "kind": "class",
+          "line": 277,
+          "truth_files": [
+            "lib/src/queue_list.dart"
+          ],
+          "reported_files": [
+            "lib/src/queue_list.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/union_set_controller.dart",
+          "name": "set",
+          "kind": "field",
+          "line": 26,
+          "truth_files": [
+            "lib/src/union_set_controller.dart",
+            "test/union_set_controller_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/union_set_controller.dart",
+            "test/union_set_controller_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_compareDigitCount",
+          "kind": "function",
+          "line": 360,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "add",
+          "kind": "method",
+          "line": 425,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "_UnorderedElementsIterable",
+          "kind": "class",
+          "line": 462,
+          "truth_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "source",
+          "kind": "field",
+          "line": 345,
+          "truth_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "reported_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "compareAsciiUpperCase",
+          "kind": "function",
+          "line": 85,
+          "truth_files": [
+            "test/comparators_test.dart"
+          ],
+          "reported_files": [
+            "test/comparators_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "equals",
+          "kind": "method",
+          "line": 212,
+          "truth_files": [
+            "test/equality_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart",
+            "test/algorithms_test.dart",
+            "test/equality_test.dart",
+            "test/extensions_test.dart"
+          ],
+          "extra_files": [
+            "lib/src/equality.dart",
+            "test/algorithms_test.dart",
+            "test/extensions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/union_set_controller.dart",
+          "name": "UnionSetController",
+          "kind": "class",
+          "line": 24,
+          "truth_files": [
+            "test/union_set_controller_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/union_set_controller.dart",
+            "test/union_set_controller_test.dart"
+          ],
+          "extra_files": [
+            "lib/src/union_set_controller.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "_queue",
+          "kind": "field",
+          "line": 183,
+          "truth_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_compareNumerically",
+          "kind": "function",
+          "line": 283,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "retainWhere",
+          "kind": "method",
+          "line": 461,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "HeapPriorityQueue",
+          "kind": "class",
+          "line": 171,
+          "truth_files": [
+            "lib/src/priority_queue.dart",
+            "test/priority_queue_test.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart",
+            "test/priority_queue_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "_queue",
+          "kind": "field",
+          "line": 463,
+          "truth_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "compareAsciiUpperCaseNatural",
+          "kind": "function",
+          "line": 224,
+          "truth_files": [
+            "test/comparators_test.dart"
+          ],
+          "reported_files": [
+            "test/comparators_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "addAll",
+          "kind": "method",
+          "line": 132,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/unmodifiable_wrappers.dart",
+          "name": "UnmodifiableMapMixin",
+          "kind": "class",
+          "line": 167,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "equality",
+          "kind": "field",
+          "line": 286,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "_isDigit",
+          "kind": "function",
+          "line": 380,
+          "truth_files": [
+            "lib/src/comparators.dart"
+          ],
+          "reported_files": [
+            "lib/src/comparators.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/wrappers.dart",
+          "name": "where",
+          "kind": "method",
+          "line": 112,
+          "truth_files": null,
+          "reported_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "extra_files": [
+            "lib/src/wrappers.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "PriorityQueue",
+          "kind": "class",
+          "line": 24,
+          "truth_files": [
+            "test/priority_queue_test.dart"
+          ],
+          "reported_files": [
+            "test/priority_queue_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/equality.dart",
+          "name": "_valueEquality",
+          "kind": "field",
+          "line": 314,
+          "truth_files": [
+            "lib/src/equality.dart"
+          ],
+          "reported_files": [
+            "lib/src/equality.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/comparators.dart",
+          "name": "compareAsciiLowerCase",
+          "kind": "function",
+          "line": 122,
+          "truth_files": [
+            "test/comparators_test.dart"
+          ],
+          "reported_files": [
+            "test/comparators_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/empty_unmodifiable_set.dart",
+          "name": "containsAll",
+          "kind": "method",
+          "line": 25,
+          "truth_files": null,
+          "reported_files": null,
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/list_extensions.dart",
+          "name": "ListSlice",
+          "kind": "class",
+          "line": 337,
+          "truth_files": [
+            "lib/src/list_extensions.dart"
+          ],
+          "reported_files": [
+            "lib/src/list_extensions.dart",
+            "test/extensions_test.dart"
+          ],
+          "extra_files": [
+            "test/extensions_test.dart"
+          ],
+          "verdict": "COMPLETE"
+        },
+        {
+          "repository": "collection",
+          "path": "lib/src/priority_queue.dart",
+          "name": "_modificationCount",
+          "kind": "field",
+          "line": 193,
+          "truth_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "reported_files": [
+            "lib/src/priority_queue.dart"
+          ],
+          "verdict": "COMPLETE"
+        }
+      ]
     }
   ],
   "limitations": [
-    "The oracle and Kivgraph share each language's type checker for Go and TypeScript. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other. Type resolution is not what this measures there: it measures which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out. Rust is the exception: the oracle is `rustc` through `cargo check` and Kivgraph reads `rust-analyzer`, two different front ends.",
+    "The oracle and Kivgraph share each language's type checker for Go, TypeScript and Dart. Go is checked with `go/packages` and `go/types` on both sides, TypeScript with the repository's own `tsc` on one side and the same checker inside the worker on the other, Dart with `dart analyze` on one side and the Analysis Server on the other. Type resolution is not what this measures there: it measures which files and build variants are loaded, how resolved uses become edges, and what is filtered on the way out. Rust is the exception: the oracle is `rustc` through `cargo check` and Kivgraph reads `rust-analyzer`, two different front ends.",
     "The unit is the file, not the reference. A rename makes the compiler reject some uses and not others (after a failed import, the uses of the imported name are not reported), so reference-level ground truth would differ by language. A file is a dependent if it gains an error.",
     "Implementation and inheritance relations are left out of the truth: an error that says a type no longer satisfies an interface or a base class is not a use of the renamed name, and `find_references` is not the tool for it.",
     "The sample frame is what Kivgraph lists for each file, so a declaration Kivgraph never recorded cannot be sampled. A recall measured this way is conditional on the declaration being known.",
     "Only declarations whose name appears in its declaring position on its first line are renamed, so the rename is exact. Declarations written another way are counted as not sampled.",
-    "Go declarations are sampled from non-test files; references from `_test.go` files are part of the truth and are reported apart, because Kivgraph reads test files only with `go.include_tests: true` and this run used the default.",
+    "Go and Dart declarations are sampled from non-test files; references from test files are part of the truth and are reported apart, because Kivgraph reads test files only with `go.include_tests` or `dart.include_tests` set to true and the default arm uses neither.",
     "One repository per language: the figures describe these repositories at these commits, not the language. A second repository would show how much they move.",
     "A declaration with no dependents says nothing about recall. It is reported through the share of such declarations for which Kivgraph still reports a reference.",
     "The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions. The Rust dependencies are fetched with `--locked`.",
-    "`rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The Rust truth can be too small and cannot contain a file that does not use the name."
+    "`rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The Rust truth can be too small and cannot contain a file that does not use the name.",
+    "Renaming a Dart class breaks its constructors' own declarations (a constructor is written with the class's name), and an `implements` clause is an implementation relation: those errors are left out of the truth. The Dart dependencies are resolved with `dart pub get`, and the repository ships no lockfile."
   ],
-  "wall_seconds": 265.455467917
+  "wall_seconds": 863.44282075
 }

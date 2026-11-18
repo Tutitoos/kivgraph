@@ -28,20 +28,20 @@ declarado en la raíz.
 - `benchmarks/language-recall/` mide, por lenguaje, qué parte de los archivos
   que dependen de una declaración devuelve `find_references`. La verdad de
   referencia sale de renombrar la declaración y volver a comprobar tipos: los
-  archivos que ganan un error son los que la usan. **En Go y TypeScript el
-  oráculo y Kivgraph comparten el comprobador de tipos**, así que no se mide
-  la resolución de tipos sino todo lo que la rodea. En Rust no: el oráculo es
-  `rustc` por `cargo check` y Kivgraph lee `rust-analyzer`. Lo que se mide en
-  los otros dos es qué archivos y variantes se cargan, cómo un uso resuelto se
-  vuelve arista y qué se filtra. La unidad es el
+  archivos que ganan un error son los que la usan. **En Go, TypeScript y Dart
+  el oráculo y Kivgraph comparten el comprobador de tipos** (`dart analyze` y
+  el Analysis Server), así que no se mide la resolución de tipos sino todo lo
+  que la rodea. En Rust no: el oráculo es `rustc` por `cargo check` y Kivgraph
+  lee `rust-analyzer`. Lo que se mide en los otros es qué archivos y variantes
+  se cargan, cómo un uso resuelto se vuelve arista y qué se filtra. La unidad es el
   archivo, no la referencia, porque tras un import roto el compilador no
   reporta los usos del nombre importado. Un error solo cuenta si su línea
   nombra el identificador original (los errores en cascada no) y se excluyen
   las relaciones de implementación y los errores sobre la propia línea de la
   declaración. Corpus público fijado por commit; un repositorio por lenguaje
   en el piloto, así que las cifras describen esos repositorios y no el
-  lenguaje. Go se mide con la configuración por defecto y con
-  `go.include_tests: true`, porque la diferencia entre las dos es lo que cuesta
+  lenguaje. Go y Dart se miden con la configuración por defecto y con
+  `include_tests: true`, porque la diferencia entre las dos es lo que cuesta
   ese ajuste. Un resultado sin la lista de lo que no se pudo muestrear no se
   publica.
 - `benchmarks/edit-frequency` no mide una reconstrucción contra otra: mide qué
