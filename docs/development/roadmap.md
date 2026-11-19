@@ -2295,8 +2295,11 @@ tests read, on 40 declarations per repository (100 for `cobra` and
 
 - Cost of reading tests, after the `init` and symlink fixes: edges `x3.0`, `x1.5`
   and `x2.2` on `gin`, `caddy` and `prometheus`; indexing `3 to 3 s`, `5 to 6 s`,
-  `14 to 20 s`; state `+13`, `+31`, `+202 MB`. Serving memory and query latency
-  were not measured.
+  `14 to 20 s`; state `+13`, `+31`, `+202 MB`. Measured later (ADR 0132): serving
+  RSS `+1` to `+35 MB` and query p95 under `5 ms`; the default answer grows
+  `5 %` to `53 %`; the indexing peak grows `+0.1` to `+1.1 GB`, from a baseline
+  of `5.5 GB` on `prometheus` that is not the Go heap (`GOMEMLIMIT 1 GiB` leaves
+  it at `5.1 GB`).
 - Done: both defaults are `true`. `find_references` takes `exclude_tests`, which
   uses the path rule of `impact` and applies before the total and the page.
 - Existing installations keep `false`: the `config.yaml` an earlier `init` wrote
