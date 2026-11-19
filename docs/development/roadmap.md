@@ -2388,8 +2388,14 @@ of the precision column, and `exclude_tests` on the traversal tools.
   - The benchmark measures one repository per language apart from Go; Java and
     C# need `scip-java` and `scip-dotnet`, Python has no oracle independent of
     Pyright, and `etcd` needs a Go `1.27` build.
-  - Site: `/github` and the `v0.10.0-dev.1` compare link return `404`, and the
-    tool-reference JSON examples predate `completeness` and schema `5`.
+  - Site, done: `/github` answers `302` (the earlier `404` is gone, and the
+    redirect lives in the edge Worker, not in this repository). The compare link
+    of a release with no tag (`v0.10.0`, `v0.10.0-dev.1`) is hidden by
+    `tagged: false` in its note, to be removed when the tag exists. The
+    examples of `find_references`, `trace_dependencies` and
+    `find_cross_repo_consumers` carry `completeness`, and `graph_status` shows
+    schema `5`. Examples were reconciled by envelope keys against real answers
+    on `cobra`; the fields inside `results` were not compared one by one.
 
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
