@@ -4,7 +4,7 @@ How many of the files that depend on a declaration does `find_references` report
 
 - Command: `go run ./benchmarks/language-recall -kivgraph <binary> -repo-root .`
 - Date: 2026-11-19, seed 1, up to 100 declarations per language
-- Kivgraph `0.10.0` on darwin/arm64, go1.26.11, Version 5.9.3, node v25.9.0, rustc 1.99.1 (58cf8f9c3 2026-10-13) (Homebrew)
+- Kivgraph `0.10.0` on darwin/arm64, go1.26.11, Version 5.9.3, node v25.9.0, rustc 1.100.0 (0ef1bc386 2026-11-09) (Homebrew)
 
 ## Corpus
 
@@ -51,13 +51,13 @@ Intervals are 95 % percentile intervals from resampling declarations.
 
 ## typescript (default)
 
-- Declarations listed 1062, eligible for the rename 398, measured 100 (oracle failed on 0, Kivgraph refused 0).
+- Declarations listed 1134, eligible for the rename 398, measured 100 (oracle failed on 0, Kivgraph refused 0).
 - Recall on non-test files: 100.0 % (100.0 to 100.0). On test files: n/a.
 - Recall on ES private names (`#x`): 100.0 % (100.0 to 100.0) over 13 declarations. On every other declaration: 100.0 % (100.0 to 100.0).
 - Declarations with no dependents for which Kivgraph still reports a file: 3 of 15.
 - Completeness verdicts: COMPLETE 98, LOWER_BOUND 2.
 - Answers that said `COMPLETE` and missed at least one non-test file: 0 of 98.
-- Not sampled: kind not sampled: 391; name not found in declaring position: 273; outline refused: 21.
+- Not sampled: kind not sampled: 425; name not found in declaring position: 311; outline refused: 21.
 
 |kind|declarations with dependents|file recall|
 |---|---|---|
@@ -250,5 +250,5 @@ Declarations with a reported file the compiler did not flag (first 15 of 6). The
 - One repository per language: the figures describe these repositories at these commits, not the language. A second repository would show how much they move.
 - A declaration with no dependents says nothing about recall. It is reported through the share of such declarations for which Kivgraph still reports a reference.
 - The TypeScript dependencies are installed with `npm install` and are not pinned by a lockfile, so a rerun can resolve other versions. The Rust dependencies are fetched with `--locked`.
-- `rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The Rust truth can be too small and cannot contain a file that does not use the name.
+- `rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The same holds across a workspace: a crate that fails to compile hides every crate and target that depends on it, so on a multi-crate workspace the truth is a lower bound and the precision is too (on `ripgrep`, 25 of 33 extra files are in other crates and 8 in targets of the declaring crate). The Rust truth cannot contain a file that does not use the name.
 - Renaming a Dart class breaks its constructors' own declarations (a constructor is written with the class's name), and an `implements` clause is an implementation relation: those errors are left out of the truth. The Dart dependencies are resolved with `dart pub get`, and the repository ships no lockfile.
