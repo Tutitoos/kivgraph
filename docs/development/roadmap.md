@@ -2393,12 +2393,14 @@ of the precision column, and `exclude_tests` on the traversal tools.
   that depend on the renamed one, which do not compile after the rename: the
   truth is a lower bound on a workspace.
   TypeScript `got`: `4` declarations missed (all answers `LOWER_BOUND`, none
-  `COMPLETE`). Two are accessor pairs the rename splits (`dnsCache`,
-  `maxHeaderSize`: a setter renamed, its getter left); not traced, probably an
-  oracle artefact. Two are keys of an object literal passed to a generic call
-  (`https: {rejectUnauthorized}`, `beforeRedirect`); for the first, traced, the
-  contextual type is the literal's own and not the declared one. That is the
-  known limit of contextual keys, not fixed.
+  `COMPLETE`). Two were keys of an object literal passed to a generic call
+  (`https: {rejectUnauthorized}`, `beforeRedirect`): the contextual type there
+  is what the checker inferred from the literal, so the key resolved to the
+  literal's own property. Fixed (ADR 0137): the key is now looked up in the
+  constraint of the parameter; `got` recall `97.8 %` to `98.7 %`, `ky` unchanged.
+  The other two are accessor pairs (`dnsCache`, `maxHeaderSize`): the oracle
+  renames the setter only, which makes the getter read-only and cascades errors
+  in the same file (checked on `maxHeaderSize`). Not a miss of the worker.
   The precision is largely the oracle's. Of `92` extra files, `31` have no
   mention of the name (`export *` in `source/index.ts`), `2` only export or
   import lines and `59` mention it in code. Two causes were checked: an aliased
@@ -2417,7 +2419,8 @@ of the precision column, and `exclude_tests` on the traversal tools.
   - Dart: explicit extension application (`IterableExtension(this)`) and `/** */`
     doc links. Rust: methods on a receiver, names passed through a metavariable
     and per-call-site expansion in `macro_rules!`. TypeScript: property keys of
-    a contextual union, and function-typed properties under the structural
+    a contextual union outside a generic call (the generic-call case is fixed,
+    ADR 0137), and function-typed properties under the structural
     implementation rule.
   - The benchmark measures one repository per language apart from Go; Java and
     C# need `scip-java` and `scip-dotnet`, Python has no oracle independent of
