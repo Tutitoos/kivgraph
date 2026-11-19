@@ -2412,10 +2412,22 @@ of the precision column, and `exclude_tests` on the traversal tools.
   `ArgParser.allowAnything()`, attributed to the class it constructs.
   Dart without tests: recall `65.1 %` (`collection`: `74.0 %`).
   No `COMPLETE` answer missed a non-test file in any of the three.
+- **Indexing memory, fixed in part (ADR 0138).** The earlier item said the
+  open idea was to own the load and release dependency syntax. It was cheaper:
+  `go/packages` accepts a parser, and a dependency's function bodies can be
+  dropped there. A first try that left the errors in blocked every module (the
+  checker reports the imports that only bodies used, and a generic function
+  without a body); the proxy that ignored them showed a halving of the live
+  heap, and the version that keeps generic bodies and `init` and forgives only
+  those errors is the one measured. `prometheus`: live heap `3.9` to `1.7`/`1.8
+  GB`, peak heap `6.0`/`6.5` to `3.1 GB`, peak RSS `7.0`/`7.7` to `4.7`/`4.9
+  GB`, time about `5 %` less; `caddy` RSS `2.85` to `1.88 GB`. Same graph on
+  `cobra`, `gin`, `caddy`, `prometheus` and the same files and verdicts for
+  `280` declarations. A root outside the load directory forces a second load.
 - **Open after the language-recall work** (none has an owner or a date):
-  - Indexing memory on large Go repositories: the peak is Go heap held by
-    `go/packages` (`NeedDeps`); the only lever found costs `5x` to `11x` in
-    time. Owning the load and releasing dependency syntax is the open idea.
+  - Indexing memory on large Go repositories, after ADR 0138: the Go heap is
+    halved and the resident peak is down by a third (`prometheus` `7.0`/`7.7`
+    to `4.7`/`4.9 GB`), but `1.6 GB` above the Go heap is not attributed.
   - Dart: explicit extension application (`IterableExtension(this)`) and `/** */`
     doc links. Rust: methods on a receiver, names passed through a metavariable
     and per-call-site expansion in `macro_rules!`. TypeScript: property keys of
