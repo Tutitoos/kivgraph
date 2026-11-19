@@ -2433,6 +2433,15 @@ of the precision column, and `exclude_tests` on the traversal tools.
   to `3.4`/`3.2 GB` for about `1.5 s` more, `gin` `0.86` to `0.45 GB`, `cobra`
   unchanged; `GOGC` in the environment still wins. About `0.7 GB` above the
   heap at the peak is not broken down.
+- **Indexing memory on Linux (ADR 0140).** The two changes hold where the
+  resident set is truthful: `prometheus` `7.3`/`7.7 GB` to `4.7`/`4.5 GB` (ADR
+  0138) to `3.5`/`3.8 GB` (ADR 0139); `caddy` `2.8` to `1.3 GB`. What Linux
+  adds is the container's limit, which Go does not read: with `--memory=3g` the
+  pass was killed at `3.06 GB`. A pass now sets the Go soft limit to four
+  fifths of the cgroup limit: it passes at `3 GB` (`2.46 GB`, `45 s`) and at
+  `2.5 GB` (`56 s`), and is still killed at `2 GB`, where what is live does not
+  fit. `GOMEMLIMIT` wins; without a cgroup limit nothing is set. Measured on
+  `linux/arm64` in a container, not on `linux/amd64`.
 - **Open after the language-recall work** (none has an owner or a date):
   - Dart: explicit extension application (`IterableExtension(this)`) and `/** */`
     doc links. Rust: methods on a receiver, names passed through a metavariable
