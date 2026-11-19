@@ -45,8 +45,9 @@ default `find_references` answer grows by `5 %` to `53 %` because the compact vi
 groups rows by file; with `view: full` and every edge kind the mean answer grows
 `1.4x` to `3.7x`. The peak while indexing is the cost that matters: `+0.1` to
 `+1.1 GB`, on top of a baseline that is already `5.5 GB` for `prometheus`. It is
-mostly not the Go heap: `GOMEMLIMIT` at `1 GiB` left the peak at `5.1 GB` and made
-the index three times slower, so it is not a lever.
+Go heap, mostly the syntax trees and type-checker tables of every dependency
+(`GOMEMLIMIT` cannot go below the `3.9 GB` that is live), and no cheap setting
+lowers it: see the roadmap.
 
 The cost to the reader is that tests become rows. `find_references` had no way
 to ask for production uses only, which is a fair question, so the default could
