@@ -2335,9 +2335,16 @@ of the precision column, and `exclude_tests` on the traversal tools.
   data type or an options bag was its "only implementation", and the references
   to the type were forwarded to it. A structural implementation now needs a
   required method. `ky`: precision `90.9 %` to `96.2 %`, recall `100 %`.
-- **Not confirmed.** The method `value` of `source/utils/body.ts:149`, an
-  object-literal method with no dependents for which Kivgraph reports its own
-  file. One of `156`; the row was not traced.
+- **`value` traced and fixed (ADR 0135).** The method `value` of
+  `source/utils/body.ts:149` reported the uses of four other `value`s of the file:
+  references travelled as a qualified name and the consumer kept the last symbol
+  of each name. Each reference now carries the offsets of its two declarations.
+  `ky` precision `96.2 %` to `96.8 %`. The benchmark's own-file `EXPORTS` rule hid
+  a real `export default ky;` that the bug had been covering; it now keeps an
+  export written on another line than the declaration.
+- **Not fixed.** Two symbols of a file with the same name, kind and signature
+  (two `(value: string)` parameters) share a stable key and the graph keeps one.
+
 - **`exclude_tests`** on `find_implementations`, `trace_dependencies` and
   `get_blast_radius` (ADR 0132, amendment). In the blast radius it leaves the
   axes too. `trace_dependencies` refuses it with `to`. Surface `18.128` to
