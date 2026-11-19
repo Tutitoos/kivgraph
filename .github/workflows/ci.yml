@@ -489,7 +489,7 @@ jobs:
 
       - name: Install Chromium for web end-to-end tests
         working-directory: web
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --only-shell chromium
 
       - name: Test large topology in Chromium
         working-directory: web
