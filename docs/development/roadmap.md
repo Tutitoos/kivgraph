@@ -2376,6 +2376,21 @@ of the precision column, and `exclude_tests` on the traversal tools.
   axes too. `trace_dependencies` refuses it with `to`. Surface `18.128` to
   `18.494` bytes, ceiling `18.600`.
 
+- **Open after the language-recall work** (none has an owner or a date):
+  - Indexing memory on large Go repositories: the peak is Go heap held by
+    `go/packages` (`NeedDeps`); the only lever found costs `5x` to `11x` in
+    time. Owning the load and releasing dependency syntax is the open idea.
+  - Dart: explicit extension application (`IterableExtension(this)`) and `/** */`
+    doc links. Rust: methods on a receiver, names passed through a metavariable
+    and per-call-site expansion in `macro_rules!`. TypeScript: property keys of
+    a contextual union, and function-typed properties under the structural
+    implementation rule.
+  - The benchmark measures one repository per language apart from Go; Java and
+    C# need `scip-java` and `scip-dotnet`, Python has no oracle independent of
+    Pyright, and `etcd` needs a Go `1.27` build.
+  - Site: `/github` and the `v0.10.0-dev.1` compare link return `404`, and the
+    tool-reference JSON examples predate `completeness` and schema `5`.
+
 ## Phase 7. Impact from a diff (`feat/blast-radius-from-diff`)
 
 `kivgraph impact --base <ref>`: symbols touched by `git diff`, aggregated
