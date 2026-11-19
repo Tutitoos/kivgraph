@@ -2424,10 +2424,16 @@ of the precision column, and `exclude_tests` on the traversal tools.
   GB`, time about `5 %` less; `caddy` RSS `2.85` to `1.88 GB`. Same graph on
   `cobra`, `gin`, `caddy`, `prometheus` and the same files and verdicts for
   `280` declarations. A root outside the load directory forces a second load.
+- **The rest of the indexing memory, attributed (ADR 0139).** It was the
+  collector's headroom while the pass holds every package (`3.7 GB` in use for
+  `1.9 GB` live at `GOGC=100`), and on macOS pages Go had already released that
+  `maximum resident set size` still counts; `peak memory footprint` is the
+  figure that does not. Forcing the release before staging changed nothing.
+  The pass now sets the GC percent to `50`: `prometheus` footprint `4.2`/`4.4`
+  to `3.4`/`3.2 GB` for about `1.5 s` more, `gin` `0.86` to `0.45 GB`, `cobra`
+  unchanged; `GOGC` in the environment still wins. About `0.7 GB` above the
+  heap at the peak is not broken down.
 - **Open after the language-recall work** (none has an owner or a date):
-  - Indexing memory on large Go repositories, after ADR 0138: the Go heap is
-    halved and the resident peak is down by a third (`prometheus` `7.0`/`7.7`
-    to `4.7`/`4.9 GB`), but `1.6 GB` above the Go heap is not attributed.
   - Dart: explicit extension application (`IterableExtension(this)`) and `/** */`
     doc links. Rust: methods on a receiver, names passed through a metavariable
     and per-call-site expansion in `macro_rules!`. TypeScript: property keys of
