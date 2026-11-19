@@ -2364,8 +2364,12 @@ of the precision column, and `exclude_tests` on the traversal tools.
   `ky` precision `96.2 %` to `96.8 %`. The benchmark's own-file `EXPORTS` rule hid
   a real `export default ky;` that the bug had been covering; it now keeps an
   export written on another line than the declaration.
-- **Not fixed.** Two symbols of a file with the same name, kind and signature
-  (two `(value: string)` parameters) share a stable key and the graph keeps one.
+- **Identical declarations numbered (ADR 0136).** Two symbols of a file with the
+  same name, kind and signature (two `(value: string)` parameters) shared a
+  stable key and the graph kept one. On `ky`: `72` declarations in `36` groups
+  (`28` parameters, `38` variables, `6` type parameters); the graph went from
+  `1062` to `1134` symbols. The first keeps its key and each repeat is numbered.
+  The recall figures did not move: the benchmark cannot tell these apart.
 
 - **`exclude_tests`** on `find_implementations`, `trace_dependencies` and
   `get_blast_radius` (ADR 0132, amendment). In the blast radius it leaves the
