@@ -2298,8 +2298,24 @@ tests read, on 40 declarations per repository (100 for `cobra` and
   `14 to 20 s`; state `+13`, `+31`, `+202 MB`. Measured later (ADR 0132): serving
   RSS `+1` to `+35 MB` and query p95 under `5 ms`; the default answer grows
   `5 %` to `53 %`; the indexing peak grows `+0.1` to `+1.1 GB`, from a baseline
-  of `5.5 GB` on `prometheus` that is not the Go heap (`GOMEMLIMIT 1 GiB` leaves
-  it at `5.1 GB`).
+  of `5.5 GB` on `prometheus` (see the next item: it is the Go heap).
+- Where the indexing memory goes (measured on `prometheus`, with tests): the
+  peak is the `kivgraph` process itself; its children (`go list`, `clang`) stay
+  under `0.3 GB`. It is Go heap: `gctrace` shows `3.9 GB` live and `6.1 GB`
+  in use at the maximum, which is why `GOMEMLIMIT` could not lower it. A heap
+  profile at that point is `go/parser` ASTs and `go/types` `Info` maps
+  (`recordTypeAndValue` alone `1.0 GB`, `recordUse`, scopes): `LoadMode` has
+  `NeedDeps` with `NeedSyntax` and `NeedTypesInfo`, so `go/packages` type-checks
+  every dependency from source and keeps it while `roots` lives. The writable
+  buffer pool is not it: capping it at `256`, `512` and `1024 MB` moved neither
+  `prometheus` nor `caddy` outside the run-to-run spread (`4.9` to `8.2 GB` on
+  the same configuration). `GOGC` `50` and `25` did not lower it either.
+- Dropping `NeedDeps` does lower it (`prometheus` `8.2` to `2.9 GB`, `caddy`
+  `2.9` to `1.1 GB`) but dependencies then come from export data and indexing
+  is `5x` to `11x` slower with a warm build cache (`caddy` `7` to `38 s`,
+  `prometheus` `19` to `212 s`). Not adopted. Open: type-check dependencies
+  from source but release their `Syntax` and `TypesInfo` once checked, which
+  `go/packages` does not offer, so it would mean owning the loading.
 - Done: both defaults are `true`. `find_references` takes `exclude_tests`, which
   uses the path rule of `impact` and applies before the total and the page.
 - Existing installations keep `false`: the `config.yaml` an earlier `init` wrote
