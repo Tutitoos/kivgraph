@@ -56,6 +56,22 @@ func corpus() []corpusRepository {
 			Setup:  []string{"dart pub get"},
 		},
 		{
+			Language: "typescript", Name: "got", URL: "https://github.com/sindresorhus/got.git",
+			Commit: "6b5aafc1cd538998728be6f45c65b0f80bae01b2", Extra: true,
+			Project: "tsconfig.json",
+			Setup:   []string{"npm install --no-audit --no-fund --ignore-scripts --fetch-retries=5 --fetch-timeout=120000"},
+		},
+		{
+			Language: "rust", Name: "ripgrep", URL: "https://github.com/BurntSushi/ripgrep.git",
+			Commit: "fdf7d95485ec69c599418b7e7154baa4518fed2c", Extra: true,
+			Setup: []string{"cargo fetch --locked"},
+		},
+		{
+			Language: "dart", Name: "args", URL: "https://github.com/dart-lang/args.git",
+			Commit: "7a2dfb528768f0a2e5680f711dbfb948f1d6c255", Extra: true,
+			Setup: []string{"dart pub get"},
+		},
+		{
 			Language: "go", Name: "gin", URL: "https://github.com/gin-gonic/gin.git",
 			Commit: "0f09c3a9b4626d9fe9979cf4d0521d6ae32ab646", Extra: true,
 			Setup: []string{"go mod download"},

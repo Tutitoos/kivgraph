@@ -280,7 +280,7 @@ type cargoMessage struct {
 // type inference can be hidden behind an unresolved name elsewhere: the truth
 // can only be too small, never contain a file that does not use the name.
 func (o *oracle) checkRust(ctx context.Context) ([]oracleError, error) {
-	process := exec.CommandContext(ctx, "cargo", "check", "--workspace", "--all-targets", "--locked", "--message-format=json", "--color=never")
+	process := exec.CommandContext(ctx, "cargo", "check", "--workspace", "--all-targets", "--locked", "--keep-going", "--message-format=json", "--color=never")
 	process.Dir = o.repository.Path
 	process.Env = toolEnvironment()
 	var stdout, stderr bytes.Buffer
