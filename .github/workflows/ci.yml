@@ -736,7 +736,8 @@ jobs:
 
           bundle="$PWD/dist/kivgraph-linux-amd64/bin/kivgraph"
           "$bundle" init --repository kivgraph="$PWD" --languages go,typescript
-          "$bundle" doctor
+          # setup-go reads ".go: " as a compiler diagnostic even without a line number.
+          "$bundle" doctor | sed 's/^toolchain\.go: PASS/toolchain.go PASS/'
           "$bundle" index --full --json | tee "$RUNNER_TEMP/index.json" | tail -1
 
           # The graph has to be worth serving: below this the pass loaded almost
