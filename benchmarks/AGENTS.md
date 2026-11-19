@@ -44,7 +44,9 @@ declarado en la raíz.
   configuración por defecto y con `include_tests: false`
   (`go.tests_excluded`), porque la diferencia entre las dos es lo que compra
   leerlos. `-repos` mide repositorios extra por nombre -- `gin`, `caddy`,
-  `prometheus` -- que no entran en la ejecución por defecto. Un resultado sin la
+  `prometheus`, y `got`, `ripgrep` y `args` como segundo repositorio de
+  TypeScript, Rust y Dart (`second-repository/`) -- que no entran en la
+  ejecución por defecto. Un resultado sin la
   lista de lo que no se pudo muestrear no se
   publica.
 - `benchmarks/edit-frequency` no mide una reconstrucción contra otra: mide qué

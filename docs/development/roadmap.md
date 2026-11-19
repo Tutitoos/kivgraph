@@ -2376,6 +2376,40 @@ of the precision column, and `exclude_tests` on the traversal tools.
   axes too. `trace_dependencies` refuses it with `to`. Surface `18.128` to
   `18.494` bytes, ceiling `18.600`.
 
+- **A second repository per language** (`benchmarks/language-recall/
+  second-repository/`; `got`, `ripgrep`, `args`; 100 declarations each, same
+  seed). The first repository's figures do not carry over:
+
+  |language|repository|recall|precision|
+  |---|---|---|---|
+  |TypeScript|`ky` / `got`|`100 %` / `97.8 %`|`96.8 %` / `70.3 %`|
+  |Rust|`fd` / `ripgrep`|`100 %` / `100 %`|`97.8 %` / `81.1 %`|
+  |Dart|`collection` / `args`|`99.0 %` / `100 %`|`88.4 %` / `91.3 %`|
+
+  Rust: the oracle ran `cargo check` without `--keep-going`, so one failing
+  unit stopped the others. On `ripgrep` it left `53` of `87` declarations with
+  dependents and precision at `45.1 %`; with the flag, `87` and `81.1 %`. `fd`
+  did not move (`100 %`, `97.8 %`). The remaining extras are files in crates
+  that depend on the renamed one, which do not compile after the rename: the
+  truth is a lower bound on a workspace.
+  TypeScript `got`: `4` declarations missed (all answers `LOWER_BOUND`, none
+  `COMPLETE`). Two are accessor pairs the rename splits (`dnsCache`,
+  `maxHeaderSize`: a setter renamed, its getter left); not traced, probably an
+  oracle artefact. Two are keys of an object literal passed to a generic call
+  (`https: {rejectUnauthorized}`, `beforeRedirect`); for the first, traced, the
+  contextual type is the literal's own and not the declared one. That is the
+  known limit of contextual keys, not fixed.
+  The precision is largely the oracle's. Of `92` extra files, `31` have no
+  mention of the name (`export *` in `source/index.ts`), `2` only export or
+  import lines and `59` mention it in code. Two causes were checked: an aliased
+  default export (`export {default as Options}`, so renaming the class breaks
+  nothing) and a merged `interface ClientRequest` that augments `node:http`. The
+  rest of the `59` were not audited. Every `got` answer is `LOWER_BOUND` because
+  one package (`expect-type`) is not found anywhere in the index.
+  Dart `args`: `20` extra files, `6` of them callers of the factory
+  `ArgParser.allowAnything()`, attributed to the class it constructs.
+  Dart without tests: recall `65.1 %` (`collection`: `74.0 %`).
+  No `COMPLETE` answer missed a non-test file in any of the three.
 - **Open after the language-recall work** (none has an owner or a date):
   - Indexing memory on large Go repositories: the peak is Go heap held by
     `go/packages` (`NeedDeps`); the only lever found costs `5x` to `11x` in
