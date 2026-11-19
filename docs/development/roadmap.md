@@ -2318,6 +2318,9 @@ tests read, on 40 declarations per repository (100 for `cobra` and
   `go/packages` does not offer, so it would mean owning the loading.
 - Done: both defaults are `true`. `find_references` takes `exclude_tests`, which
   uses the path rule of `impact` and applies before the total and the page.
+- `find_cross_repo_consumers` takes `exclude_tests` too (second amendment of
+  ADR 0132): it drops consumer and unresolved rows in a test file and keeps
+  package dependencies, which name no file.
 - Existing installations keep `false`: the `config.yaml` an earlier `init` wrote
   spells the key out. A test pins that an explicit `false` is still read as
   `false`.
