@@ -185,9 +185,11 @@ type referencesAnswer struct {
 	Results struct {
 		Subject struct {
 			Path string `json:"file_path"`
+			Line int    `json:"start_line"`
 		} `json:"subject"`
 		References []struct {
 			Path string `json:"file_path"`
+			Line int    `json:"start_line"`
 			Edge string `json:"edge_kind"`
 		} `json:"references"`
 	} `json:"results"`
@@ -201,9 +203,11 @@ type referencesAnswer struct {
 //   - IMPLEMENTS and OVERRIDES are relations, which `find_implementations`
 //     answers. A structural match makes a class "implement" an interface it
 //     never names, and no use of the interface is in that file.
-//   - An EXPORTS edge from the declaring file is the declaration's own export
-//     binding. Another file exporting the symbol is kept: re-exporting is a
-//     use, and the compiler rejects it when the name is gone.
+//   - An EXPORTS edge from the declaring file, on the line of the declaration,
+//     is the declaration's own export binding (`export const x = ...`). An
+//     export written on another line (`export default x;`) is kept, like
+//     another file exporting the symbol: it is a use, and the compiler rejects
+//     it when the name is gone.
 func referencingFiles(ctx context.Context, session *sdkmcp.ClientSession, repository, stableKey string) (map[string]bool, string, error) {
 	files := map[string]bool{}
 	var verdict string
@@ -227,7 +231,7 @@ func referencingFiles(ctx context.Context, session *sdkmcp.ClientSession, reposi
 			if row.Edge == "IMPLEMENTS" || row.Edge == "OVERRIDES" {
 				continue
 			}
-			if row.Edge == "EXPORTS" && row.Path == answer.Results.Subject.Path {
+			if row.Edge == "EXPORTS" && row.Path == answer.Results.Subject.Path && row.Line == answer.Results.Subject.Line {
 				continue
 			}
 			files[row.Path] = true

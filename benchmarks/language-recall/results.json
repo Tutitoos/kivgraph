@@ -1,7 +1,7 @@
 {
   "benchmark": "language-recall",
   "command": "go run ./benchmarks/language-recall -kivgraph \u003cbinary\u003e -repo-root .",
-  "date": "2026-11-18",
+  "date": "2026-11-19",
   "seed": 1,
   "declarations_per_language": 100,
   "environment": {
@@ -1975,12 +1975,12 @@
         "symbols": 72
       },
       "file_precision": {
-        "value": 0.9615384615384616,
-        "low": 0.9295774647887324,
-        "high": 0.9871794871794872,
+        "value": 0.967741935483871,
+        "low": 0.9379310344827586,
+        "high": 0.993103448275862,
         "numerator": 150,
-        "denominator": 156,
-        "symbols": 89
+        "denominator": 155,
+        "symbols": 88
       },
       "symbols_fully_recalled": {
         "value": 1,
@@ -1991,10 +1991,10 @@
         "symbols": 85
       },
       "symbols_without_dependents_that_report_references": {
-        "value": 0.26666666666666666,
-        "low": 0.1089745324961737,
-        "high": 0.5195043425155202,
-        "numerator": 4,
+        "value": 0.2,
+        "low": 0.0704754929173392,
+        "high": 0.45185448924055305,
+        "numerator": 3,
         "denominator": 15,
         "symbols": 15
       },
@@ -2271,12 +2271,7 @@
           "kind": "method",
           "line": 149,
           "truth_files": null,
-          "reported_files": [
-            "source/utils/body.ts"
-          ],
-          "extra_files": [
-            "source/utils/body.ts"
-          ],
+          "reported_files": null,
           "verdict": "LOWER_BOUND"
         },
         {
@@ -10368,5 +10363,5 @@
     "`rustc` stops after name resolution when that fails, so an error that needs type inference can be hidden behind an unresolved name elsewhere. The Rust truth can be too small and cannot contain a file that does not use the name.",
     "Renaming a Dart class breaks its constructors' own declarations (a constructor is written with the class's name), and an `implements` clause is an implementation relation: those errors are left out of the truth. The Dart dependencies are resolved with `dart pub get`, and the repository ships no lockfile."
   ],
-  "wall_seconds": 496.255433834
+  "wall_seconds": 717.184799
 }
