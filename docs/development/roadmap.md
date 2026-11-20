@@ -11,6 +11,10 @@ paragraph below and "Migration to the fork" at the end of phase 6 are the
 current state. The private repositories used as a measurement corpus are not
 named. The ADRs and the code are the reference for behavior.
 
+ADRs 0118, 0126 and 0127 describe the fork's own distribution and exist only
+there, and the pull request numbers are the fork's unless a repository is
+named.
+
 Base when the plan was written: `main` at `200c6db`, ADRs up to 0124.
 Upstream at that time: the development repository. `Luqueee/kivgraph` was
 then no
