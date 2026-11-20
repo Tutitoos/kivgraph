@@ -26,9 +26,11 @@ import (
 	"time"
 
 	"github.com/Luqueee/kivgraph/internal/facts"
+	"github.com/Luqueee/kivgraph/internal/proctree"
 	"github.com/Luqueee/kivgraph/internal/scip"
 	"github.com/Luqueee/kivgraph/internal/scip/scipwire"
 	"github.com/Luqueee/kivgraph/internal/scratchtree"
+	"github.com/Luqueee/kivgraph/internal/testpath"
 	"github.com/Luqueee/kivgraph/internal/workspace"
 )
 
@@ -120,7 +122,7 @@ func Run(ctx context.Context, options Options) (facts.SemanticPayload, error) {
 
 	process := exec.CommandContext(runContext, executable, arguments...)
 	process.Dir = tree.Path
-	combined, runErr := process.CombinedOutput()
+	combined, runErr := proctree.CombinedOutput(process)
 	if runErr != nil {
 		if runContext.Err() != nil && ctx.Err() == nil {
 			return facts.SemanticPayload{}, fmt.Errorf(
@@ -257,17 +259,10 @@ func includeFile(relative string, options Options) bool {
 	if !options.IncludeGenerated && isGenerated(slashed) {
 		return false
 	}
-	if !options.IncludeTests && isTest(slashed) {
+	if !options.IncludeTests && testpath.Is(slashed) {
 		return false
 	}
 	return true
-}
-
-// isTest is the layout Maven, Gradle and sbt all share. It is a path rule and
-// not a guess about content: `src/test/java` is where the three of them put
-// tests, and a file outside it is not treated as one.
-func isTest(path string) bool {
-	return strings.Contains(path, "src/test/") || strings.Contains(path, "src/it/")
 }
 
 // isGenerated names the directories a build writes into. A file under one of
